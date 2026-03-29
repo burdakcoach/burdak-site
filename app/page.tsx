@@ -58,17 +58,12 @@ export default function Home() {
           </div>
 
           <div className="flex justify-center">
-            <div className="w-full max-w-md aspect-[4/5] rounded-[32px] border border-white/10 bg-gradient-to-b from-zinc-900 to-zinc-800 flex items-center justify-center text-center p-8">
-              <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-gray-500 mb-4">
-                  Місце для фото
-                </p>
-                <p className="text-2xl font-semibold">
-                  Тут буде твоє
-                  <br />
-                  головне фото
-                </p>
-              </div>
+            <div className="w-full max-w-md aspect-[4/5] rounded-[32px] overflow-hidden border border-white/10">
+             <img
+              src="/me.jpg"
+              alt="Іван Бурдак"
+              className="w-full h-full object-cover"
+             />
             </div>
           </div>
         </div>
