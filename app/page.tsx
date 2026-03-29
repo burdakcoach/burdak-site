@@ -12,12 +12,15 @@ export default function Home() {
               Іван Бурдак
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8">
-              Персональний тренер та реабілітолог. Зі мною результат
-              залежить тільки від твоєї готовності пожертвувати гіршою
-              версією себе.
-            </p>
+            <div className="mb-8 space-y-4">
+  <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
+    Персональний тренер та реабілітолог.
+  </p>
 
+  <blockquote className="border-l-4 border-white pl-4 italic text-lg md:text-xl text-gray-400">
+    “Зі мною результат залежить тільки від твоєї готовності пожертвувати гіршою версією себе.”
+  </blockquote>
+</div>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="https://wa.me/380994470977"
