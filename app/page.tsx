@@ -43,11 +43,26 @@ export default function Home() {
 >
   <div className="relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/30 transition">
     
-    <img
-      src="/result.jpg"
-      alt="Результати клієнтів"
-      className="w-full h-40 object-cover opacity-80 group-hover:opacity-100 transition"
-    />
+    <div className="group border border-white/10 rounded-2xl overflow-hidden relative hover:border-white/30 transition">
+
+  <div className="grid grid-cols-3 h-60">
+    <img src="/result1.jpg" className="w-full h-full object-cover" />
+    <img src="/result2.jpg" className="w-full h-full object-cover" />
+    <img src="/result3.jpg" className="w-full h-full object-cover" />
+  </div>
+
+  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
+
+  <div className="absolute bottom-4 left-4">
+    <p className="text-sm font-semibold">
+      результат за 21 день
+    </p>
+    <p className="text-xs text-gray-300">
+      різні ракурси • реальний кейс
+    </p>
+  </div>
+
+</div>
 
     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
 
