@@ -1,8 +1,13 @@
 export default function Home() {
   return (
-    <main className="bg-black text-white">
-      <section className="min-h-screen flex items-center justify-center px-6 py-20">
-        <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(120,119,198,0.18),_transparent_35%),radial-gradient(circle_at_right,_rgba(255,255,255,0.08),_transparent_25%),linear-gradient(to_bottom,_#050505,_#0a0a0a_45%,_#050505)] text-white">
+      <section className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-white/5 blur-3xl" />
+          <div className="absolute bottom-10 right-10 h-56 w-56 rounded-full bg-white/5 blur-3xl" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-gray-400 mb-4">
               Реабілітолог • Тренер • 5+ років досвіду
@@ -22,21 +27,12 @@ export default function Home() {
               </blockquote>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://wa.me/380994470977"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-black px-6 py-4 rounded-2xl font-semibold text-center hover:opacity-80 transition"
-              >
-                Записатися на консультацію
-              </a>
-
+            <div className="flex">
               <a
                 href="https://www.instagram.com/burdak_coach?igsh=OGlhZ3J0bGpodXM2"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-white px-6 py-4 rounded-2xl font-semibold text-center hover:bg-white hover:text-black transition"
+                className="border border-white/20 bg-white/5 backdrop-blur-sm px-6 py-4 rounded-2xl font-semibold text-center hover:bg-white hover:text-black transition"
               >
                 Перейти в Instagram
               </a>
