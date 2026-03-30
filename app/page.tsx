@@ -81,14 +81,20 @@ export default function Home() {
               <h3 className="text-xl font-semibold mb-3">
                 Онлайн консультація
               </h3>
-              <p className="text-gray-400 mb-6">
+
+              <p className="text-gray-400 mb-4">
                 Аналіз твоєї ситуації, рекомендації по тренуваннях та харчуванню.
               </p>
+
+              <p className="text-white font-semibold mb-6">
+                від 500 грн
+              </p>
+
               <a
-                href="https://wa.me/380994470977"
+                href="https://wa.me/380994470977?text=Привіт,%20хочу%20консультацію"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white underline"
+                className="inline-block w-full text-center bg-white text-black py-3 rounded-xl font-semibold hover:opacity-80 transition"
               >
                 Записатися
               </a>
@@ -98,14 +104,20 @@ export default function Home() {
               <h3 className="text-xl font-semibold mb-3">
                 Програма тренувань
               </h3>
-              <p className="text-gray-400 mb-6">
+
+              <p className="text-gray-400 mb-4">
                 Індивідуальний план тренувань під твою ціль та рівень.
               </p>
+
+              <p className="text-white font-semibold mb-6">
+                від 1000 грн
+              </p>
+
               <a
-                href="https://wa.me/380994470977"
+                href="https://wa.me/380994470977?text=Привіт,%20хочу%20програму%20тренувань"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white underline"
+                className="inline-block w-full text-center bg-white text-black py-3 rounded-xl font-semibold hover:opacity-80 transition"
               >
                 Замовити
               </a>
@@ -115,16 +127,22 @@ export default function Home() {
               <h3 className="text-xl font-semibold mb-3">
                 Онлайн ведення
               </h3>
-              <p className="text-gray-400 mb-6">
+
+              <p className="text-gray-400 mb-4">
                 Повний супровід: тренування, харчування, контроль і корекції.
               </p>
+
+              <p className="text-white font-semibold mb-6">
+                індивідуально
+              </p>
+
               <a
-                href="https://wa.me/380994470977"
+                href="https://wa.me/380994470977?text=Привіт,%20цікавить%20онлайн%20ведення"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white underline"
+                className="inline-block w-full text-center border border-white py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
               >
-                Детальніше
+                Написати
               </a>
             </div>
           </div>
