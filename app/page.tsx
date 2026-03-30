@@ -37,9 +37,20 @@ export default function Home() {
           <div className="relative rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition">
 
             <img
-              src="/result1.jpg"
-              className="w-full h-60 object-cover group-hover:scale-105 transition"
-            />
+  src="/result1.jpg"
+  className="w-full h-60 object-cover group-hover:scale-105 transition duration-300"
+/>
+
+<div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition" />
+
+<div className="absolute bottom-6 left-6">
+  <p className="text-2xl font-bold">
+    Результат за 21 день
+  </p>
+  <p className="text-sm text-gray-300">
+    реальний кейс клієнта
+  </p>
+</div>
 
             <div className="absolute inset-0 bg-black/40" />
 
