@@ -43,32 +43,28 @@ export default function Home() {
       </section>
 
       {/* РЕЗУЛЬТАТИ */}
-      <section className="max-w-4xl mx-auto mb-24">
-        <a href="/results" className="block group">
+      <section className="max-w-6xl mx-auto mb-20">
+  <a href="/results" className="block group max-w-2xl">
+    <div className="relative rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition">
+      <img
+        src="/result.jpg"
+        alt="Результат за 21 день"
+        className="w-full h-32 md:h-36 object-cover group-hover:scale-105 transition duration-300"
+      />
 
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition">
+      <div className="absolute inset-0 bg-black/45 group-hover:bg-black/30 transition" />
 
-            <img
-              src="/result1.jpg"
-              className="w-full h-40 object-cover group-hover:scale-105 transition duration-300"
-            />
-
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition" />
-
-            <div className="absolute bottom-4 left-4">
-              <p className="text-lg font-semibold">
-                Результат за 21 день
-              </p>
-              <p className="text-xs text-gray-300">
-                кейс клієнта
-              </p>
-            </div>
-
-          </div>
-
-        </a>
-      </section>
-
+      <div className="absolute bottom-4 left-4">
+        <p className="text-base md:text-lg font-semibold">
+          Результат за 21 день
+        </p>
+        <p className="text-xs text-gray-300">
+          кейс клієнта
+        </p>
+      </div>
+    </div>
+  </a>
+</section>
       {/* ПОСЛУГИ */}
       <section className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-10">
