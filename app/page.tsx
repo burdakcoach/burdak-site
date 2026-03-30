@@ -27,7 +27,7 @@ export default function Home() {
               </blockquote>
             </div>
 
-            <div className="flex">
+            <div className="flex space-x-4"> 
               <a
                 href="https://www.instagram.com/burdak_coach?igsh=OGlhZ3J0bGpodXM2"
                 target="_blank"
@@ -37,7 +37,62 @@ export default function Home() {
                 Перейти в Instagram
               </a>
             </div>
+            <a
+  href="#results"
+  className="mt-6 block group"
+>
+  <div className="relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/30 transition">
+    
+    <img
+      src="/result.jpg"
+      alt="Результати клієнтів"
+      className="w-full h-40 object-cover opacity-80 group-hover:opacity-100 transition"
+    />
 
+    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
+
+    <div className="absolute bottom-4 left-4">
+      <p className="text-lg font-semibold">Результати</p>
+      <p className="text-sm text-gray-300">кейси клієнтів</p>
+    </div>
+  </div>
+  <section id="results" className="px-6 py-20 border-t border-white/10">
+  <div className="max-w-5xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-bold mb-12">
+      Результати клієнтів
+    </h2>
+
+    <div className="grid md:grid-cols-3 gap-6">
+      <div className="border border-white/10 rounded-2xl overflow-hidden">
+        <img src="/result.jpg" className="w-full h-60 object-cover" />
+        <div className="p-4">
+          <p className="text-sm text-gray-400">
+            -8 кг за 2 місяці
+          </p>
+        </div>
+      </div>
+
+      <div className="border border-white/10 rounded-2xl overflow-hidden">
+        <img src="/result.jpg" className="w-full h-60 object-cover" />
+        <div className="p-4">
+          <p className="text-sm text-gray-400">
+            +5 кг м’язів
+          </p>
+        </div>
+      </div>
+
+      <div className="border border-white/10 rounded-2xl overflow-hidden">
+        <img src="/result.jpg" className="w-full h-60 object-cover" />
+        <div className="p-4">
+          <p className="text-sm text-gray-400">
+            мінус біль у спині
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</a> 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="border border-white/10 rounded-2xl p-4">
                 <p className="text-2xl font-bold">5+ років</p>
