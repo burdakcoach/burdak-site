@@ -5,21 +5,20 @@ export default function Home() {
       <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center mb-28">
         <div>
           <p className="text-sm uppercase tracking-[0.28em] text-gray-500 mb-5">
-            5+ років досвіду • онлайн робота
-          </p>
+  Реабілітолог • Тренер • 5+ років досвіду
+</p>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             Іван Бурдак
           </h1>
 
           <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl mb-6">
-            Допомагаю прибрати біль, привести тіло в форму та отримати результат
-            через системний підхід.
-          </p>
+  Допомагаю прибрати біль, привести тіло в форму та отримати результат через системний підхід.
+</p>
 
           <blockquote className="border-l-4 border-white/80 pl-4 italic text-gray-400 text-base md:text-lg mb-8">
-            “Результат залежить від твоєї готовності працювати.”
-          </blockquote>
+  “Зі мною результат залежить тільки від твоєї готовності пожертвувати гіршою версією себе.”
+</blockquote>
 
           <div className="flex flex-col sm:flex-row gap-4">
             <a
