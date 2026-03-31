@@ -21,15 +21,24 @@ export default function Home() {
 </blockquote>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="https://www.instagram.com/burdak_coach"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center border border-white/20 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
-            >
-              Перейти в Instagram
-            </a>
-          </div>
+
+  <a
+    href="https://www.instagram.com/burdak_coach"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center justify-center border border-white/20 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
+  >
+    Перейти в Instagram
+  </a>
+
+  <a
+    href="/quiz"
+    className="inline-flex items-center justify-center bg-white text-black px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition"
+  >
+    Оцінити власну форму
+  </a>
+
+</div>
         </div>
 
         <div className="flex justify-center md:justify-end">
