@@ -3,7 +3,7 @@ export default function Home() {
     <main className="bg-black text-white min-h-screen px-6 py-20">
 
       {/* HERO */}
-      <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center mb-24">
+      <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center mb-32">
 
         {/* ТЕКСТ */}
         <div>
@@ -15,7 +15,7 @@ export default function Home() {
             Іван Бурдак
           </h1>
 
-          <p className="text-gray-300 mb-6 max-w-md">
+          <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
             Допомагаю прибрати біль, привести тіло в форму та отримати результат через системний підхід.
           </p>
 
@@ -73,7 +73,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-          <div className="border border-white/10 rounded-2xl p-6">
+          <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition">
             <h3 className="text-xl font-semibold mb-3">
               Онлайн консультація
             </h3>
@@ -87,15 +87,14 @@ export default function Home() {
             </p>
 
             <a
-              href="https://wa.me/380994470977?text=Привіт,%20хочу%20консультацію"
-              target="_blank"
-              className="block text-center bg-white text-black py-3 rounded-xl font-semibold"
-            >
-              Записатися
-            </a>
+  href="#"
+  className="block text-center bg-white text-black py-3 rounded-xl font-semibold hover:opacity-90 transition"
+>
+  Записатися
+</a>
           </div>
 
-          <div className="border border-white/10 rounded-2xl p-6">
+          <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition">
             <h3 className="text-xl font-semibold mb-3">
               Програма тренувань
             </h3>
@@ -109,15 +108,14 @@ export default function Home() {
             </p>
 
             <a
-              href="https://wa.me/380994470977?text=Привіт,%20хочу%20програму"
-              target="_blank"
-              className="block text-center bg-white text-black py-3 rounded-xl font-semibold"
-            >
-              Замовити
-            </a>
+  href="#"
+  className="block text-center bg-white text-black py-3 rounded-xl font-semibold hover:opacity-90 transition"
+>
+  Замовити
+</a>
           </div>
 
-          <div className="border border-white/10 rounded-2xl p-6">
+          <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition">
             <h3 className="text-xl font-semibold mb-3">
               Онлайн ведення
             </h3>
@@ -131,12 +129,11 @@ export default function Home() {
             </p>
 
             <a
-              href="https://wa.me/380994470977?text=Привіт,%20хочу%20супровід"
-              target="_blank"
-              className="block text-center border border-white py-3 rounded-xl font-semibold"
-            >
-              Написати
-            </a>
+  href="#"
+  className="block text-center bg-white text-black py-3 rounded-xl font-semibold hover:opacity-90 transition"
+>
+  Написати
+</a>
           </div>
 
         </div>
@@ -156,7 +153,7 @@ export default function Home() {
 
           {/* 1 */}
           <div className="border border-white/10 rounded-2xl p-6">
-            <h3 className="text-xl font-semibold mb-3">
+            <h3 className="text-xl font-semibold mb-3">і
               Онлайн консультація
             </h3>
 
