@@ -45,6 +45,36 @@ export default function Home() {
 </a>
 
 </div>
+<div className="flex flex-wrap items-center gap-3 text-sm text-gray-400 mt-4">
+  <span className="mr-1">Зручно написати в:</span>
+
+  <a
+    href="https://wa.me/380994470977"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="border border-white/10 bg-white/5 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+  >
+    WhatsApp
+  </a>
+
+  <a
+    href="https://t.me/calmswirl"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="border border-white/10 bg-white/5 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+  >
+    Telegram
+  </a>
+
+  <a
+    href="https://signal.me/#p/+380994470977"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="border border-white/10 bg-white/5 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+  >
+    Signal
+  </a>
+</div>
         </div>
 
         <div className="flex justify-center md:justify-end">
