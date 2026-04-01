@@ -26,8 +26,7 @@ export default function Home() {
     href="https://www.instagram.com/burdak_coach"
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-flex items-center justify-center border border-white/20 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
-  >
+className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white hover:opacity-90 transition"  >
     Перейти в Instagram
   </a>
 
@@ -48,29 +47,32 @@ export default function Home() {
 <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400 mt-4">
   <span className="mr-1">Зручно написати в:</span>
 
+  {/* WhatsApp */}
   <a
     href="https://wa.me/380994470977"
     target="_blank"
     rel="noopener noreferrer"
-    className="border border-white/10 bg-white/5 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+    className="px-4 py-2 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366] hover:text-black transition"
   >
     WhatsApp
   </a>
 
+  {/* Telegram */}
   <a
     href="https://t.me/calmswirl"
     target="_blank"
     rel="noopener noreferrer"
-    className="border border-white/10 bg-white/5 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+    className="px-4 py-2 rounded-full bg-[#229ED9]/10 border border-[#229ED9]/30 text-[#229ED9] hover:bg-[#229ED9] hover:text-black transition"
   >
     Telegram
   </a>
 
+  {/* Signal */}
   <a
     href="https://signal.me/#p/+380994470977"
     target="_blank"
     rel="noopener noreferrer"
-    className="border border-white/10 bg-white/5 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+    className="px-4 py-2 rounded-full bg-[#3A76F0]/10 border border-[#3A76F0]/30 text-[#3A76F0] hover:bg-[#3A76F0] hover:text-black transition"
   >
     Signal
   </a>
