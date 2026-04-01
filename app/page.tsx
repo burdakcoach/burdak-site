@@ -190,6 +190,116 @@ className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-sem
               Написати
             </a>
           </div>
+          <section className="max-w-6xl mx-auto mt-24">
+  <div className="flex items-end justify-between gap-6 mb-10">
+    <div>
+      <p className="text-sm uppercase tracking-[0.28em] text-gray-500 mb-3">
+        База вправ
+      </p>
+      <h2 className="text-3xl md:text-4xl font-bold mb-3">
+        Відео-бібліотека вправ
+      </h2>
+      <p className="text-gray-400 max-w-2xl leading-relaxed">
+        Каталог вправ у моєму виконанні: техніка, варіації та окремий розділ для домашніх тренувань.
+      </p>
+    </div>
+
+    <a
+      href="/library"
+      className="hidden md:inline-flex items-center justify-center border border-white/20 bg-white/5 px-5 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
+    >
+      Відкрити бібліотеку
+    </a>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+    <a
+      href="/library"
+      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
+    >
+      <h3 className="text-xl font-semibold mb-3">Алфавітний каталог</h3>
+      <p className="text-gray-400 text-sm leading-relaxed">
+        Структурований перелік вправ для швидкого пошуку.
+      </p>
+    </a>
+
+    <a
+      href="/library/home"
+      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
+    >
+      <h3 className="text-xl font-semibold mb-3">Вправи вдома</h3>
+      <p className="text-gray-400 text-sm leading-relaxed">
+        Варіанти без тренажерного залу та складного обладнання.
+      </p>
+    </a>
+
+    <a
+      href="/stretching"
+      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
+    >
+      <h3 className="text-xl font-semibold mb-3">Стретчинг</h3>
+      <p className="text-gray-400 text-sm leading-relaxed">
+        Мобільність, розтягнення та робота з напруженими зонами.
+      </p>
+    </a>
+
+    <a
+      href="/library"
+      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
+    >
+      <h3 className="text-xl font-semibold mb-3">Техніка виконання</h3>
+      <p className="text-gray-400 text-sm leading-relaxed">
+        Ключові моменти, щоб тренуватись без дурних помилок.
+      </p>
+    </a>
+  </div>
+
+  <a
+    href="/library"
+    className="mt-6 md:hidden inline-flex items-center justify-center border border-white/20 bg-white/5 px-5 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
+  >
+    Відкрити бібліотеку
+  </a>
+</section>
+<section className="max-w-6xl mx-auto mt-24 mb-12">
+  <div className="grid md:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+    <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-3xl p-8">
+      <p className="text-sm uppercase tracking-[0.28em] text-gray-500 mb-4">
+        Про мене
+      </p>
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        Біографія
+      </h2>
+      <p className="text-gray-400 leading-relaxed">
+        Мій шлях почався з активного дитинства, гір, гімнастики і постійного руху. 
+        Пізніше це переросло в професійний розвиток, освіту реабілітолога та багаторічну практику в фітнесі.
+      </p>
+    </div>
+
+    <div className="space-y-5">
+      <div className="border-l-2 border-white/20 pl-5">
+        <h3 className="text-lg font-semibold mb-2">Активне дитинство і фундамент руху</h3>
+        <p className="text-gray-400 leading-relaxed">
+          Завдяки активному способу життя, походам у Криму та Карпатах і заняттям гімнастикою я дуже рано зрозумів цінність фізичного розвитку.
+        </p>
+      </div>
+
+      <div className="border-l-2 border-white/20 pl-5">
+        <h3 className="text-lg font-semibold mb-2">Освіта і практика</h3>
+        <p className="text-gray-400 leading-relaxed">
+          Починаючи з другого курсу університету, де я здобував освіту фізичного реабілітолога, я вже працював у фітнес-клубі і вчився не тільки в теорії, а й у реальній роботі з людьми.
+        </p>
+      </div>
+
+      <div className="border-l-2 border-white/20 pl-5">
+        <h3 className="text-lg font-semibold mb-2">Позиція сьогодні</h3>
+        <p className="text-gray-400 leading-relaxed">
+          Для мене ця справа не про випадкові тренування. Це про розвиток, системність і реальні зміни в тілі, здоров’ї та якості життя.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
         </div>
       </section>
     </main>
