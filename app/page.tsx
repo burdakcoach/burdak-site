@@ -1,307 +1,481 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_25%),linear-gradient(to_bottom,_#030303,_#080808_45%,_#030303)] text-white px-6 py-20">
-      {/* HERO */}
-      <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center mb-28">
-        <div>
-          <p className="text-sm uppercase tracking-[0.28em] text-gray-500 mb-5">
-  Реабілітолог • Тренер • 5+ років досвіду
-</p>
+    <main>
+      <header className="siteHeader">
+        <a href="#" className="logo">
+          BURDAK COACH
+        </a>
 
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Іван Бурдак
-          </h1>
+        <nav className="navLinks">
+          <a href="#about">Про мене</a>
+          <a href="#services">Послуги</a>
+          <a href="#results">Результати</a>
+          <a href="#library">Бібліотека вправ</a>
+          <a href="#contacts">Контакти</a>
+        </nav>
 
-          <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl mb-6">
-  Допомагаю прибрати біль, привести тіло в форму та отримати результат через системний підхід.
-</p>
+        <a href="https://t.me/coach_burdak" className="headerBtn">
+          Консультація
+        </a>
+      </header>
 
-          <blockquote className="border-l-4 border-white/80 pl-4 italic text-gray-400 text-base md:text-lg mb-8">
-  “Зі мною результат залежить тільки від твоєї готовності пожертвувати гіршою версією себе.”
-</blockquote>
+      <section className="heroSection">
+        <div className="heroContainer">
+          <div className="heroText">
+            <p className="heroLabel">
+              Персональний тренер • онлайн супровід
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+            <h1 className="heroTitle">
+              Система тренувань і харчування під твою ціль
+            </h1>
 
-  <a
-    href="https://www.instagram.com/burdak_coach"
-    target="_blank"
-    rel="noopener noreferrer"
-className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white hover:opacity-90 transition"  >
-    Перейти в Instagram
-  </a>
+            <p className="heroDescription">
+              Допомагаю прибрати хаос у тренуваннях, харчуванні та прогресі:
+              будую план, контролюю виконання і адаптую систему під твоє тіло,
+              графік та результат.
+            </p>
 
-  <a
-    href="/quiz"
-    className="inline-flex items-center justify-center bg-white text-black px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition"
-  >
-    Оцінити власну форму
-  </a>
-  <a
-  href="/ubd"
-  className="inline-flex items-center justify-center border border-white/20 px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
->
-  Для УБД (безкоштовно)
-</a>
+            <div className="heroButtons">
+              <a href="https://t.me/coach_burdak" className="primaryBtn">
+                Записатись на консультацію
+              </a>
 
-</div>
-<div className="flex flex-wrap items-center gap-3 text-sm text-gray-400 mt-4">
-  <span className="mr-1">Зручно написати в:</span>
+              <a href="https://instagram.com/burdak_coach" className="secondaryBtn">
+                Переглянути Instagram
+              </a>
+            </div>
+          </div>
 
-  {/* WhatsApp */}
-  <a
-    href="https://wa.me/380994470977"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="px-4 py-2 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366] hover:text-black transition"
-  >
-    WhatsApp
-  </a>
+          <div className="photoWrap">
+            <div className="photoCard">
+              <img src="/coach.jpg" alt="Coach" className="coachImage" />
+            </div>
 
-  {/* Telegram */}
-  <a
-    href="https://t.me/calmswirl"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="px-4 py-2 rounded-full bg-[#229ED9]/10 border border-[#229ED9]/30 text-[#229ED9] hover:bg-[#229ED9] hover:text-black transition"
-  >
-    Telegram
-  </a>
+            <div className="experienceCard">
+              <div className="experienceNumber">5+</div>
 
-  {/* Signal */}
-  <a
-    href="https://signal.me/#p/+380994470977"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="px-4 py-2 rounded-full bg-[#3A76F0]/10 border border-[#3A76F0]/30 text-[#3A76F0] hover:bg-[#3A76F0] hover:text-black transition"
-  >
-    Signal
-  </a>
-</div>
-        </div>
-
-        <div className="flex justify-center md:justify-end">
-          <div className="relative">
-            <div className="absolute inset-0 rounded-[28px] bg-white/5 blur-2xl scale-95" />
-            <img
-              src="/me.jpg"
-              alt="Іван Бурдак"
-              className="relative w-[320px] md:w-[380px] rounded-[28px] object-cover border border-white/10 shadow-2xl"
-            />
+              <div className="experienceText">
+                років практики в тренуваннях, мобільності та роботі з тілом
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* RESULTS CARD */}
-      <section className="max-w-6xl mx-auto mb-24">
-        <a href="/results" className="block group max-w-2xl">
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition">
-            <img
-              src="/result.jpg"
-              alt="Результат за 21 день"
-              className="w-full h-32 md:h-36 object-cover group-hover:scale-105 transition duration-300"
-            />
+      <section id="about" className="targetSection">
+        <div className="targetContainer">
+          <div className="sectionHead">
+            <p className="sectionLabel">Для кого</p>
 
-            <div className="absolute inset-0 bg-black/45 group-hover:bg-black/30 transition" />
+            <h2 className="sectionTitle">
+              Цей супровід для тих, хто хоче не просто тренуватись, а нарешті
+              бачити результат
+            </h2>
+          </div>
 
-            <div className="absolute bottom-4 left-4">
-              <p className="text-base md:text-lg font-semibold">
-                Результат за 21 день
+          <div className="targetGrid">
+            <div className="targetCard">
+              <span>01</span>
+              <h3>Тренуєшся без системи</h3>
+              <p>
+                Робиш вправи, міняєш програми, але не розумієш, що саме дає
+                прогрес.
               </p>
-              <p className="text-xs text-gray-300">
-                кейс клієнта
+            </div>
+
+            <div className="targetCard">
+              <span>02</span>
+              <h3>Не бачиш змін у дзеркалі</h3>
+              <p>
+                Вага, форма і силові стоять на місці, хоча ти ніби стараєшся.
+              </p>
+            </div>
+
+            <div className="targetCard">
+              <span>03</span>
+              <h3>Харчування хаотичне</h3>
+              <p>
+                То недоїдаєш, то переїдаєш, то просто не розумієш, скільки тобі
+                треба.
+              </p>
+            </div>
+
+            <div className="targetCard">
+              <span>04</span>
+              <h3>Хочеш форму і контроль</h3>
+              <p>
+                Без випадкових рішень, з чітким планом, корекціями і зрозумілою
+                системою.
               </p>
             </div>
           </div>
-        </a>
-      </section>
-
-      {/* SERVICES */}
-      <section className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10">
-          Послуги
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition">
-            <h3 className="text-xl font-semibold mb-3">
-              Онлайн консультація
-            </h3>
-
-            <p className="text-gray-400 mb-4 leading-relaxed">
-              Аналіз ситуації, рекомендації по тренуваннях та харчуванню.
-            </p>
-
-            <p className="mb-6 font-semibold text-white">
-              від 500 грн
-            </p>
-
-            <a
-              href="https://wa.me/380994470977?text=Привіт,%20хочу%20консультацію"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center bg-white text-black py-3 rounded-xl font-semibold hover:opacity-90 transition"
-            >
-              Записатися
-            </a>
-          </div>
-
-          <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition">
-            <h3 className="text-xl font-semibold mb-3">
-              Програма тренувань
-            </h3>
-
-            <p className="text-gray-400 mb-4 leading-relaxed">
-              Індивідуальний план під твою ціль.
-            </p>
-
-            <p className="mb-6 font-semibold text-white">
-              від 1000 грн
-            </p>
-
-            <a
-              href="https://wa.me/380994470977?text=Привіт,%20хочу%20програму%20тренувань"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center bg-white text-black py-3 rounded-xl font-semibold hover:opacity-90 transition"
-            >
-              Замовити
-            </a>
-          </div>
-
-          <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition">
-            <h3 className="text-xl font-semibold mb-3">
-              Онлайн ведення
-            </h3>
-
-            <p className="text-gray-400 mb-4 leading-relaxed">
-              Повний супровід: тренування, харчування, контроль.
-            </p>
-
-            <p className="mb-6 font-semibold text-white">
-              індивідуально
-            </p>
-
-            <a
-              href="https://wa.me/380994470977?text=Привіт,%20цікавить%20онлайн%20ведення"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center border border-white py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
-            >
-              Написати
-            </a>
-          </div>
-          <section className="max-w-6xl mx-auto mt-24">
-  <div className="flex items-end justify-between gap-6 mb-10">
-    <div>
-      <p className="text-sm uppercase tracking-[0.28em] text-gray-500 mb-3">
-        База вправ
-      </p>
-      <h2 className="text-3xl md:text-4xl font-bold mb-3">
-        Відео-бібліотека вправ
-      </h2>
-      <p className="text-gray-400 max-w-2xl leading-relaxed">
-        Каталог вправ у моєму виконанні: техніка, варіації та окремий розділ для домашніх тренувань.
-      </p>
-    </div>
-
-    <a
-      href="/library"
-      className="hidden md:inline-flex items-center justify-center border border-white/20 bg-white/5 px-5 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
-    >
-      Відкрити бібліотеку
-    </a>
-  </div>
-
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-    <a
-      href="/library"
-      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
-    >
-      <h3 className="text-xl font-semibold mb-3">Алфавітний каталог</h3>
-      <p className="text-gray-400 text-sm leading-relaxed">
-        Структурований перелік вправ для швидкого пошуку.
-      </p>
-    </a>
-
-    <a
-      href="/library/home"
-      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
-    >
-      <h3 className="text-xl font-semibold mb-3">Вправи вдома</h3>
-      <p className="text-gray-400 text-sm leading-relaxed">
-        Варіанти без тренажерного залу та складного обладнання.
-      </p>
-    </a>
-
-    <a
-      href="/stretching"
-      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
-    >
-      <h3 className="text-xl font-semibold mb-3">Стретчинг</h3>
-      <p className="text-gray-400 text-sm leading-relaxed">
-        Мобільність, розтягнення та робота з напруженими зонами.
-      </p>
-    </a>
-
-    <a
-      href="/library"
-      className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:border-white/30 transition"
-    >
-      <h3 className="text-xl font-semibold mb-3">Техніка виконання</h3>
-      <p className="text-gray-400 text-sm leading-relaxed">
-        Ключові моменти, щоб тренуватись без дурних помилок.
-      </p>
-    </a>
-  </div>
-
-  <a
-    href="/library"
-    className="mt-6 md:hidden inline-flex items-center justify-center border border-white/20 bg-white/5 px-5 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition"
-  >
-    Відкрити бібліотеку
-  </a>
-</section>
-<section className="max-w-6xl mx-auto mt-24 mb-12">
-  <div className="grid md:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
-    <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-3xl p-8">
-      <p className="text-sm uppercase tracking-[0.28em] text-gray-500 mb-4">
-        Про мене
-      </p>
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">
-        Біографія
-      </h2>
-      <p className="text-gray-400 leading-relaxed">
-        Мій шлях почався з активного дитинства, гір, гімнастики і постійного руху. 
-        Пізніше це переросло в професійний розвиток, освіту реабілітолога та багаторічну практику в фітнесі.
-      </p>
-    </div>
-
-    <div className="space-y-5">
-      <div className="border-l-2 border-white/20 pl-5">
-        <h3 className="text-lg font-semibold mb-2">Активне дитинство і фундамент руху</h3>
-        <p className="text-gray-400 leading-relaxed">
-          Завдяки активному способу життя, походам у Криму та Карпатах і заняттям гімнастикою я дуже рано зрозумів цінність фізичного розвитку.
-        </p>
-      </div>
-
-      <div className="border-l-2 border-white/20 pl-5">
-        <h3 className="text-lg font-semibold mb-2">Освіта і практика</h3>
-        <p className="text-gray-400 leading-relaxed">
-          Починаючи з другого курсу університету, де я здобував освіту фізичного реабілітолога, я вже працював у фітнес-клубі і вчився не тільки в теорії, а й у реальній роботі з людьми.
-        </p>
-      </div>
-
-      <div className="border-l-2 border-white/20 pl-5">
-        <h3 className="text-lg font-semibold mb-2">Позиція сьогодні</h3>
-        <p className="text-gray-400 leading-relaxed">
-          Для мене ця справа не про випадкові тренування. Це про розвиток, системність і реальні зміни в тілі, здоров’ї та якості життя.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
         </div>
       </section>
+
+      <section id="services" className="servicesSection">
+        <div className="servicesContainer">
+          <div className="sectionHead">
+            <p className="sectionLabel">Супровід</p>
+
+            <h2 className="sectionTitle">
+              Що ти отримуєш в роботі зі мною
+            </h2>
+          </div>
+
+          <div className="servicesGrid">
+            <div className="serviceCard">
+              <div className="serviceTop">
+                <span>01</span>
+                <h3>Тренувальний план</h3>
+              </div>
+
+              <p>
+                Програма під твою ціль, рівень підготовки, графік і можливості.
+                Без випадкових вправ і хаосу.
+              </p>
+            </div>
+
+            <div className="serviceCard">
+              <div className="serviceTop">
+                <span>02</span>
+                <h3>Харчування і КБЖВ</h3>
+              </div>
+
+              <p>
+                Розрахунок калорій, білків, жирів і вуглеводів під твою форму і
+                задачі.
+              </p>
+            </div>
+
+            <div className="serviceCard">
+              <div className="serviceTop">
+                <span>03</span>
+                <h3>Контроль техніки</h3>
+              </div>
+
+              <p>
+                Аналіз відео вправ, корекція техніки і зменшення ризику травм.
+              </p>
+            </div>
+
+            <div className="serviceCard">
+              <div className="serviceTop">
+                <span>04</span>
+                <h3>Регулярний контроль</h3>
+              </div>
+
+              <p>
+                Звіти, корекції, зміни плану і підтримка, щоб прогрес не
+                зупинявся.
+              </p>
+            </div>
+
+            <div className="serviceCard">
+              <div className="serviceTop">
+                <span>05</span>
+                <h3>Система під результат</h3>
+              </div>
+
+              <p>
+                Ти не просто “ходиш у зал”. Ти розумієш, що робиш, навіщо
+                робиш і як це приводить тебе до форми.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="results" className="resultsSection">
+        <div className="resultsContainer">
+          <div className="sectionHead">
+            <p className="sectionLabel">Результати</p>
+
+            <h2 className="sectionTitle">
+              Конкретні зміни тіла, сили і контролю
+            </h2>
+          </div>
+
+          <div className="resultsGrid">
+            <div className="resultCard">
+              <div className="resultImagePlaceholder">Фото результату</div>
+
+              <div className="resultContent">
+                <span>-12 кг</span>
+                <h3>Схуднення без хаосу</h3>
+                <p>4 місяці роботи: контроль харчування, силові тренування і стабільний прогрес.</p>
+              </div>
+            </div>
+
+            <div className="resultCard">
+              <div className="resultImagePlaceholder">Фото результату</div>
+
+              <div className="resultContent">
+                <span>Рекомпозиція</span>
+                <h3>Менше жиру, більше форми</h3>
+                <p>Без жорстких дієт: системний план, корекції і поступова зміна тіла.</p>
+              </div>
+            </div>
+
+            <div className="resultCard">
+              <div className="resultImagePlaceholder">Фото результату</div>
+
+              <div className="resultContent">
+                <span>+ сила</span>
+                <h3>Сильніше і впевненіше тіло</h3>
+                <p>Покращення техніки, силових показників і загального контролю руху.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="formats" className="formatsSection">
+        <div className="formatsContainer">
+          <div className="sectionHead">
+            <p className="sectionLabel">Формати</p>
+
+            <h2 className="sectionTitle">
+              Обери формат роботи під свою ціль і графік
+            </h2>
+          </div>
+
+          <div className="formatsGrid">
+            <div className="formatCard">
+              <span>01</span>
+              <h3>Персональні тренування</h3>
+              <p>
+                Робота в залі з контролем техніки, навантаження і прогресу на кожному тренуванні.
+              </p>
+            </div>
+
+            <div className="formatCard">
+              <span>02</span>
+              <h3>Онлайн-супровід</h3>
+              <p>
+                План тренувань, харчування, звіти, корекції і контроль прогресу дистанційно.
+              </p>
+            </div>
+
+            <div className="formatCard">
+              <span>03</span>
+              <h3>Харчування і КБЖВ</h3>
+              <p>
+                Розрахунок калорій, білків, жирів і вуглеводів під твою ціль, режим і вподобання.
+              </p>
+            </div>
+
+            <div className="formatCard premium">
+              <span>04</span>
+              <h3>Premium coaching</h3>
+              <p>
+                Максимальний контроль: тренування, харчування, регулярні корекції, підтримка і стратегія під результат.
+              </p>
+            </div>
+          </div>
+        </div>
+        <section id="process" className="processSection">
+          <div className="processContainer">
+
+            <div className="sectionHead">
+              <p className="sectionLabel">Процес</p>
+
+              <h2 className="sectionTitle">
+                Як проходить робота зі мною
+              </h2>
+            </div>
+
+            <div className="processGrid">
+
+              <div className="processCard">
+                <span>01</span>
+                <h3>Аналіз</h3>
+
+                <p>
+                  Оцінка твоєї форми, цілей, режиму, харчування і поточного рівня.
+                </p>
+              </div>
+
+              <div className="processCard">
+                <span>02</span>
+                <h3>План</h3>
+
+                <p>
+                  Створення системи тренувань і харчування під тебе, а не “універсальної програми”.
+                </p>
+              </div>
+
+              <div className="processCard">
+                <span>03</span>
+                <h3>Контроль</h3>
+
+                <p>
+                  Перевірка техніки, звіти, контроль навантаження і регулярний фідбек.
+                </p>
+              </div>
+
+              <div className="processCard">
+                <span>04</span>
+                <h3>Корекція</h3>
+
+                <p>
+                  Зміни плану по прогресу, самопочуттю, силових показниках і формі.
+                </p>
+              </div>
+
+              <div className="processCard result">
+                <span>05</span>
+                <h3>Результат</h3>
+
+                <p>
+                  Сильніше, сухіше і контрольованіше тіло без хаосу і випадкових рішень.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </section>
+      <section id="library" className="librarySection">
+        <div className="libraryContainer">
+          <div className="sectionHead">
+            <p className="sectionLabel">Бібліотека вправ</p>
+
+            <h2 className="sectionTitle">
+              Вправи з поясненням техніки для кожної цілі
+            </h2>
+          </div>
+
+          <div className="libraryTags">
+            <span>Груди</span>
+            <span>Спина</span>
+            <span>Ноги</span>
+            <span>Плечі</span>
+            <span>Прес</span>
+            <span>Мобільність</span>
+          </div>
+
+          <div className="libraryGrid">
+            <div className="exerciseCard">
+              <div className="exerciseVideo">Відео вправи</div>
+              <div className="exerciseContent">
+                <span>Груди</span>
+                <h3>Жим гантелей лежачи</h3>
+                <p>Контроль амплітуди, стабільні лопатки і робота без ривків.</p>
+              </div>
+            </div>
+
+            <div className="exerciseCard">
+              <div className="exerciseVideo">Відео вправи</div>
+              <div className="exerciseContent">
+                <span>Спина</span>
+                <h3>Тяга верхнього блока</h3>
+                <p>Фокус на лопатках, контроль корпусу і повне скорочення спини.</p>
+              </div>
+            </div>
+
+            <div className="exerciseCard">
+              <div className="exerciseVideo">Відео вправи</div>
+              <div className="exerciseContent">
+                <span>Ноги</span>
+                <h3>Румунська тяга</h3>
+                <p>Таз назад, нейтральна спина, контроль задньої поверхні стегна.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="faq" className="faqSection">
+        <div className="faqContainer">
+          <div className="sectionHead">
+            <p className="sectionLabel">FAQ</p>
+
+            <h2 className="sectionTitle">
+              Питання, які зазвичай виникають перед стартом
+            </h2>
+          </div>
+
+          <div className="faqList">
+            <div className="faqItem">
+              <h3>Я новачок. Мені підійде?</h3>
+              <p>
+                Так. План підбирається під твій рівень, техніку, ціль і графік. Не треба бути “готовим” до старту.
+              </p>
+            </div>
+
+            <div className="faqItem">
+              <h3>Обов’язково рахувати калорії?</h3>
+              <p>
+                Не завжди. Але для точного результату ми маємо розуміти харчування: через КБЖВ, порції або контроль раціону.
+              </p>
+            </div>
+
+            <div className="faqItem">
+              <h3>Коли буде результат?</h3>
+              <p>
+                Перші зміни зазвичай видно через 3–4 тижні. Стабільний результат залежить від дисципліни, сну, харчування і регулярності.
+              </p>
+            </div>
+
+            <div className="faqItem">
+              <h3>Онлайн-супровід працює?</h3>
+              <p>
+                Так, якщо ти виконуєш план, надсилаєш звіти і не зникаєш, як Wi-Fi у підвалі.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="finalCtaSection">
+        <div className="finalCtaContainer">
+
+          <p className="sectionLabel">
+            Старт
+          </p>
+
+          <h2 className="finalCtaTitle">
+            Готовий перестати тренуватись навмання?
+          </h2>
+
+          <p className="finalCtaText">
+            Система тренувань, харчування і контролю,
+            яка будується під твою ціль,
+            а не під випадкові поради з TikTok.
+          </p>
+
+          <div className="finalCtaButtons">
+            <a href="#contacts" className="finalPrimaryBtn">
+              Записатись на консультацію
+            </a>
+
+            <a
+              href="https://instagram.com/burdak_coach"
+              target="_blank"
+              className="finalSecondaryBtn"
+            >
+              Переглянути Instagram
+            </a>
+          </div>
+        </div>
+      </section>
+      <footer className="footer">
+        <div className="footerContainer">
+
+          <div className="footerLeft">
+            <h3>BURDAK COACH</h3>
+
+            <p>
+              Персональний тренер • Онлайн супровід • Система без хаосу
+            </p>
+          </div>
+
+          <div className="footerRight">
+            <a href="#about">Про мене</a>
+            <a href="#services">Послуги</a>
+            <a href="#results">Результати</a>
+            <a href="#library">Бібліотека вправ</a>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
