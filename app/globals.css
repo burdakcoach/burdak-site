@@ -1196,3 +1196,462 @@ main {
     height: 260px;
   }
 }
+@media (max-width: 760px) {
+  .siteHeader {
+    width: calc(100% - 32px);
+    top: 16px;
+    padding: 14px 16px;
+    border-radius: 24px;
+  }
+
+  .logo {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .headerBtn {
+    height: 44px;
+    padding: 0 18px;
+    font-size: 14px;
+  }
+}
+.formatsSection {
+  padding: 120px 32px;
+  background: #050505;
+}
+
+.formatsContainer {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.formatsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.formatCard {
+  min-height: 360px;
+  padding: 32px;
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.055),
+    rgba(255, 255, 255, 0.018)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.formatCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.formatCard.premium {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(239, 68, 68, 0.18), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.022));
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.formatCard span {
+  display: block;
+  font-size: 16px;
+  font-weight: 900;
+  color: #ef4444;
+}
+
+.formatCard h3 {
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.formatCard p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #a1a1aa;
+}
+
+.contactsTitle {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: clamp(52px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  text-align: center;
+}
+
+.contactsSection .sectionLabel {
+  text-align: center;
+}
+
+.contactsText {
+  max-width: 720px;
+  margin: 28px auto 42px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #a1a1aa;
+}
+
+.contactsButtons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.contactBtn {
+  min-width: 180px;
+  height: 58px;
+  padding: 0 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+
+  background: rgba(255,255,255,0.04);
+  transition: all 0.25s ease;
+}
+
+.contactBtn:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.contactBtn.primary {
+  background: #ffffff;
+  color: #050505;
+}
+.libraryTags a {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.035);
+  color: #d4d4d8;
+  font-size: 14px;
+  font-weight: 800;
+  transition: all 0.25s ease;
+}
+
+.libraryTags a:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+.muscleMapGrid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.muscleInfoCard {
+  padding: 34px;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.02)
+  );
+}
+
+.muscleInfoCard h2 {
+  margin: 18px 0;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.muscleInfoCard p {
+  color: #a1a1aa;
+  line-height: 1.7;
+}
+
+.muscleMapWrap {
+  padding: 28px;
+  border-radius: 40px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    radial-gradient(circle at center, rgba(239,68,68,0.08), transparent 45%),
+    rgba(255,255,255,0.025);
+}
+
+.muscleSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mapLabel {
+  fill: #71717a;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bodyBase {
+  fill: rgba(255,255,255,0.08);
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 2;
+}
+
+.bodyStroke {
+  fill: none;
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+
+.muscleZone {
+  cursor: pointer;
+  opacity: 0.78;
+  stroke: rgba(255,255,255,0.4);
+  stroke-width: 2;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    filter 0.25s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.muscleZone:hover {
+  opacity: 1;
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 18px rgba(255,255,255,0.35));
+}
+
+.chest {
+  fill: #ef4444;
+}
+
+.shoulders {
+  fill: #f59e0b;
+}
+
+.core {
+  fill: #facc15;
+}
+
+.legs {
+  fill: #a855f7;
+}
+
+.back {
+  fill: #3b82f6;
+}
+
+.mobility {
+  fill: #22c55e;
+}
+
+@media (max-width: 900px) {
+  .muscleMapGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .muscleMapWrap {
+    padding: 16px;
+    border-radius: 28px;
+  }
+
+  .muscleInfoCard {
+    padding: 26px;
+  }
+
+  .muscleInfoCard h2 {
+    font-size: 28px;
+  }
+}
+.anatomyMap {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 60px auto 0;
+}
+
+.anatomyImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 32px;
+}
+
+.anatomyHotspots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hotspot {
+  cursor: pointer;
+  fill: rgba(255, 255, 255, 0.01);
+  stroke: rgba(255, 255, 255, 0);
+  stroke-width: 3;
+  transition: 0.25s ease;
+}
+
+.hotspot:hover {
+  fill: rgba(239, 68, 68, 0.28);
+  stroke: rgba(255, 255, 255, 0.65);
+  filter: drop-shadow(0 0 18px rgba(239, 68, 68, 0.65));
+}
+
+.hotspot.shoulders:hover {
+  fill: rgba(245, 158, 11, 0.3);
+}
+
+.hotspot.back:hover {
+  fill: rgba(59, 130, 246, 0.3);
+}
+
+.hotspot.mobility:hover {
+  fill: rgba(34, 197, 94, 0.3);
+}
+
+.hotspot.legs:hover {
+  fill: rgba(168, 85, 247, 0.3);
+}
+
+.hotspot.core:hover {
+  fill: rgba(250, 204, 21, 0.3);
+}
+.anatomyLayout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 36px;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.anatomyMap {
+  position: relative;
+  width: 100%;
+}
+
+.anatomyImage {
+  width: 100%;
+  display: block;
+  border-radius: 34px;
+}
+
+.anatomyHotspots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hotspot {
+  cursor: pointer;
+  fill: rgba(255, 255, 255, 0.01);
+  stroke: transparent;
+  stroke-width: 3;
+  transition: 0.25s ease;
+}
+
+.hotspot:hover {
+  stroke: rgba(255, 255, 255, 0.75);
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.6));
+}
+
+.hotspot.chest:hover {
+  fill: rgba(239, 68, 68, 0.32);
+}
+
+.hotspot.shoulders:hover {
+  fill: rgba(249, 115, 22, 0.32);
+}
+
+.hotspot.back:hover {
+  fill: rgba(59, 130, 246, 0.32);
+}
+
+.hotspot.mobility:hover {
+  fill: rgba(34, 197, 94, 0.32);
+}
+
+.hotspot.legs:hover {
+  fill: rgba(168, 85, 247, 0.32);
+}
+
+.hotspot.core:hover {
+  fill: rgba(250, 204, 21, 0.32);
+}
+
+.muscleInfoCard {
+  padding: 32px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.035);
+}
+
+.muscleInfoCard h2 {
+  margin: 18px 0;
+  font-size: 30px;
+}
+
+.muscleInfoCard p,
+.muscleInfoCard li {
+  color: #a1a1aa;
+  line-height: 1.7;
+}
+
+.muscleInfoCard ul {
+  margin: 22px 0;
+  padding-left: 20px;
+}
+
+.muscleDot {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+}
+
+.chestDot {
+  background: #ef4444;
+}
+
+.muscleCardBtn {
+  display: inline-flex;
+  margin-top: 10px;
+  padding: 16px 22px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .anatomyLayout {
+    grid-template-columns: 1fr;
+  }
+}

@@ -10,7 +10,7 @@ export default function Home() {
           <a href="#about">Про мене</a>
           <a href="#services">Послуги</a>
           <a href="#results">Результати</a>
-          <a href="#library">Бібліотека вправ</a>
+          <a href="/library">Бібліотека вправ</a>
           <a href="#contacts">Контакти</a>
         </nav>
 
@@ -329,59 +329,9 @@ export default function Home() {
                   Сильніше, сухіше і контрольованіше тіло без хаосу і випадкових рішень.
                 </p>
               </div>
-
             </div>
           </div>
         </section>
-      </section>
-      <section id="library" className="librarySection">
-        <div className="libraryContainer">
-          <div className="sectionHead">
-            <p className="sectionLabel">Бібліотека вправ</p>
-
-            <h2 className="sectionTitle">
-              Вправи з поясненням техніки для кожної цілі
-            </h2>
-          </div>
-
-          <div className="libraryTags">
-            <span>Груди</span>
-            <span>Спина</span>
-            <span>Ноги</span>
-            <span>Плечі</span>
-            <span>Прес</span>
-            <span>Мобільність</span>
-          </div>
-
-          <div className="libraryGrid">
-            <div className="exerciseCard">
-              <div className="exerciseVideo">Відео вправи</div>
-              <div className="exerciseContent">
-                <span>Груди</span>
-                <h3>Жим гантелей лежачи</h3>
-                <p>Контроль амплітуди, стабільні лопатки і робота без ривків.</p>
-              </div>
-            </div>
-
-            <div className="exerciseCard">
-              <div className="exerciseVideo">Відео вправи</div>
-              <div className="exerciseContent">
-                <span>Спина</span>
-                <h3>Тяга верхнього блока</h3>
-                <p>Фокус на лопатках, контроль корпусу і повне скорочення спини.</p>
-              </div>
-            </div>
-
-            <div className="exerciseCard">
-              <div className="exerciseVideo">Відео вправи</div>
-              <div className="exerciseContent">
-                <span>Ноги</span>
-                <h3>Румунська тяга</h3>
-                <p>Таз назад, нейтральна спина, контроль задньої поверхні стегна.</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
       <section id="faq" className="faqSection">
         <div className="faqContainer">
@@ -424,36 +374,38 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="finalCtaSection">
-        <div className="finalCtaContainer">
+      <section id="contacts" className="contactsSection">
+        <div className="contactsContainer">
+          <p className="sectionLabel">Контакти</p>
 
-          <p className="sectionLabel">
-            Старт
-          </p>
-
-          <h2 className="finalCtaTitle">
+          <h2 className="contactsTitle">
             Готовий перестати тренуватись навмання?
           </h2>
 
-          <p className="finalCtaText">
-            Система тренувань, харчування і контролю,
-            яка будується під твою ціль,
-            а не під випадкові поради з TikTok.
+          <p className="contactsText">
+            Напиши мені та отримай консультацію щодо тренувань,
+            харчування і плану досягнення результату.
           </p>
 
-          <div className="finalCtaButtons">
-            <a href="#contacts" className="finalPrimaryBtn">
-              Записатись на консультацію
+          <div className="contactsButtons">
+            <a
+              href="https://t.me/coach_burdak"
+              target="_blank"
+              className="contactBtn primary"
+            >
+              Telegram
             </a>
 
             <a
-              href="https://instagram.com/burdak_coach"
+              href="https://instagram.com/"
               target="_blank"
-              className="finalSecondaryBtn"
+              className="contactBtn"
             >
-              Переглянути Instagram
+              Instagram
             </a>
+
           </div>
+
         </div>
       </section>
       <footer className="footer">
@@ -471,11 +423,11 @@ export default function Home() {
             <a href="#about">Про мене</a>
             <a href="#services">Послуги</a>
             <a href="#results">Результати</a>
-            <a href="#library">Бібліотека вправ</a>
+            <a href="/library">Бібліотека вправ</a>
             <a href="#faq">FAQ</a>
           </div>
         </div>
       </footer>
-    </main>
+    </main >
   );
 }
