@@ -71,7 +71,7 @@ main {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--muted-dark);
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .heroTitle {
@@ -90,12 +90,14 @@ main {
   line-height: 1.65;
   color: var(--muted);
 }
-  .heroButtons {
+
+.heroButtons {
   display: flex;
   gap: 18px;
   flex-wrap: nowrap;
   align-items: center;
 }
+
 .primaryBtn,
 .secondaryBtn {
   white-space: nowrap;
@@ -149,15 +151,15 @@ main {
 
 .photoCard {
   .photoCard {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 0.72;
-  overflow: hidden;
-  border-radius: 38px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(10,10,12,0.85);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
-}
+    position: relative;
+    width: 100%;
+    aspect-ratio: 0.72;
+    overflow: hidden;
+    border-radius: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 10, 12, 0.85);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  }
 }
 
 .photoPlaceholder {
@@ -183,7 +185,7 @@ main {
   padding: 22px 24px;
   border-radius: 26px;
   background: rgba(0, 0, 0, 0.92);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
 }
@@ -255,6 +257,7 @@ main {
     font-size: 44px;
   }
 }
+
 .siteHeader {
   position: fixed;
   top: 22px;
@@ -322,6 +325,7 @@ main {
     display: none;
   }
 }
+
 .coachImage {
   width: 100%;
   height: 100%;
@@ -330,8 +334,9 @@ main {
   display: block;
   border-radius: 38px;
   filter: contrast(1.04) brightness(0.92);
-   filter: brightness(0.82);
+  filter: brightness(0.82);
 }
+
 .targetSection {
   padding: 120px 32px;
   background:
@@ -364,10 +369,12 @@ main {
   letter-spacing: -0.05em;
   font-weight: 900;
 }
+
 .sectionHead {
   margin-bottom: 60px;
   padding-top: 40px;
 }
+
 .targetGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -379,16 +386,15 @@ main {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
+
 .targetCard {
   min-height: 340px;
   padding: 30px;
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.055),
-    rgba(255, 255, 255, 0.018)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -401,11 +407,9 @@ main {
 .targetCard:hover {
   transform: translateY(-6px);
   border-color: rgba(255, 255, 255, 0.18);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.085),
-    rgba(255, 255, 255, 0.025)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.085),
+      rgba(255, 255, 255, 0.025));
 }
 
 .targetCard span {
@@ -437,9 +441,10 @@ main {
 @media (max-width: 620px) {
   .targetSection {
     padding: 90px 20px;
-     .servicesGrid {
-    grid-template-columns: 1fr;
-  }
+
+    .servicesGrid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .targetGrid {
@@ -450,6 +455,7 @@ main {
     min-height: auto;
   }
 }
+
 .servicesSection {
   padding: 120px 32px;
   background: #050505;
@@ -493,12 +499,10 @@ main {
   grid-column: span 1;
   padding: 32px;
   border-radius: 32px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.06),
-    rgba(255,255,255,0.02)
-  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -507,7 +511,7 @@ main {
 
 .serviceCard:hover {
   transform: translateY(-6px);
-  border-color: rgba(255,255,255,0.18);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .serviceTop {
@@ -551,6 +555,7 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
 .resultsSection {
   padding: 120px 32px;
   background:
@@ -574,11 +579,9 @@ main {
   overflow: hidden;
   border-radius: 34px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.055),
-    rgba(255, 255, 255, 0.018)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
   transition:
     transform 0.25s ease,
     border-color 0.25s ease;
@@ -649,6 +652,7 @@ main {
     height: 340px;
   }
 }
+
 .formatsSection {
   padding: 120px 32px;
   background: #050505;
@@ -671,11 +675,9 @@ main {
   padding: 32px;
   border-radius: 34px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.055),
-    rgba(255, 255, 255, 0.018)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -735,6 +737,7 @@ main {
     min-height: 300px;
   }
 }
+
 .processSection {
   padding: 120px 32px;
   background: #050505;
@@ -759,14 +762,12 @@ main {
 
   border-radius: 32px;
 
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.055),
-      rgba(255,255,255,0.018)
-    );
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
 
   display: flex;
   flex-direction: column;
@@ -781,23 +782,19 @@ main {
   transform: translateY(-6px);
 
   border-color:
-    rgba(255,255,255,0.18);
+    rgba(255, 255, 255, 0.18);
 }
 
 .processCard.result {
-  border-color: rgba(239,68,68,0.35);
+  border-color: rgba(239, 68, 68, 0.35);
 
   background:
-    radial-gradient(
-      circle at top right,
-      rgba(239,68,68,0.16),
-      transparent 35%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.07),
-      rgba(255,255,255,0.02)
-    );
+    radial-gradient(circle at top right,
+      rgba(239, 68, 68, 0.16),
+      transparent 35%),
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.02));
 }
 
 .processCard span {
@@ -840,6 +837,7 @@ main {
     min-height: 280px;
   }
 }
+
 .faqSection {
   padding: 120px 32px;
   background:
@@ -862,11 +860,9 @@ main {
   padding: 30px 34px;
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.052),
-    rgba(255, 255, 255, 0.018)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.052),
+      rgba(255, 255, 255, 0.018));
 }
 
 .faqItem h3 {
@@ -901,15 +897,14 @@ main {
     font-size: 15px;
   }
 }
+
 .finalCtaSection {
   padding: 140px 32px 120px;
 
   background:
-    radial-gradient(
-      circle at top,
-      rgba(239,68,68,0.12),
-      transparent 35%
-    ),
+    radial-gradient(circle at top,
+      rgba(239, 68, 68, 0.12),
+      transparent 35%),
     #050505;
 }
 
@@ -981,10 +976,10 @@ main {
 }
 
 .finalSecondaryBtn {
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 
   background:
-    rgba(255,255,255,0.03);
+    rgba(255, 255, 255, 0.03);
 
   color: #fff;
 }
@@ -993,14 +988,14 @@ main {
   transform: translateY(-4px);
 
   border-color:
-    rgba(255,255,255,0.24);
+    rgba(255, 255, 255, 0.24);
 }
 
 .footer {
   padding: 38px 32px;
 
   border-top:
-    1px solid rgba(255,255,255,0.06);
+    1px solid rgba(255, 255, 255, 0.06);
 
   background: #050505;
 }
@@ -1081,6 +1076,7 @@ main {
     padding: 32px 20px;
   }
 }
+
 .librarySection {
   padding: 120px 32px;
   background:
@@ -1121,11 +1117,9 @@ main {
   overflow: hidden;
   border-radius: 34px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.055),
-    rgba(255, 255, 255, 0.018)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
   transition:
     transform 0.25s ease,
     border-color 0.25s ease;
@@ -1196,6 +1190,7 @@ main {
     height: 260px;
   }
 }
+
 @media (max-width: 760px) {
   .siteHeader {
     width: calc(100% - 32px);
@@ -1219,6 +1214,7 @@ main {
     font-size: 14px;
   }
 }
+
 .formatsSection {
   padding: 120px 32px;
   background: #050505;
@@ -1241,11 +1237,9 @@ main {
   padding: 32px;
   border-radius: 34px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.055),
-    rgba(255, 255, 255, 0.018)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1314,12 +1308,13 @@ main {
   gap: 16px;
   flex-wrap: wrap;
 }
+
 .contactBtn {
   min-width: 180px;
   height: 58px;
   padding: 0 30px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 
   display: inline-flex;
   align-items: center;
@@ -1330,19 +1325,20 @@ main {
   font-weight: 700;
   text-decoration: none;
 
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   transition: all 0.25s ease;
 }
 
 .contactBtn:hover {
   transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.25);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .contactBtn.primary {
   background: #ffffff;
   color: #050505;
 }
+
 .libraryTags a {
   padding: 12px 18px;
   border-radius: 999px;
@@ -1359,23 +1355,14 @@ main {
   border-color: rgba(255, 255, 255, 0.22);
   transform: translateY(-2px);
 }
-.muscleMapGrid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 40px;
-  align-items: center;
-  margin-top: 60px;
-}
 
 .muscleInfoCard {
   padding: 34px;
   border-radius: 32px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.06),
-    rgba(255,255,255,0.02)
-  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02));
 }
 
 .muscleInfoCard h2 {
@@ -1388,98 +1375,6 @@ main {
   color: #a1a1aa;
   line-height: 1.7;
 }
-
-.muscleMapWrap {
-  padding: 28px;
-  border-radius: 40px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background:
-    radial-gradient(circle at center, rgba(239,68,68,0.08), transparent 45%),
-    rgba(255,255,255,0.025);
-}
-
-.muscleSvg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.mapLabel {
-  fill: #71717a;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.bodyBase {
-  fill: rgba(255,255,255,0.08);
-  stroke: rgba(255,255,255,0.18);
-  stroke-width: 2;
-}
-
-.bodyStroke {
-  fill: none;
-  stroke: rgba(255,255,255,0.18);
-  stroke-width: 12;
-  stroke-linecap: round;
-}
-
-.muscleZone {
-  cursor: pointer;
-  opacity: 0.78;
-  stroke: rgba(255,255,255,0.4);
-  stroke-width: 2;
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease,
-    filter 0.25s ease;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.muscleZone:hover {
-  opacity: 1;
-  transform: scale(1.06);
-  filter: drop-shadow(0 0 18px rgba(255,255,255,0.35));
-}
-
-.chest {
-  fill: #ef4444;
-}
-
-.shoulders {
-  fill: #f59e0b;
-}
-
-.core {
-  fill: #facc15;
-}
-
-.legs {
-  fill: #a855f7;
-}
-
-.back {
-  fill: #3b82f6;
-}
-
-.mobility {
-  fill: #22c55e;
-}
-
-@media (max-width: 900px) {
-  .muscleMapGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 620px) {
-  .muscleMapWrap {
-    padding: 16px;
-    border-radius: 28px;
-  }
-
   .muscleInfoCard {
     padding: 26px;
   }
@@ -1487,129 +1382,12 @@ main {
   .muscleInfoCard h2 {
     font-size: 28px;
   }
-}
-.anatomyMap {
-  position: relative;
-  width: 100%;
-  max-width: 980px;
-  margin: 60px auto 0;
-}
-
-.anatomyImage {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 32px;
-}
-
-.anatomyHotspots {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hotspot {
-  cursor: pointer;
-  fill: rgba(255, 255, 255, 0.01);
-  stroke: rgba(255, 255, 255, 0);
-  stroke-width: 3;
-  transition: 0.25s ease;
-}
-
-.hotspot:hover {
-  fill: rgba(239, 68, 68, 0.28);
-  stroke: rgba(255, 255, 255, 0.65);
-  filter: drop-shadow(0 0 18px rgba(239, 68, 68, 0.65));
-}
-
-.hotspot.shoulders:hover {
-  fill: rgba(245, 158, 11, 0.3);
-}
-
-.hotspot.back:hover {
-  fill: rgba(59, 130, 246, 0.3);
-}
-
-.hotspot.mobility:hover {
-  fill: rgba(34, 197, 94, 0.3);
-}
-
-.hotspot.legs:hover {
-  fill: rgba(168, 85, 247, 0.3);
-}
-
-.hotspot.core:hover {
-  fill: rgba(250, 204, 21, 0.3);
-}
-.anatomyLayout {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 36px;
-  align-items: center;
-  margin-top: 60px;
-}
-
-.anatomyMap {
-  position: relative;
-  width: 100%;
-}
-
-.anatomyImage {
-  width: 100%;
-  display: block;
-  border-radius: 34px;
-}
-
-.anatomyHotspots {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hotspot {
-  cursor: pointer;
-  fill: rgba(255, 255, 255, 0.01);
-  stroke: transparent;
-  stroke-width: 3;
-  transition: 0.25s ease;
-}
-
-.hotspot:hover {
-  stroke: rgba(255, 255, 255, 0.75);
-  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.6));
-}
-
-.hotspot.chest:hover {
-  fill: rgba(239, 68, 68, 0.32);
-}
-
-.hotspot.shoulders:hover {
-  fill: rgba(249, 115, 22, 0.32);
-}
-
-.hotspot.back:hover {
-  fill: rgba(59, 130, 246, 0.32);
-}
-
-.hotspot.mobility:hover {
-  fill: rgba(34, 197, 94, 0.32);
-}
-
-.hotspot.legs:hover {
-  fill: rgba(168, 85, 247, 0.32);
-}
-
-.hotspot.core:hover {
-  fill: rgba(250, 204, 21, 0.32);
-}
 
 .muscleInfoCard {
   padding: 32px;
   border-radius: 30px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .muscleInfoCard h2 {
@@ -1635,10 +1413,6 @@ main {
   border-radius: 999px;
 }
 
-.chestDot {
-  background: #ef4444;
-}
-
 .muscleCardBtn {
   display: inline-flex;
   margin-top: 10px;
@@ -1654,4 +1428,19 @@ main {
   .anatomyLayout {
     grid-template-columns: 1fr;
   }
+}
+
+.anatomyMap {
+  position: relative;
+  width: min(100%, 1050px);
+  max-width: 1050px;
+  margin: 70px auto 0;
+  border-radius: 36px;
+  overflow: hidden;
+}
+
+.anatomyImage {
+  display: block;
+  width: 100%;
+  height: auto;
 }
