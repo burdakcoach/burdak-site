@@ -1423,24 +1423,3 @@ main {
   font-weight: 800;
   text-decoration: none;
 }
-
-@media (max-width: 900px) {
-  .anatomyLayout {
-    grid-template-columns: 1fr;
-  }
-}
-
-.anatomyMap {
-  position: relative;
-  width: min(100%, 1050px);
-  max-width: 1050px;
-  margin: 70px auto 0;
-  border-radius: 36px;
-  overflow: hidden;
-}
-
-.anatomyImage {
-  display: block;
-  width: 100%;
-  height: auto;
-}

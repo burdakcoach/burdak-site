@@ -11,19 +11,8 @@ export default function LibraryPage() {
             <p className="sectionLabel">Бібліотека вправ</p>
 
             <h1 className="sectionTitle">
-              Обери м’яз і знайди найкращі вправи
+              Обери м'яз і знайди найкращі вправи
             </h1>
-          </div>
-
-          <div className="anatomyLayout">
-
-            <div className="anatomyMap">
-              <img
-                src="/anatomy-map.png"
-                alt="Анатомічна карта м’язів"
-                className="anatomyImage"
-              />
-            </div>
           </div>
         </div>
       </section>
