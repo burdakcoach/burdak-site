@@ -70,7 +70,6 @@ main {
   line-height: 1.4;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--muted-dark);
   color: rgba(255, 255, 255, 0.65);
 }
 
@@ -150,16 +149,14 @@ main {
 }
 
 .photoCard {
-  .photoCard {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 0.72;
-    overflow: hidden;
-    border-radius: 38px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(10, 10, 12, 0.85);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-  }
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.72;
+  overflow: hidden;
+  border-radius: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 12, 0.85);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
 }
 
 .photoPlaceholder {
@@ -334,7 +331,6 @@ main {
   display: block;
   border-radius: 38px;
   filter: contrast(1.04) brightness(0.92);
-  filter: brightness(0.82);
 }
 
 .targetSection {
@@ -373,12 +369,6 @@ main {
 .sectionHead {
   margin-bottom: 60px;
   padding-top: 40px;
-}
-
-.targetGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
 }
 
 .targetGrid {
@@ -441,10 +431,6 @@ main {
 @media (max-width: 620px) {
   .targetSection {
     padding: 90px 20px;
-
-    .servicesGrid {
-      grid-template-columns: 1fr;
-    }
   }
 
   .targetGrid {
@@ -1215,71 +1201,6 @@ main {
   }
 }
 
-.formatsSection {
-  padding: 120px 32px;
-  background: #050505;
-}
-
-.formatsContainer {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.formatsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.formatCard {
-  min-height: 360px;
-  padding: 32px;
-  border-radius: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.055),
-      rgba(255, 255, 255, 0.018));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease;
-}
-
-.formatCard:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255, 255, 255, 0.18);
-}
-
-.formatCard.premium {
-  background:
-    radial-gradient(circle at 80% 20%, rgba(239, 68, 68, 0.18), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.022));
-  border-color: rgba(239, 68, 68, 0.35);
-}
-
-.formatCard span {
-  display: block;
-  font-size: 16px;
-  font-weight: 900;
-  color: #ef4444;
-}
-
-.formatCard h3 {
-  font-size: 30px;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
-}
-
-.formatCard p {
-  font-size: 16px;
-  line-height: 1.65;
-  color: #a1a1aa;
-}
-
 .contactsTitle {
   max-width: 1000px;
   margin: 0 auto;
@@ -1354,72 +1275,4 @@ main {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.22);
   transform: translateY(-2px);
-}
-
-.muscleInfoCard {
-  padding: 34px;
-  border-radius: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.06),
-      rgba(255, 255, 255, 0.02));
-}
-
-.muscleInfoCard h2 {
-  margin: 18px 0;
-  font-size: 34px;
-  line-height: 1;
-}
-
-.muscleInfoCard p {
-  color: #a1a1aa;
-  line-height: 1.7;
-}
-  .muscleInfoCard {
-    padding: 26px;
-  }
-
-  .muscleInfoCard h2 {
-    font-size: 28px;
-  }
-
-.muscleInfoCard {
-  padding: 32px;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.muscleInfoCard h2 {
-  margin: 18px 0;
-  font-size: 30px;
-}
-
-.muscleInfoCard p,
-.muscleInfoCard li {
-  color: #a1a1aa;
-  line-height: 1.7;
-}
-
-.muscleInfoCard ul {
-  margin: 22px 0;
-  padding-left: 20px;
-}
-
-.muscleDot {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-}
-
-.muscleCardBtn {
-  display: inline-flex;
-  margin-top: 10px;
-  padding: 16px 22px;
-  border-radius: 999px;
-  background: #ef4444;
-  color: #fff;
-  font-weight: 800;
-  text-decoration: none;
 }
