@@ -1200,6 +1200,18 @@ main {
     font-size: 14px;
   }
 }
+.contactsSection {
+  padding: 120px 32px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(239, 68, 68, 0.08), transparent 32%),
+    #050505;
+}
+
+.contactsContainer {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
 
 .contactsTitle {
   max-width: 1000px;
@@ -1258,6 +1270,12 @@ main {
 .contactBtn.primary {
   background: #ffffff;
   color: #050505;
+}
+
+@media (max-width: 620px) {
+  .contactsSection {
+    padding: 90px 20px;
+  }
 }
 
 .libraryTags a {
