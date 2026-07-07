@@ -1,0 +1,33 @@
+export default function CorePage() {
+  return (
+    <main>
+      <section className="librarySection">
+        <div className="libraryContainer">
+          <a href="/library" className="backLink">
+            ← До бібліотеки
+          </a>
+
+          <div className="sectionHead">
+            <p className="sectionLabel">Кор</p>
+
+            <h1 className="sectionTitle">
+              Вправи для м'язів кора
+            </h1>
+          </div>
+
+          <div className="libraryGrid">
+            <a href="/library/core/hyperextension" className="exerciseCard">
+              <div className="exerciseVideo">Відео вправи</div>
+
+              <div className="exerciseContent">
+                <span>Кор</span>
+                <h3>Гіперекстеншн</h3>
+                <p>Контроль поперекового відділу, робота розгиначів спини без перерозгинання.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
