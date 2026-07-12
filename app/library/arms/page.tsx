@@ -37,6 +37,14 @@ export default function ArmsPage() {
                 <p>Лікті притиснуті до корпусу, повне розгинання рук.</p>
               </div>
             </div>
+            <div className="exerciseCard">
+  <video className="exerciseVideo" src="/library/arms/triceps-cable-extension.mp4" controls />
+  <div className="exerciseContent">
+    <span>Руки</span>
+    <h3>Розгинання рук у кросовері</h3>
+    <p>Лікті нерухомі, повна амплітуда розгинання трицепса.</p>
+  </div>
+</div>
           </div>
         </div>
       </section>

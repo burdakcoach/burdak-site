@@ -28,6 +28,14 @@ export default function LegsPage() {
                 <p>Широка постановка ніг, коліна по лінії стоп, акцент на сідниці.</p>
               </div>
             </div>
+            <div className="exerciseCard">
+  <video className="exerciseVideo" src="/library/legs/bulgarian-split-squat.mp4" controls />
+  <div className="exerciseContent">
+    <span>Ноги</span>
+    <h3>Болгарські випади</h3>
+    <p>Задня нога на підвищенні, коліно передньої ноги не виходить за носок.</p>
+  </div>
+</div>
           </div>
         </div>
       </section>
