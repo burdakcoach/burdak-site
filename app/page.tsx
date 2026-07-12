@@ -4,6 +4,20 @@
 import { useState } from "react";
 
 export default function Home() {
+  const [lightbox, setLightbox] = useState<{ photos: string[]; index: number } | null>(null);
+
+  const openLightbox = (photos: string[]) => setLightbox({ photos, index: 0 });
+  const closeLightbox = () => setLightbox(null);
+  const nextPhoto = () =>
+    setLightbox((prev) =>
+      prev ? { ...prev, index: (prev.index + 1) % prev.photos.length } : null
+    );
+  const prevPhoto = () =>
+    setLightbox((prev) =>
+      prev
+        ? { ...prev, index: (prev.index - 1 + prev.photos.length) % prev.photos.length }
+        : null
+    );
   return (
     <main>
       <header className="siteHeader">
@@ -202,9 +216,13 @@ export default function Home() {
 
           <div className="resultsGrid">
   <div className="resultCard">
-    <div className="resultSinglePhoto">
-      <img src="/results/loss-collage.jpg" alt="-12 кг схуднення" />
-    </div>
+  <div
+    className="resultSinglePhoto resultClickable"
+    onClick={() => openLightbox(["/results/loss-1.jpg", "/results/loss-2.jpg", "/results/loss-3.jpg"])}
+  >
+    <img src="/results/loss-collage.jpg" alt="-12 кг схуднення" />
+    <span className="resultViewAll">Переглянути всі фото →</span>
+  </div>
 
     <div className="resultContent">
       <span>-12 кг</span>
