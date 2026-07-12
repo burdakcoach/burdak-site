@@ -3,9 +3,9 @@ export default function LibraryPage() {
     { id: "chest", label: "Груди", video: "/library/chest.mp4" },
     { id: "back", label: "Спина", video: "/library/back.mp4" },
     { id: "legs", label: "Ноги", video: "/library/legs.mp4" },
-    { id: "shoulders", label: "Плечі", video: "/library/shoulders.mp4" },
+   { id: "shoulders", label: "Плечі", video: "/library/shoulders/lateral-raise.mp4" },
     { id: "core", label: "Прес", video: "/library/core.mp4" },
-    { id: "mobility", label: "Мобільність", video: "/library/mobility.mp4" },
+    { id: "mobility", label: "Мобільність", video: "/library/mobility/hamstring-back-stretch.mp4" },
   ];
 
   return (
