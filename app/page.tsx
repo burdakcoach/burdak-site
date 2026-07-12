@@ -220,7 +220,7 @@ export default function Home() {
     className="resultSinglePhoto resultClickable"
     onClick={() => openLightbox(["/results/loss-1.jpg", "/results/loss-2.jpg", "/results/loss-3.jpg"])}
   >
-    <img src="/results/loss-collage.jpg" alt="-12 кг схуднення" />
+    <img src="/results/loss-1.jpg" alt="-12 кг схуднення" />
     <span className="resultViewAll">Переглянути всі фото →</span>
   </div>
 
