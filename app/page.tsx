@@ -207,14 +207,16 @@ export default function Home() {
             </div>
 
             <div className="resultCard">
-              <div className="resultImagePlaceholder">Фото результату</div>
+  <div className="resultSinglePhoto">
+    <img src="/results/recomp-collage.jpg" alt="+8кг м'язів і об'єм сідниць" />
+  </div>
 
-              <div className="resultContent">
-                <span>Рекомпозиція</span>
-                <h3>Менше жиру, більше форми</h3>
-                <p>Без жорстких дієт: системний план, корекції і поступова зміна тіла.</p>
-              </div>
-            </div>
+  <div className="resultContent">
+    <span>+8кг м'язів і об'єм сідниць</span>
+    <h3>Менше жиру, більше форми</h3>
+    <p>Без жорстких дієт: системний план, корекції і поступова зміна тіла.</p>
+  </div>
+</div>
 
             <div className="resultCard">
               <div className="resultImagePlaceholder">Фото результату</div>

@@ -3,28 +3,31 @@ export default function LegsPage() {
     <main>
       <section className="librarySection">
         <div className="libraryContainer">
-          <a href="/library" className="backLink">
-            ← До бібліотеки
-          </a>
+          <a href="/library" className="backLink">← До бібліотеки</a>
 
           <div className="sectionHead">
             <p className="sectionLabel">Ноги</p>
-
-            <h1 className="sectionTitle">
-              Вправи для м'язів ніг
-            </h1>
+            <h1 className="sectionTitle">Вправи для м'язів ніг</h1>
           </div>
 
           <div className="libraryGrid">
-            <a href="/library/legs/leg-press" className="exerciseCard">
-              <div className="exerciseVideo">Відео вправи</div>
-
+            <div className="exerciseCard">
+              <video className="exerciseVideo" src="/library/legs/romanian-deadlift.mp4" controls />
               <div className="exerciseContent">
                 <span>Ноги</span>
-                <h3>Жим ногами</h3>
-                <p>Контроль амплітуди, стопи на платформі, коліна не завалюються всередину.</p>
+                <h3>Румунська тяга</h3>
+                <p>М'який згин колін, штанга близько до ніг, розтяжка задньої поверхні стегна.</p>
               </div>
-            </a>
+            </div>
+
+            <div className="exerciseCard">
+              <video className="exerciseVideo" src="/library/legs/sumo-deadlift.mp4" controls />
+              <div className="exerciseContent">
+                <span>Ноги</span>
+                <h3>Сумо-тяга на сідниці</h3>
+                <p>Широка постановка ніг, коліна по лінії стоп, акцент на сідниці.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

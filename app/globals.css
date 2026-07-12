@@ -1346,3 +1346,20 @@ main {
     grid-template-columns: 1fr;
   }
 }
+.resultSinglePhoto {
+  height: 420px;
+  overflow: hidden;
+}
+
+.resultSinglePhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 620px) {
+  .resultSinglePhoto {
+    height: 280px;
+  }
+}
