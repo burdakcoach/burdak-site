@@ -1,3 +1,8 @@
+
+"use client";
+
+import { useState } from "react";
+
 export default function Home() {
   return (
     <main>
@@ -196,39 +201,41 @@ export default function Home() {
           </div>
 
           <div className="resultsGrid">
-            <div className="resultCard">
-              <div className="resultImagePlaceholder">Фото результату</div>
+  <div className="resultCard">
+    <div className="resultSinglePhoto">
+      <img src="/results/loss-collage.jpg" alt="-12 кг схуднення" />
+    </div>
 
-              <div className="resultContent">
-                <span>-12 кг</span>
-                <h3>Схуднення без хаосу</h3>
-                <p>4 місяці роботи: контроль харчування, силові тренування і стабільний прогрес.</p>
-              </div>
-            </div>
-
-            <div className="resultCard">
-  <div className="resultSinglePhoto">
-    <img src="/results/recomp-collage.jpg" alt="+8кг м'язів і об'єм сідниць" />
+    <div className="resultContent">
+      <span>-12 кг</span>
+      <h3>Схуднення без хаосу</h3>
+      <p>4 місяці роботи: контроль харчування, силові тренування і стабільний прогрес.</p>
+    </div>
   </div>
 
-  <div className="resultContent">
-    <span>+8кг м'язів і об'єм сідниць</span>
-    <h3>Менше жиру, більше форми</h3>
-    <p>Без жорстких дієт: системний план, корекції і поступова зміна тіла.</p>
+  <div className="resultCard">
+    <div className="resultSinglePhoto">
+      <img src="/results/recomp-collage.jpg" alt="+8кг м'язів і об'єм сідниць" />
+    </div>
+
+    <div className="resultContent">
+      <span>+8кг м'язів і об'єм сідниць</span>
+      <h3>Менше жиру, більше форми</h3>
+      <p>Без жорстких дієт: системний план, корекції і поступова зміна тіла.</p>
+    </div>
+  </div>
+
+  <div className="resultCard">
+    <div className="resultImagePlaceholder">Фото результату</div>
+
+    <div className="resultContent">
+      <span>+ сила</span>
+      <h3>Сильніше і впевненіше тіло</h3>
+      <p>Покращення техніки, силових показників і загального контролю руху.</p>
+    </div>
   </div>
 </div>
-
-            <div className="resultCard">
-              <div className="resultImagePlaceholder">Фото результату</div>
-
-              <div className="resultContent">
-                <span>+ сила</span>
-                <h3>Сильніше і впевненіше тіло</h3>
-                <p>Покращення техніки, силових показників і загального контролю руху.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+</div>
       </section>
       <section id="formats" className="formatsSection">
         <div className="formatsContainer">
