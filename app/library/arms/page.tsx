@@ -12,7 +12,7 @@ export default function ArmsPage() {
 
           <div className="libraryGrid">
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/arms/hammer-curl.mp4" controls preload="metadata"/>
+              <video className="exerciseVideo" src="/library/arms/hammer-curl.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Руки</span>
                 <h3>Молотки</h3>
@@ -37,14 +37,51 @@ export default function ArmsPage() {
                 <p>Лікті притиснуті до корпусу, повне розгинання рук.</p>
               </div>
             </div>
+
             <div className="exerciseCard">
-  <video className="exerciseVideo" src="/library/arms/triceps-cable-extension.mp4" controls preload="metadata" />
-  <div className="exerciseContent">
-    <span>Руки</span>
-    <h3>Розгинання рук у кросовері</h3>
-    <p>Лікті нерухомі, повна амплітуда розгинання трицепса.</p>
-  </div>
-</div>
+              <video className="exerciseVideo" src="/library/arms/triceps-cable-extension.mp4" controls preload="metadata" />
+              <div className="exerciseContent">
+                <span>Руки</span>
+                <h3>Розгинання рук у кросовері</h3>
+                <p>Лікті нерухомі, повна амплітуда розгинання трицепса.</p>
+              </div>
+            </div>
+
+            <div className="exerciseCard">
+              <video className="exerciseVideo" src="/library/arms/bicep-curl.mp4" controls preload="metadata" />
+              <div className="exerciseContent">
+                <span>Руки</span>
+                <h3>Підйом гантелей на біцепс</h3>
+                <p>Лікті зафіксовані, повна амплітуда без розгойдування корпусу.</p>
+              </div>
+            </div>
+
+            <div className="exerciseCard">
+              <video className="exerciseVideo" src="/library/arms/cable-bicep-curl.mp4" controls preload="metadata" />
+              <div className="exerciseContent">
+                <span>Руки</span>
+                <h3>Згинання рук у кросовері</h3>
+                <p>Постійне навантаження на біцепс завдяки натягу троса протягом усього руху.</p>
+              </div>
+            </div>
+
+            <div className="exerciseCard">
+              <video className="exerciseVideo" src="/library/arms/hammer-triceps-extension.mp4" controls preload="metadata" />
+              <div className="exerciseContent">
+                <span>Руки</span>
+                <h3>Молотки на трицепс</h3>
+                <p>Контрольоване розгинання руки з акцентом на трицепс без ривків.</p>
+              </div>
+            </div>
+
+            <div className="exerciseCard">
+            <video className="exerciseVideo" src="/library/arms/triceps-kickback.mp4" controls preload="metadata" />
+              <div className="exerciseContent">
+                <span>Руки</span>
+                <h3>Розгинання на трицепс у нахилі</h3>
+                <p>Корпус зафіксований, лікоть нерухомий, повне розгинання руки назад.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

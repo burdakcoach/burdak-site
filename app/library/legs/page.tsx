@@ -36,6 +36,23 @@ export default function LegsPage() {
     <p>Задня нога на підвищенні, коліно передньої ноги не виходить за носок.</p>
   </div>
 </div>
+<div className="exerciseCard">
+  <video className="exerciseVideo" src="/library/legs/cable-leg-abduction.mp4" controls preload="metadata" />
+  <div className="exerciseContent">
+    <span>Ноги</span>
+    <h3>Відведення ноги в кросовері</h3>
+    <p>Корпус нерухомий, контрольований рух ноги в сторону з акцентом на середній сідничний м'яз.</p>
+  </div>
+</div>
+
+<div className="exerciseCard">
+  <video className="exerciseVideo" src="/library/legs/diagonal-cable-abduction.mp4" controls preload="metadata" />
+  <div className="exerciseContent">
+    <span>Ноги</span>
+    <h3>Діагональне відведення ноги в кросовері</h3>
+    <p>Рух по діагоналі назад-убік, додаткове навантаження на сідничні м'язи.</p>
+  </div>
+</div>
           </div>
         </div>
       </section>
