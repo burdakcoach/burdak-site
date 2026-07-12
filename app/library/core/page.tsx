@@ -12,7 +12,7 @@ export default function CorePage() {
 
           <div className="libraryGrid">
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/core/hyperextension.mp4" controls />
+              <video className="exerciseVideo" src="/library/core/hyperextension.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Прес</span>
                 <h3>Гіперекстеншн</h3>

@@ -12,7 +12,7 @@ export default function ShouldersPage() {
 
           <div className="libraryGrid">
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/shoulders/dumbbell-shoulder-press.mp4" controls />
+              <video className="exerciseVideo" src="/library/shoulders/dumbbell-shoulder-press.mp4" controls preload="metadata"/>
               <div className="exerciseContent">
                 <span>Плечі</span>
                 <h3>Жим гантелей сидячи</h3>
@@ -21,7 +21,7 @@ export default function ShouldersPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/shoulders/lateral-raise.mp4" controls />
+              <video className="exerciseVideo" src="/library/shoulders/lateral-raise.mp4" controls preload="metadata"/>
               <div className="exerciseContent">
                 <span>Плечі</span>
                 <h3>Розведення гантелей стоячи</h3>
@@ -30,7 +30,7 @@ export default function ShouldersPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/shoulders/face-pull.mp4" controls />
+              <video className="exerciseVideo" src="/library/shoulders/face-pull.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Плечі</span>
                 <h3>Фейс-пул</h3>
@@ -38,7 +38,7 @@ export default function ShouldersPage() {
               </div>
             </div>
             <div className="exerciseCard">
-  <video className="exerciseVideo" src="/library/shoulders/front-raise.mp4" controls />
+  <video className="exerciseVideo" src="/library/shoulders/front-raise.mp4" controls preload="metadata" />
   <div className="exerciseContent">
     <span>Плечі</span>
     <h3>Підйом гантелей перед собою</h3>
@@ -47,7 +47,7 @@ export default function ShouldersPage() {
 </div>
 
 <div className="exerciseCard">
-  <video className="exerciseVideo" src="/library/shoulders/rear-delt-fly.mp4" controls />
+  <video className="exerciseVideo" src="/library/shoulders/rear-delt-fly.mp4" controls preload="metadata" />
   <div className="exerciseContent">
     <span>Плечі</span>
     <h3>Розведення на задню дельту</h3>

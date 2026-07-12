@@ -12,7 +12,7 @@ export default function ArmsPage() {
 
           <div className="libraryGrid">
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/arms/hammer-curl.mp4" controls />
+              <video className="exerciseVideo" src="/library/arms/hammer-curl.mp4" controls preload="metadata"/>
               <div className="exerciseContent">
                 <span>Руки</span>
                 <h3>Молотки</h3>
@@ -21,7 +21,7 @@ export default function ArmsPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/arms/concentration-curl.mp4" controls />
+              <video className="exerciseVideo" src="/library/arms/concentration-curl.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Руки</span>
                 <h3>Концентричний підйом на біцепс</h3>
@@ -30,7 +30,7 @@ export default function ArmsPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/arms/triceps-pushdown.mp4" controls />
+              <video className="exerciseVideo" src="/library/arms/triceps-pushdown.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Руки</span>
                 <h3>Канат — трицепс кросовер</h3>
@@ -38,7 +38,7 @@ export default function ArmsPage() {
               </div>
             </div>
             <div className="exerciseCard">
-  <video className="exerciseVideo" src="/library/arms/triceps-cable-extension.mp4" controls />
+  <video className="exerciseVideo" src="/library/arms/triceps-cable-extension.mp4" controls preload="metadata" />
   <div className="exerciseContent">
     <span>Руки</span>
     <h3>Розгинання рук у кросовері</h3>

@@ -12,7 +12,7 @@ export default function LegsPage() {
 
           <div className="libraryGrid">
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/legs/romanian-deadlift.mp4" controls />
+              <video className="exerciseVideo" src="/library/legs/romanian-deadlift.mp4" controls preload="metadata"/>
               <div className="exerciseContent">
                 <span>Ноги</span>
                 <h3>Румунська тяга</h3>
@@ -21,7 +21,7 @@ export default function LegsPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/legs/sumo-deadlift.mp4" controls />
+              <video className="exerciseVideo" src="/library/legs/sumo-deadlift.mp4" controls preload="metadata"/>
               <div className="exerciseContent">
                 <span>Ноги</span>
                 <h3>Сумо-тяга на сідниці</h3>
@@ -29,7 +29,7 @@ export default function LegsPage() {
               </div>
             </div>
             <div className="exerciseCard">
-  <video className="exerciseVideo" src="/library/legs/bulgarian-split-squat.mp4" controls />
+  <video className="exerciseVideo" src="/library/legs/bulgarian-split-squat.mp4" controls preload="metadata"/>
   <div className="exerciseContent">
     <span>Ноги</span>
     <h3>Болгарські випади</h3>
