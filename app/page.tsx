@@ -143,7 +143,8 @@ export default function Home() {
           </div>
 
           <div className="servicesGrid">
-            <div className="serviceCard">
+            <div className="serviceCard" style={{ backgroundImage: "url('/services/plan.jpg')" }}>
+  <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>01</span>
                 <h3>Тренувальний план</h3>
@@ -155,7 +156,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="serviceCard">
+            <div className="serviceCard" style={{ backgroundImage: "url('/services/nutrition.jpg')" }}>
+  <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>02</span>
                 <h3>Харчування і КБЖВ</h3>
@@ -167,7 +169,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="serviceCard">
+            <div className="serviceCard" style={{ backgroundImage: "url('/services/technique.jpg')" }}>
+  <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>03</span>
                 <h3>Контроль техніки</h3>
@@ -178,7 +181,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="serviceCard">
+            <div className="serviceCard" style={{ backgroundImage: "url('/services/control.jpg')" }}>
+  <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>04</span>
                 <h3>Регулярний контроль</h3>
@@ -190,7 +194,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="serviceCard">
+            <div className="serviceCard" style={{ backgroundImage: "url('/services/system.jpg')" }}>
+  <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>05</span>
                 <h3>Система під результат</h3>

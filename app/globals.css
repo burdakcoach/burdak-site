@@ -486,13 +486,31 @@ main {
   padding: 32px;
   border-radius: 32px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.06),
-      rgba(255, 255, 255, 0.02));
+  background-color: rgba(255, 255, 255, 0.02);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: transform .25s ease, border-color .25s ease;
+}
+
+.serviceOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      rgba(5, 5, 5, 0.35) 0%,
+      rgba(5, 5, 5, 0.55) 45%,
+      rgba(5, 5, 5, 0.92) 100%);
+  z-index: 1;
+}
+
+.serviceTop,
+.serviceCard > p {
+  position: relative;
+  z-index: 2;
 }
 
 .serviceCard:hover {
