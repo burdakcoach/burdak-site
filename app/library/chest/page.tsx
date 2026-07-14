@@ -12,7 +12,7 @@ export default function ChestPage() {
 
           <div className="libraryGrid">
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/chest/dumbbell-bench-press.mp4" controls />
+              <video className="exerciseVideo" src="/library/chest/dumbbell-bench-press.mp4" controls preload="metadata"/>
               <div className="exerciseContent">
                 <span>Груди</span>
                 <h3>Жим гантелей лежачи</h3>
@@ -21,7 +21,7 @@ export default function ChestPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/chest/incline-dumbbell-press.mp4" controls />
+              <video className="exerciseVideo" src="/library/chest/incline-dumbbell-press.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Груди</span>
                 <h3>Жим гантелей на лаві з нахилом</h3>
@@ -30,7 +30,7 @@ export default function ChestPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/chest/dumbbell-fly.mp4" controls />
+              <video className="exerciseVideo" src="/library/chest/dumbbell-fly.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Груди</span>
                 <h3>Розведення гантелей лежачи</h3>

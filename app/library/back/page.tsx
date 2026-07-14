@@ -12,7 +12,7 @@ export default function BackPage() {
 
           <div className="libraryGrid">
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/back/bent-over-dumbbell-row.mp4" controls />
+              <video className="exerciseVideo" src="/library/back/bent-over-dumbbell-row.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Спина</span>
                 <h3>Тяга гантелі в нахилі</h3>
@@ -21,7 +21,7 @@ export default function BackPage() {
             </div>
 
             <div className="exerciseCard">
-              <video className="exerciseVideo" src="/library/back/bent-over-barbell-row.mp4" controls />
+              <video className="exerciseVideo" src="/library/back/bent-over-barbell-row.mp4" controls preload="metadata" />
               <div className="exerciseContent">
                 <span>Спина</span>
                 <h3>Тяга штанги в нахилі</h3>

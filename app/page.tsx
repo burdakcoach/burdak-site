@@ -59,10 +59,7 @@ export default function Home() {
               <a href="https://t.me/coach_burdak" className="primaryBtn">
                 Записатись на консультацію
               </a>
-
-              <a href="https://instagram.com/burdak_coach" className="secondaryBtn">
-                Переглянути Instagram
-              </a>
+<a href="https://instagram.com/burdak_coach">Instagram</a>
             </div>
           </div>
 
@@ -429,7 +426,7 @@ export default function Home() {
             </a>
 
             <a
-              href="https://instagram.com/"
+             href="https://instagram.com/burdak_coach"
               target="_blank"
               className="contactBtn"
             >
