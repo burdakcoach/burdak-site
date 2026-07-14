@@ -20,24 +20,8 @@ export default function Home() {
     );
   return (
     <main>
-      <header className="siteHeader">
-        <a href="#" className="logo">
-          BURDAK COACH
-        </a>
-
-        <nav className="navLinks">
-          <a href="#about">Про мене</a>
-          <a href="#services">Послуги</a>
-          <a href="#results">Результати</a>
-          <a href="/library">Бібліотека вправ</a>
-          <a href="#contacts">Контакти</a>
-        </nav>
-
-        <a href="https://t.me/coach_burdak" className="headerBtn">
-          Консультація
-        </a>
-      </header>
-
+      
+<Header />
       <section className="heroSection">
         <div className="heroContainer">
           <div className="heroText">
