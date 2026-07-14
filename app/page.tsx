@@ -140,7 +140,7 @@ export default function Home() {
           </div>
 
           <div className="servicesGrid">
-            <div className="serviceCard" style={{ backgroundImage: "url('/services/plan.jpg')" }}>
+            <a href="/services/plan" className="serviceCard" style={{ backgroundImage: "url('/services/plan.jpg')" }}>
   <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>01</span>
@@ -151,9 +151,9 @@ export default function Home() {
                 Програма під твою ціль, рівень підготовки, графік і можливості.
                 Без випадкових вправ і хаосу.
               </p>
-            </div>
+            </a>
 
-            <div className="serviceCard" style={{ backgroundImage: "url('/services/nutrition.jpg')" }}>
+            <a href="/services/nutrition" className="serviceCard" style={{ backgroundImage: "url('/services/nutrition.jpg')" }}>
   <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>02</span>
@@ -164,9 +164,9 @@ export default function Home() {
                 Розрахунок калорій, білків, жирів і вуглеводів під твою форму і
                 задачі.
               </p>
-            </div>
+            </a>
 
-            <div className="serviceCard" style={{ backgroundImage: "url('/services/technique.jpg')" }}>
+            <a href="/services/technique" className="serviceCard" style={{ backgroundImage: "url('/services/technique.jpg')" }}>
   <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>03</span>
@@ -176,9 +176,9 @@ export default function Home() {
               <p>
                 Аналіз відео вправ, корекція техніки і зменшення ризику травм.
               </p>
-            </div>
+            </a>
 
-            <div className="serviceCard" style={{ backgroundImage: "url('/services/control.jpg')" }}>
+            <a href="/services/control" className="serviceCard" style={{ backgroundImage: "url('/services/control.jpg')" }}>
   <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>04</span>
@@ -189,9 +189,9 @@ export default function Home() {
                 Звіти, корекції, зміни плану і підтримка, щоб прогрес не
                 зупинявся.
               </p>
-            </div>
+            </a>
 
-            <div className="serviceCard" style={{ backgroundImage: "url('/services/system.jpg')" }}>
+            <a href="/services/system" className="serviceCard" style={{ backgroundImage: "url('/services/system.jpg')" }}>
   <div className="serviceOverlay" />
               <div className="serviceTop">
                 <span>05</span>
@@ -202,7 +202,7 @@ export default function Home() {
                 Ти не просто “ходиш у зал”. Ти розумієш, що робиш, навіщо
                 робиш і як це приводить тебе до форми.
               </p>
-            </div>
+            </a>
           </div>
         </div>
       </section>
