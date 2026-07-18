@@ -2,9 +2,24 @@ import { NextRequest, NextResponse } from "next/server";
 import { getBusyTimes } from "@/lib/googleCalendar";
 
 const WORK_START_HOUR = 9;
-const WORK_END_HOUR = 20;
+const WORK_END_HOUR = 20; // останній старт слоту — 19:00 (h < 20)
 const SLOT_MINUTES = 60;
 const DAYS_AHEAD = 14;
+const TIME_ZONE = "Europe/Kyiv";
+
+function getTzOffsetMinutes(date: Date): number {
+  const utcString = date.toLocaleString("en-US", { timeZone: "UTC" });
+  const tzString = date.toLocaleString("en-US", { timeZone: TIME_ZONE });
+  const utcDate = new Date(utcString);
+  const tzDate = new Date(tzString);
+  return (tzDate.getTime() - utcDate.getTime()) / 60000;
+}
+
+function kyivWallClockToUTC(year: number, month: number, day: number, hour: number): Date {
+  const naiveUTC = new Date(Date.UTC(year, month, day, hour, 0, 0));
+  const offsetMin = getTzOffsetMinutes(naiveUTC);
+  return new Date(naiveUTC.getTime() - offsetMin * 60000);
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -17,16 +32,20 @@ export async function GET(req: NextRequest) {
     const busy = await getBusyTimes(timeMin, timeMax);
     const slots: { start: string; end: string }[] = [];
 
-    for (let d = 0; d < DAYS_AHEAD; d++) {
-      const day = new Date(now);
-      day.setDate(day.getDate() + d);
-      day.setHours(0, 0, 0, 0);
+    const todayKyiv = now.toLocaleDateString("en-CA", { timeZone: TIME_ZONE });
+    const [ky, km, kd] = todayKyiv.split("-").map(Number);
 
-      if (day.getDay() === 0) continue; // пропустити неділю
+    for (let d = 0; d < DAYS_AHEAD; d++) {
+      const dayDate = new Date(Date.UTC(ky, km - 1, kd + d));
+      const weekday = dayDate.getUTCDay();
+      if (weekday === 0) continue; // пропустити неділю
+
+      const year = dayDate.getUTCFullYear();
+      const month = dayDate.getUTCMonth();
+      const day = dayDate.getUTCDate();
 
       for (let h = WORK_START_HOUR; h < WORK_END_HOUR; h++) {
-        const slotStart = new Date(day);
-        slotStart.setHours(h, 0, 0, 0);
+        const slotStart = kyivWallClockToUTC(year, month, day, h);
         if (slotStart < now) continue;
 
         const slotEnd = new Date(slotStart.getTime() + SLOT_MINUTES * 60 * 1000);
