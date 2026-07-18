@@ -8,19 +8,24 @@ export default function BookingPage() {
   const [slots, setSlots] = useState<Slot[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/availability")
-      .then((res) => res.json())
-      .then((data) => {
-        setSlots(data.slots || []);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-  }, []);
+  const [errorDetail, setErrorDetail] = useState<string>("");
+  
+ useEffect(() => {
+  fetch("/api/availability")
+    .then(async (res) => {
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || `HTTP ${res.status}`);
+      }
+      setSlots(data.slots || []);
+      setLoading(false);
+    })
+    .catch((err) => {
+      setError(true);
+      setErrorDetail(String(err.message || err));
+      setLoading(false);
+    });
+}, []);
 
   const grouped: Record<string, Slot[]> = {};
   slots.forEach((slot) => {
@@ -46,9 +51,9 @@ export default function BookingPage() {
 
           {loading && <p className="bookingStatus">Завантажую вільні слоти...</p>}
           {error && (
-            <p className="bookingStatus">
-              Не вдалося завантажити розклад. Спробуй пізніше.
-            </p>
+  <p className="bookingStatus">
+    Не вдалося завантажити розклад: {errorDetail}
+  </p>
           )}
           {!loading && !error && slots.length === 0 && (
             <p className="bookingStatus">Немає вільних слотів найближчим часом.</p>
