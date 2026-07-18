@@ -8,6 +8,11 @@ export default function BookingPage() {
   const [slots, setSlots] = useState<Slot[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
+const [name, setName] = useState("");
+const [phone, setPhone] = useState("");
+const [submitting, setSubmitting] = useState(false);
+const [submitError, setSubmitError] = useState("");
   const [errorDetail, setErrorDetail] = useState<string>("");
   
  useEffect(() => {
@@ -65,18 +70,95 @@ export default function BookingPage() {
                 <h3 className="bookingDayTitle">{day}</h3>
                 <div className="bookingSlots">
                   {daySlots.map((slot) => (
-                    <button key={slot.start} className="bookingSlotBtn">
-                      {new Date(slot.start).toLocaleTimeString("uk-UA", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </button>
+                    <button
+  key={slot.start}
+  className="bookingSlotBtn"
+  onClick={() => setSelectedSlot(slot)}
+>
+  {new Date(slot.start).toLocaleTimeString("uk-UA", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })}
+</button>
                   ))}
                 </div>
               </div>
             ))}
           </div>
         </div>
+        {selectedSlot && (
+  <div className="bookingModalOverlay" onClick={() => setSelectedSlot(null)}>
+    <div className="bookingModal" onClick={(e) => e.stopPropagation()}>
+      <button className="bookingModalClose" onClick={() => setSelectedSlot(null)}>
+        ×
+      </button>
+
+      <p className="sectionLabel">Підтвердження запису</p>
+      <h3 className="bookingModalTitle">
+        {new Date(selectedSlot.start).toLocaleDateString("uk-UA", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        })}
+        {", "}
+        {new Date(selectedSlot.start).toLocaleTimeString("uk-UA", {
+          hour: "2-digit",
+          minute: "2-digit",
+        })}
+      </h3>
+
+      <div className="bookingForm">
+        <input
+          type="text"
+          placeholder="Ім'я"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="bookingInput"
+        />
+        <input
+          type="tel"
+          placeholder="Телефон"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="bookingInput"
+        />
+
+        {submitError && <p className="bookingModalError">{submitError}</p>}
+
+        <button
+          className="primaryBtn"
+          disabled={submitting || !name || !phone}
+          onClick={async () => {
+            setSubmitting(true);
+            setSubmitError("");
+            try {
+              const res = await fetch("/api/create-booking", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  name,
+                  phone,
+                  start: selectedSlot.start,
+                  end: selectedSlot.end,
+                }),
+              });
+              const data = await res.json();
+              if (!res.ok) throw new Error(data.error || "Помилка");
+              if (data.paymentUrl) {
+                window.location.href = data.paymentUrl;
+              }
+            } catch (err: any) {
+              setSubmitError(err.message || "Не вдалося оформити запис");
+              setSubmitting(false);
+            }
+          }}
+        >
+          {submitting ? "Обробка..." : "Перейти до оплати"}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       </section>
     </main>
   );

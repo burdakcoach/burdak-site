@@ -1592,3 +1592,74 @@ main {
     padding: 90px 20px;
   }
 }
+.bookingModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.bookingModal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 36px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0a0a0c;
+}
+
+.bookingModalClose {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.bookingModalTitle {
+  margin-top: 14px;
+  font-size: 24px;
+  text-transform: capitalize;
+}
+
+.bookingForm {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.bookingInput {
+  height: 52px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 15px;
+}
+
+.bookingInput::placeholder {
+  color: #71717a;
+}
+
+.bookingModalError {
+  color: #ef4444;
+  font-size: 14px;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
