@@ -19,6 +19,8 @@ export default function Header() {
         <a href="/#contacts">Контакти</a>
       </div>
 
+      <a href="/booking">Записатись</a>
+
       <a href="https://t.me/coach_burdak" target="_blank" className="headerBtn">
         Консультація
       </a>
@@ -45,6 +47,7 @@ export default function Header() {
           className="mobileMenuBtn"
           onClick={() => setMenuOpen(false)}
         >
+          <a href="/booking" onClick={() => setMenuOpen(false)}>Записатись</a>
           Консультація
         </a>
       </div>

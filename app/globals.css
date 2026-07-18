@@ -1527,3 +1527,68 @@ main {
     display: flex;
   }
 }
+.bookingSection {
+  padding: 120px 32px;
+  background: #050505;
+  min-height: 100vh;
+}
+
+.bookingContainer {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bookingStatus {
+  margin-top: 30px;
+  color: #a1a1aa;
+  font-size: 16px;
+}
+
+.bookingDays {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.bookingDay {
+  padding: 26px 30px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.bookingDayTitle {
+  margin-bottom: 18px;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.bookingSlots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.bookingSlotBtn {
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bookingSlotBtn:hover {
+  background: #fff;
+  color: #000;
+}
+
+@media (max-width: 620px) {
+  .bookingSection {
+    padding: 90px 20px;
+  }
+}
