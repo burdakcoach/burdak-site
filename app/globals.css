@@ -1369,6 +1369,12 @@ main {
   object-fit: cover;
   display: block;
 }
+.resultSinglePhoto video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 @media (max-width: 620px) {
   .resultSinglePhoto {
@@ -1662,4 +1668,10 @@ main {
 .primaryBtn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+.resultSinglePhoto video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }

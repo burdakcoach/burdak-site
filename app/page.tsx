@@ -232,7 +232,16 @@ export default function Home() {
   </div>
 
   <div className="resultCard">
-    <div className="resultImagePlaceholder">Фото результату</div>
+    <div className="resultSinglePhoto">
+  <video
+    src="/results/strength.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    preload="metadata"
+  />
+</div>
 
     <div className="resultContent">
       <span>+ сила</span>
