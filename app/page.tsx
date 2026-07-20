@@ -64,8 +64,49 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section id="about" className="aboutSection">
+  <div className="aboutContainer">
+    <div className="aboutPhoto">
+      <img src="/coach.jpg" alt="Іван Бурдак" className="aboutImage" />
+    </div>
 
-      <section id="about" className="targetSection">
+    <div className="aboutText">
+      <p className="sectionLabel">Про мене</p>
+      <h2 className="sectionTitle">Без магії. Тільки система.</h2>
+
+      <p className="aboutParagraph">
+        Я персональний тренер і будую тренувальний процес не на мотивації
+        "з понеділка", а на чіткій системі: план, техніка, контроль і
+        коригування під реальний прогрес людини.
+      </p>
+
+      <p className="aboutParagraph">
+        За 5+ років практики я бачив, як хаотичні тренування без структури
+        призводять до вигорання і травм. Тому працюю за принципом: спочатку
+        розібратись у твоїй ситуації, потім побудувати систему, яка реально
+        працює саме для тебе — незалежно від того, тренуєшся ти в залі чи
+        онлайн.
+      </p>
+
+      <div className="aboutPrinciples">
+        <div className="aboutPrincipleItem">
+          <span>01</span>
+          <p>Індивідуальний підхід замість шаблонних програм</p>
+        </div>
+        <div className="aboutPrincipleItem">
+          <span>02</span>
+          <p>Прозорість: ти завжди розумієш, що і навіщо робиш</p>
+        </div>
+        <div className="aboutPrincipleItem">
+          <span>03</span>
+          <p>Постійний контроль техніки та прогресу</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <section id="audience" className="targetSection">
         <div className="targetContainer">
           <div className="sectionHead">
             <p className="sectionLabel">Для кого</p>
@@ -266,33 +307,29 @@ export default function Home() {
             <div className="formatCard">
               <span>01</span>
               <h3>Персональні тренування</h3>
-              <p>
-                Робота в залі з контролем техніки, навантаження і прогресу на кожному тренуванні.
-              </p>
+<p className="formatPrice">500 грн<span>/ заняття</span></p>
+<p>Робота в залі з контролем техніки, навантаження і прогресу на кожному тренуванні.</p>
             </div>
 
             <div className="formatCard">
               <span>02</span>
               <h3>Онлайн-супровід</h3>
-              <p>
-                План тренувань, харчування, звіти, корекції і контроль прогресу дистанційно.
-              </p>
+<p className="formatPrice">3000 грн<span>/ місяць</span></p>
+<p>План тренувань, харчування, звіти, корекції і контроль прогресу дистанційно.</p>
             </div>
 
             <div className="formatCard">
               <span>03</span>
               <h3>Харчування і КБЖВ</h3>
-              <p>
-                Розрахунок калорій, білків, жирів і вуглеводів під твою ціль, режим і вподобання.
-              </p>
+<p className="formatPrice">1000 грн<span>разово</span></p>
+<p>Розрахунок калорій, білків, жирів і вуглеводів під твою ціль, режим і вподобання.</p>
             </div>
 
             <div className="formatCard premium">
               <span>04</span>
               <h3>Premium coaching</h3>
-              <p>
-                Максимальний контроль: тренування, харчування, регулярні корекції, підтримка і стратегія під результат.
-              </p>
+<p className="formatPrice">8000 грн<span>/ місяць</span></p>
+<p>Максимальний контроль: тренування, харчування, регулярні корекції, підтримка і стратегія під результат.</p>
             </div>
           </div>
         </div>
@@ -357,6 +394,55 @@ export default function Home() {
           </div>
         </section>
       </section>
+      <section id="reviews" className="reviewsSection">
+  <div className="reviewsContainer">
+    <div className="sectionHead">
+      <p className="sectionLabel">Відгуки</p>
+      <h2 className="sectionTitle">Що кажуть клієнти</h2>
+    </div>
+
+    <div className="reviewsGrid">
+      <div className="reviewCard">
+        <p className="reviewQuote">
+          "Заповни реальним відгуком клієнта тут."
+        </p>
+        <div className="reviewAuthor">
+          <div className="reviewAvatar" />
+          <div>
+            <div className="reviewName">Ім'я клієнта</div>
+            <div className="reviewMeta">Формат співпраці</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="reviewCard">
+        <p className="reviewQuote">
+          "Заповни реальним відгуком клієнта тут."
+        </p>
+        <div className="reviewAuthor">
+          <div className="reviewAvatar" />
+          <div>
+            <div className="reviewName">Ім'я клієнта</div>
+            <div className="reviewMeta">Формат співпраці</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="reviewCard">
+        <p className="reviewQuote">
+          "Заповни реальним відгуком клієнта тут."
+        </p>
+        <div className="reviewAuthor">
+          <div className="reviewAvatar" />
+          <div>
+            <div className="reviewName">Ім'я клієнта</div>
+            <div className="reviewMeta">Формат співпраці</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
       <section id="faq" className="faqSection">
         <div className="faqContainer">
           <div className="sectionHead">
@@ -366,6 +452,7 @@ export default function Home() {
               Питання, які зазвичай виникають перед стартом
             </h2>
           </div>
+
 
           <div className="faqList">
             <div className="faqItem">
@@ -395,6 +482,30 @@ export default function Home() {
                 Так, якщо ти виконуєш план, надсилаєш звіти і не зникаєш, як Wi-Fi у підвалі.
               </p>
             </div>
+            <div className="faqItem">
+  <h3>Скільки коштують послуги?</h3>
+  <p>
+    Персональне тренування — 500 грн. Онлайн-супровід — 3000 грн/місяць.
+    Premium coaching — 8000 грн/місяць. Повний перелік цін дивись у розділі
+    "Формати".
+  </p>
+</div>
+
+<div className="faqItem">
+  <h3>Який мінімальний термін співпраці?</h3>
+  <p>
+    Можна почати з одного тренування, щоб оцінити формат роботи. Для
+    стабільного результату рекомендую мінімум 4-8 тижнів системної роботи.
+  </p>
+</div>
+
+<div className="faqItem">
+  <h3>Що потрібно для онлайн-формату?</h3>
+  <p>
+    Мінімум обладнання: гантелі або доступ до залу вдома чи в фітнес-клубі.
+    План адаптується під те, що в тебе реально є.
+  </p>
+</div>
           </div>
         </div>
       </section>

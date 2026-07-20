@@ -15,6 +15,7 @@ export default function Header() {
         <a href="/#about">Про мене</a>
         <a href="/#services">Послуги</a>
         <a href="/#results">Результати</a>
+        <a href="/#reviews">Відгуки</a>
         <a href="/library">Бібліотека вправ</a>
         <a href="/#contacts">Контакти</a>
       </div>
@@ -39,6 +40,7 @@ export default function Header() {
         <a href="/#about" onClick={() => setMenuOpen(false)}>Про мене</a>
         <a href="/#services" onClick={() => setMenuOpen(false)}>Послуги</a>
         <a href="/#results" onClick={() => setMenuOpen(false)}>Результати</a>
+        <a href="/#reviews" onClick={() => setMenuOpen(false)}>Відгуки</a>
         <a href="/library" onClick={() => setMenuOpen(false)}>Бібліотека вправ</a>
         <a href="/#contacts" onClick={() => setMenuOpen(false)}>Контакти</a>
         <a
