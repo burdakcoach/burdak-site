@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 
-function getAuth() {
+function getAuth(scopes: string[]) {
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
   const key = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n");
 
@@ -11,12 +11,12 @@ function getAuth() {
   return new google.auth.JWT({
     email,
     key,
-    scopes: ["https://www.googleapis.com/auth/calendar.readonly"],
+    scopes,
   });
 }
 
 export async function getBusyTimes(timeMin: string, timeMax: string) {
-  const auth = getAuth();
+  const auth = getAuth(["https://www.googleapis.com/auth/calendar.readonly"]);
   const calendar = google.calendar({ version: "v3", auth });
   const calendarId = process.env.GOOGLE_CALENDAR_ID!;
 
@@ -29,4 +29,27 @@ export async function getBusyTimes(timeMin: string, timeMax: string) {
   });
 
   return res.data.calendars?.[calendarId]?.busy ?? [];
+}
+
+export async function createCalendarEvent(params: {
+  summary: string;
+  description: string;
+  start: string;
+  end: string;
+}) {
+  const auth = getAuth(["https://www.googleapis.com/auth/calendar.events"]);
+  const calendar = google.calendar({ version: "v3", auth });
+  const calendarId = process.env.GOOGLE_CALENDAR_ID!;
+
+  const res = await calendar.events.insert({
+    calendarId,
+    requestBody: {
+      summary: params.summary,
+      description: params.description,
+      start: { dateTime: params.start },
+      end: { dateTime: params.end },
+    },
+  });
+
+  return res.data;
 }
