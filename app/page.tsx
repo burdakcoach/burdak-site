@@ -118,38 +118,51 @@ export default function Home() {
           </div>
 
           <div className="targetGrid">
-            <div className="targetCard">
+            <div
+              className="targetCard"
+              style={{ backgroundImage: "url('/images/for-who/01-no-system.jpg')" }}
+            >
               <span>01</span>
               <h3>Тренуєшся без системи</h3>
               <p>
-                Робиш вправи, міняєш програми, але не розумієш, що саме дає
-                прогрес.
+                Робиш вправи, міняєш програми, але не розумієш,
+                що саме дає прогрес.
               </p>
             </div>
 
-            <div className="targetCard">
+            <div
+              className="targetCard"
+              style={{ backgroundImage: "url('/images/for-who/02-no-changes.jpg')" }}
+            >
               <span>02</span>
               <h3>Не бачиш змін у дзеркалі</h3>
               <p>
-                Вага, форма і силові стоять на місці, хоча ти ніби стараєшся.
+                Вага, форма і силові стоять на місці, хоча ти ніби
+                стараєшся.
               </p>
             </div>
 
-            <div className="targetCard">
+            <div
+              className="targetCard"
+              style={{ backgroundImage: "url('/images/for-who/03-chaotic-nutrition.jpg')" }}
+            >
               <span>03</span>
               <h3>Харчування хаотичне</h3>
               <p>
-                То недоїдаєш, то переїдаєш, то просто не розумієш, скільки тобі
-                треба.
+                То недоїдаєш, то переїдаєш, то просто не розумієш,
+                скільки тобі треба.
               </p>
             </div>
 
-            <div className="targetCard">
+            <div
+              className="targetCard"
+              style={{ backgroundImage: "url('/images/for-who/04-control-form.jpg')" }}
+            >
               <span>04</span>
               <h3>Хочеш форму і контроль</h3>
               <p>
-                Без випадкових рішень, з чітким планом, корекціями і зрозумілою
-                системою.
+                Без випадкових рішень — з чітким планом, корекціями
+                і зрозумілою системою.
               </p>
             </div>
           </div>

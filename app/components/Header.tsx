@@ -43,13 +43,18 @@ export default function Header() {
         <a href="/#reviews" onClick={() => setMenuOpen(false)}>Відгуки</a>
         <a href="/library" onClick={() => setMenuOpen(false)}>Бібліотека вправ</a>
         <a href="/#contacts" onClick={() => setMenuOpen(false)}>Контакти</a>
-        <a
+
+        <a href="/booking" onClick={() => setMenuOpen(false)}>
+          Записатись
+        </a>
+
+        
+          <a
           href="https://t.me/coach_burdak"
           target="_blank"
           className="mobileMenuBtn"
           onClick={() => setMenuOpen(false)}
         >
-          <a href="/booking" onClick={() => setMenuOpen(false)}>Записатись</a>
           Консультація
         </a>
       </div>
