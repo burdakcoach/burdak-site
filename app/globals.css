@@ -476,8 +476,7 @@ main {
   align-items: stretch;
 }
 
-.serviceCard.large,
-.serviceCard.wide {
+.serviceCard, .serviceCard.large, .serviceCard.wide {
   width: 100%;
   min-width: 0;
   min-height: 320px;
