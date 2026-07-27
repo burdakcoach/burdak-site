@@ -67,7 +67,7 @@ export default function Home() {
       <section id="about" className="aboutSection">
   <div className="aboutContainer">
     <div className="aboutPhoto">
-      <img src="/coach.jpg" alt="Іван Бурдак" className="aboutImage" />
+      <img src="/about.jpg" alt="Іван Бурдак" className="aboutImage" />
     </div>
 
     <div className="aboutText">
