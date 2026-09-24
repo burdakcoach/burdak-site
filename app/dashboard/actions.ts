@@ -22,6 +22,16 @@ export async function logWorkoutStatus(exerciseId: string, status: WorkoutStatus
     return;
   }
 
+  const { data: client } = await supabase
+    .from("clients")
+    .select("id")
+    .eq("auth_user_id", user.id)
+    .single();
+
+  if (!client) {
+    return;
+  }
+
   const { data: exercise } = await supabase
     .from("exercises")
     .select("sets, reps")
@@ -34,7 +44,7 @@ export async function logWorkoutStatus(exerciseId: string, status: WorkoutStatus
 
   await supabase.from("workout_logs").upsert(
     {
-      client_id: user.id,
+      client_id: client.id,
       exercise_id: exerciseId,
       date: kyivToday(),
       planned_sets: exercise.sets,

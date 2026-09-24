@@ -30,18 +30,20 @@ export default async function DashboardPage() {
 
   const { data: client } = await supabase
     .from("clients")
-    .select("name, level, role")
-    .eq("id", user.id)
+    .select("id, name, level, role")
+    .eq("auth_user_id", user.id)
     .single();
 
-  const { data: program } = await supabase
-    .from("programs")
-    .select("id")
-    .eq("client_id", user.id)
-    .eq("is_active", true)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  const { data: program } = client
+    ? await supabase
+        .from("programs")
+        .select("id")
+        .eq("client_id", client.id)
+        .eq("is_active", true)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle()
+    : { data: null };
 
   const { data: exercises } = program
     ? await supabase
@@ -61,7 +63,7 @@ export default async function DashboardPage() {
       ? await supabase
           .from("workout_logs")
           .select("exercise_id, status")
-          .eq("client_id", user.id)
+          .eq("client_id", client!.id)
           .eq("date", today)
           .in("exercise_id", exerciseIds)
       : { data: [] };

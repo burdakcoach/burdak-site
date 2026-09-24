@@ -76,7 +76,7 @@ export default async function ClientCardPage({
           <div className="authCard">
             <h2 className="cabinetDayTitle">Програма тренувань</h2>
 
-            {WEEKDAYS.map((day) => {
+            {Array.from(byDay.keys()).map((day) => {
               const dayExercises = byDay.get(day) || [];
               if (dayExercises.length === 0) return null;
               return (
@@ -108,16 +108,18 @@ export default async function ClientCardPage({
               <input type="hidden" name="clientId" value={id} />
               <input type="hidden" name="programId" value={program!.id} />
               <div className="adminRow">
-                <select name="dayLabel" className="adminRowInput" required defaultValue="">
-                  <option value="" disabled>
-                    День
-                  </option>
-                  {WEEKDAYS.map((day) => (
-                    <option key={day} value={day}>
-                      {day}
-                    </option>
+                <input
+                  name="dayLabel"
+                  className="adminRowInput"
+                  placeholder="День (напр. День A)"
+                  list="dayLabelOptions"
+                  required
+                />
+                <datalist id="dayLabelOptions">
+                  {Array.from(new Set([...byDay.keys(), ...WEEKDAYS])).map((day) => (
+                    <option key={day} value={day} />
                   ))}
-                </select>
+                </datalist>
                 <input name="name" className="adminRowInput" placeholder="Назва вправи" required />
                 <input name="sets" className="adminRowInput" placeholder="Підходи" type="number" min={1} />
                 <input name="reps" className="adminRowInput" placeholder="Повторення" />

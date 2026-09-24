@@ -13,7 +13,7 @@ export async function getCurrentClient() {
   const { data: client } = await supabase
     .from("clients")
     .select("*")
-    .eq("id", user.id)
+    .eq("auth_user_id", user.id)
     .single();
 
   return { supabase, user, client };

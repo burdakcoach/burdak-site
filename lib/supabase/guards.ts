@@ -14,7 +14,7 @@ export async function requireCoach() {
   const { data: client } = await supabase
     .from("clients")
     .select("role")
-    .eq("id", user.id)
+    .eq("auth_user_id", user.id)
     .single();
 
   if (client?.role !== "coach") {
