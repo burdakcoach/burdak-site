@@ -1912,3 +1912,251 @@ main {
     min-height: 300px;
   }
 }
+/* AUTH */
+
+.authSection {
+  padding: 120px 32px;
+  background: #050505;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authContainer {
+  width: 100%;
+  max-width: 420px;
+}
+
+.authCard {
+  margin-top: 24px;
+  padding: 32px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.authTabs {
+  display: flex;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.authTab,
+.authTabActive {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #a1a1aa;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.authTabActive {
+  background: #fff;
+  color: #000;
+}
+
+.authForm {
+  display: grid;
+  gap: 14px;
+}
+
+.authInput {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 15px;
+}
+
+.authButton {
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.authButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.authError {
+  color: #ef4444;
+  font-size: 14px;
+}
+
+.authNote {
+  color: #a1a1aa;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* CABINET / ADMIN */
+
+.cabinetContainer {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+}
+
+.cabinetHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cabinetDayTitle {
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.exerciseCard {
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 14px;
+}
+
+.exerciseCard:last-child {
+  margin-bottom: 0;
+}
+
+.exerciseHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.exerciseName {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.exerciseMeta {
+  color: #a1a1aa;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.exerciseComment {
+  margin-top: 8px;
+  color: #a1a1aa;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.statusButtons {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.statusBtn,
+.statusBtnActive {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.statusBtnActive {
+  background: #fff;
+  color: #000;
+}
+
+.weekOverview {
+  display: grid;
+  gap: 14px;
+}
+
+.weekDay {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.weekDayTitle {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.weekDayList {
+  list-style: none;
+  color: #a1a1aa;
+  font-size: 14px;
+  display: grid;
+  gap: 2px;
+}
+
+.adminTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.adminTable th {
+  text-align: left;
+  padding: 10px 12px;
+  color: #a1a1aa;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.adminTable td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 14px;
+}
+
+.adminTable tr:last-child td {
+  border-bottom: none;
+}
+
+.adminRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.adminRowInput {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 14px;
+}
+
+.adminDeleteBtn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
