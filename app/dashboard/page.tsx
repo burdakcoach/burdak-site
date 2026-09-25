@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { kyivToday, kyivTodayWeekday, WEEKDAYS } from "@/lib/weekdays";
+import { kyivToday, kyivTodayWeekday } from "@/lib/weekdays";
 import { logWorkoutStatus, type WorkoutStatus } from "./actions";
-import SignOutButton from "./SignOutButton";
 
 const STATUS_OPTIONS: WorkoutStatus[] = ["Виконано", "Частково", "Пропуск"];
 
@@ -30,7 +29,7 @@ export default async function DashboardPage() {
 
   const { data: client } = await supabase
     .from("clients")
-    .select("id, name, level, role")
+    .select("id")
     .eq("auth_user_id", user.id)
     .single();
 
@@ -59,11 +58,11 @@ export default async function DashboardPage() {
 
   const exerciseIds = (exercises || []).map((e) => e.id);
   const { data: todayLogs } =
-    exerciseIds.length > 0
+    client && exerciseIds.length > 0
       ? await supabase
           .from("workout_logs")
           .select("exercise_id, status")
-          .eq("client_id", client!.id)
+          .eq("client_id", client.id)
           .eq("date", today)
           .in("exercise_id", exerciseIds)
       : { data: [] };
@@ -77,83 +76,58 @@ export default async function DashboardPage() {
   });
 
   return (
-    <main>
-      <section className="authSection">
-        <div className="cabinetContainer">
-          <div className="cabinetHeader">
-            <div>
-              <h1 className="sectionTitle">
-                {client?.name ? `Привіт, ${client.name}` : "Кабінет"}
-              </h1>
-              <p className="authNote">
-                {client?.level ? `Рівень: ${client.level}` : "Профіль ще не заповнено тренером."}
-              </p>
+    <>
+      <div className="authCard">
+        <h2 className="cabinetDayTitle">Сьогодні · {todayWeekday}</h2>
+
+        {!program && <p className="authNote">Тренер ще не призначив тобі програму.</p>}
+
+        {program && todayExercises.length === 0 && (
+          <p className="authNote">На сьогодні вправ немає — день відпочинку.</p>
+        )}
+
+        {todayExercises.map((ex) => (
+          <div key={ex.id} className="exerciseCard">
+            <div className="exerciseHeader">
+              <span className="exerciseName">{ex.name}</span>
+              <span className="exerciseMeta">
+                {ex.sets ? `${ex.sets} × ${ex.reps ?? "?"}` : ex.reps}
+              </span>
             </div>
-            <SignOutButton />
+            {ex.coach_comment && <p className="exerciseComment">{ex.coach_comment}</p>}
+            <div className="statusButtons">
+              {STATUS_OPTIONS.map((status) => {
+                const isCurrent = statusByExercise.get(ex.id) === status;
+                return (
+                  <form key={status} action={logWorkoutStatus.bind(null, ex.id, status)}>
+                    <button type="submit" className={isCurrent ? "statusBtnActive" : "statusBtn"}>
+                      {status}
+                    </button>
+                  </form>
+                );
+              })}
+            </div>
           </div>
+        ))}
+      </div>
 
-          <div className="authCard">
-            <h2 className="cabinetDayTitle">Сьогодні · {todayWeekday}</h2>
-
-            {!program && (
-              <p className="authNote">Тренер ще не призначив тобі програму.</p>
-            )}
-
-            {program && todayExercises.length === 0 && (
-              <p className="authNote">На сьогодні вправ немає — день відпочинку.</p>
-            )}
-
-            {todayExercises.map((ex) => (
-              <div key={ex.id} className="exerciseCard">
-                <div className="exerciseHeader">
-                  <span className="exerciseName">{ex.name}</span>
-                  <span className="exerciseMeta">
-                    {ex.sets ? `${ex.sets} × ${ex.reps ?? "?"}` : ex.reps}
-                  </span>
-                </div>
-                {ex.coach_comment && (
-                  <p className="exerciseComment">{ex.coach_comment}</p>
-                )}
-                <div className="statusButtons">
-                  {STATUS_OPTIONS.map((status) => {
-                    const isCurrent = statusByExercise.get(ex.id) === status;
-                    return (
-                      <form key={status} action={logWorkoutStatus.bind(null, ex.id, status)}>
-                        <button
-                          type="submit"
-                          className={isCurrent ? "statusBtnActive" : "statusBtn"}
-                        >
-                          {status}
-                        </button>
-                      </form>
-                    );
-                  })}
-                </div>
+      {program && (exercises || []).length > 0 && (
+        <div className="authCard">
+          <h2 className="cabinetDayTitle">Програма на тиждень</h2>
+          <div className="weekOverview">
+            {Array.from(byDay.keys()).map((day) => (
+              <div key={day} className="weekDay">
+                <p className="weekDayTitle">{day}</p>
+                <ul className="weekDayList">
+                  {byDay.get(day)!.map((e) => (
+                    <li key={e.id}>{e.name}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
-
-          {program && (exercises || []).length > 0 && (
-            <div className="authCard">
-              <h2 className="cabinetDayTitle">Програма на тиждень</h2>
-              <div className="weekOverview">
-                {WEEKDAYS.filter((d) => d !== "Неділя" || byDay.has(d)).map((day) =>
-                  byDay.has(day) ? (
-                    <div key={day} className="weekDay">
-                      <p className="weekDayTitle">{day}</p>
-                      <ul className="weekDayList">
-                        {byDay.get(day)!.map((e) => (
-                          <li key={e.id}>{e.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null
-                )}
-              </div>
-            </div>
-          )}
         </div>
-      </section>
-    </main>
+      )}
+    </>
   );
 }

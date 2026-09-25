@@ -2161,3 +2161,69 @@ main {
   font-weight: 600;
   cursor: pointer;
 }
+.cabinetNav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cabinetNavLink {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #a1a1aa;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cabinetNavLink:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.progressChart {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.progressChartLabel {
+  fill: #a1a1aa;
+  font-size: 11px;
+}
+
+.progressTableWrap {
+  overflow-x: auto;
+}
+
+.profileList {
+  display: grid;
+  gap: 14px;
+}
+
+.profileRow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 12px;
+}
+
+.profileRow dt {
+  color: #a1a1aa;
+  font-size: 14px;
+}
+
+.profileRow dd {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@media (max-width: 620px) {
+  .profileRow {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
