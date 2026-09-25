@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { requireCoach } from "@/lib/supabase/guards";
+import { createNewClient } from "./actions";
 
 type WorkoutLog = {
   client_id: string;
@@ -62,6 +63,23 @@ export default async function AdminPage({
       <section className="authSection">
         <div className="cabinetContainer" style={{ maxWidth: 960 }}>
           <h1 className="sectionTitle">Клієнти</h1>
+
+          <details className="authCard">
+            <summary className="cabinetDayTitle" style={{ cursor: "pointer" }}>
+              + Додати клієнта
+            </summary>
+            <form action={createNewClient} className="authForm" style={{ marginTop: 16 }}>
+              <div className="adminRow">
+                <input name="name" className="adminRowInput" placeholder="Ім'я" required />
+                <input name="email" className="adminRowInput" placeholder="Email (необов'язково)" type="email" />
+                <input name="level" className="adminRowInput" placeholder="Рівень" />
+                <input name="goal" className="adminRowInput" placeholder="Ціль" />
+              </div>
+              <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
+                Створити
+              </button>
+            </form>
+          </details>
 
           {levels.length > 0 && (
             <form method="get" className="adminRow" style={{ gridTemplateColumns: "auto auto" }}>
