@@ -2227,3 +2227,24 @@ main {
     gap: 4px;
   }
 }
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.photoCard {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px;
+}
+
+.photoImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}

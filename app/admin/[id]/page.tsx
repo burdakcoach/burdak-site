@@ -52,6 +52,31 @@ export default async function ClientCardPage({
     .order("date", { ascending: false })
     .limit(10);
 
+  const { data: measurements } = await supabase
+    .from("measurements")
+    .select("id, date, weight, waist, wellbeing")
+    .eq("client_id", id)
+    .order("date", { ascending: false });
+
+  const { data: photos } = await supabase
+    .from("photos")
+    .select("id, date, angle, note, storage_path")
+    .eq("client_id", id)
+    .order("date", { ascending: false });
+
+  const photoUrls = new Map<string, string>();
+  if (photos && photos.length > 0) {
+    const { data: signed } = await supabase.storage
+      .from("photos")
+      .createSignedUrls(
+        photos.map((p) => p.storage_path),
+        3600
+      );
+    (signed || []).forEach((s) => {
+      if (s.signedUrl) photoUrls.set(s.path ?? "", s.signedUrl);
+    });
+  }
+
   const byDay = new Map<string, typeof exercises>();
   (exercises || []).forEach((e) => {
     if (!byDay.has(e.day_label)) byDay.set(e.day_label, []);
@@ -155,6 +180,61 @@ export default async function ClientCardPage({
                   ))}
                 </tbody>
               </table>
+            )}
+          </div>
+
+          <div className="authCard">
+            <h2 className="cabinetDayTitle">Заміри</h2>
+            {(!measurements || measurements.length === 0) && (
+              <p className="authNote">Замірів ще немає.</p>
+            )}
+            {measurements && measurements.length > 0 && (
+              <table className="adminTable">
+                <thead>
+                  <tr>
+                    <th>Дата</th>
+                    <th>Вага</th>
+                    <th>Талія</th>
+                    <th>Самопочуття</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {measurements.map((m) => (
+                    <tr key={m.id}>
+                      <td>{m.date}</td>
+                      <td>{m.weight ?? "—"}</td>
+                      <td>{m.waist ?? "—"}</td>
+                      <td>{m.wellbeing ?? "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          <div className="authCard">
+            <h2 className="cabinetDayTitle">Фото прогресу</h2>
+            {(!photos || photos.length === 0) && (
+              <p className="authNote">Фото ще немає.</p>
+            )}
+            {photos && photos.length > 0 && (
+              <div className="photoGrid">
+                {photos.map((p) => {
+                  const url = photoUrls.get(p.storage_path);
+                  return (
+                    <div key={p.id} className="photoCard">
+                      {url && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={url} alt={p.angle || "Фото прогресу"} className="photoImage" />
+                      )}
+                      <p className="authNote">
+                        {p.date} {p.angle ? `· ${p.angle}` : ""}
+                      </p>
+                      {p.note && <p className="authNote">{p.note}</p>}
+                    </div>
+                  );
+                })}
+              </div>
             )}
           </div>
         </div>

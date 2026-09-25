@@ -1,5 +1,14 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { uploadPhoto, deletePhoto } from "./actions";
+
+type Photo = {
+  id: string;
+  date: string;
+  angle: string | null;
+  note: string | null;
+  storage_path: string;
+};
 
 type Measurement = {
   id: string;
@@ -79,7 +88,30 @@ export default async function ProgressPage() {
 
   const rows = (measurements || []) as Measurement[];
 
+  const { data: photos } = client
+    ? await supabase
+        .from("photos")
+        .select("id, date, angle, note, storage_path")
+        .eq("client_id", client.id)
+        .order("date", { ascending: false })
+    : { data: [] as Photo[] };
+
+  const photoRows = (photos || []) as Photo[];
+  const photoUrls = new Map<string, string>();
+  if (photoRows.length > 0) {
+    const { data: signed } = await supabase.storage
+      .from("photos")
+      .createSignedUrls(
+        photoRows.map((p) => p.storage_path),
+        3600
+      );
+    (signed || []).forEach((s) => {
+      if (s.signedUrl) photoUrls.set(s.path ?? "", s.signedUrl);
+    });
+  }
+
   return (
+    <>
     <div className="authCard">
       <h2 className="cabinetDayTitle">Прогрес</h2>
 
@@ -126,5 +158,59 @@ export default async function ProgressPage() {
         </>
       )}
     </div>
+
+    <div className="authCard">
+      <h2 className="cabinetDayTitle">Фото прогресу</h2>
+
+      <form action={uploadPhoto} className="authForm" encType="multipart/form-data">
+        <input type="file" name="photo" accept="image/*" required className="authInput" />
+        <div className="adminRow">
+          <select name="angle" className="adminRowInput" defaultValue="">
+            <option value="">Ракурс</option>
+            <option value="Фронт">Фронт</option>
+            <option value="Профіль">Профіль</option>
+            <option value="Спина">Спина</option>
+          </select>
+          <input name="note" className="adminRowInput" placeholder="Коментар (необов'язково)" />
+        </div>
+        <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
+          Завантажити
+        </button>
+      </form>
+
+      {photoRows.length === 0 && (
+        <p className="authNote" style={{ marginTop: 16 }}>
+          Фото ще не завантажені.
+        </p>
+      )}
+
+      {photoRows.length > 0 && (
+        <div className="photoGrid">
+          {photoRows.map((p) => {
+            const url = photoUrls.get(p.storage_path);
+            return (
+              <div key={p.id} className="photoCard">
+                {url && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={url} alt={p.angle || "Фото прогресу"} className="photoImage" />
+                )}
+                <p className="authNote">
+                  {p.date} {p.angle ? `· ${p.angle}` : ""}
+                </p>
+                {p.note && <p className="authNote">{p.note}</p>}
+                <form action={deletePhoto}>
+                  <input type="hidden" name="photoId" value={p.id} />
+                  <input type="hidden" name="storagePath" value={p.storage_path} />
+                  <button type="submit" className="adminDeleteBtn">
+                    Видалити
+                  </button>
+                </form>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+    </>
   );
 }
