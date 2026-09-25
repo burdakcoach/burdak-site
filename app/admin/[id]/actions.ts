@@ -39,6 +39,48 @@ export async function addExercise(formData: FormData) {
   revalidatePath(`/admin/${clientId}`);
 }
 
+const PROFILE_TEXT_FIELDS = [
+  "name",
+  "email",
+  "phone",
+  "level",
+  "goal",
+  "city",
+  "job_type",
+  "health_notes",
+  "start_weight",
+  "training_frequency",
+  "activity_level",
+  "priorities",
+] as const;
+
+export async function updateClientProfile(formData: FormData) {
+  const { supabase } = await requireCoach();
+  const clientId = String(formData.get("clientId") || "");
+  if (!clientId) {
+    return;
+  }
+
+  const payload: Record<string, string | number | null> = {};
+
+  for (const key of PROFILE_TEXT_FIELDS) {
+    const raw = formData.get(key);
+    payload[key] = raw != null && String(raw).trim() !== "" ? String(raw).trim() : null;
+  }
+
+  const age = formData.get("age");
+  payload.age = age && String(age).trim() !== "" ? Number(age) : null;
+
+  const heightCm = formData.get("height_cm");
+  payload.height_cm = heightCm && String(heightCm).trim() !== "" ? Number(heightCm) : null;
+
+  const startDate = formData.get("start_date");
+  payload.start_date = startDate && String(startDate).trim() !== "" ? String(startDate) : null;
+
+  await supabase.from("clients").update(payload).eq("id", clientId);
+  revalidatePath(`/admin/${clientId}`);
+}
+
 export async function deleteExercise(formData: FormData) {
   const { supabase } = await requireCoach();
   const clientId = String(formData.get("clientId") || "");

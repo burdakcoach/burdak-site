@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireCoach } from "@/lib/supabase/guards";
 import { WEEKDAYS } from "@/lib/weekdays";
-import { addExercise, deleteExercise } from "./actions";
+import { addExercise, deleteExercise, updateClientProfile } from "./actions";
 
 export default async function ClientCardPage({
   params,
@@ -13,7 +13,9 @@ export default async function ClientCardPage({
 
   const { data: client } = await supabase
     .from("clients")
-    .select("id, name, email, phone, level, goal")
+    .select(
+      "id, name, email, phone, level, goal, age, height_cm, start_weight, start_date, training_frequency, activity_level, priorities, health_notes, city, job_type"
+    )
     .eq("id", id)
     .single();
 
@@ -90,12 +92,35 @@ export default async function ClientCardPage({
           <a href="/admin" className="backLink">← Усі клієнти</a>
 
           <div className="authCard">
-            <h1 className="sectionTitle">{client.name || client.email}</h1>
-            <p className="authNote">
-              {client.email} {client.phone ? `· ${client.phone}` : ""}
-              {client.level ? ` · ${client.level}` : ""}
-            </p>
-            {client.goal && <p className="authNote">Ціль: {client.goal}</p>}
+            <h1 className="sectionTitle">{client.name || client.email || "Клієнт"}</h1>
+
+            <form action={updateClientProfile} className="authForm" style={{ marginTop: 18 }}>
+              <input type="hidden" name="clientId" value={id} />
+              <div className="adminRow">
+                <input name="name" className="adminRowInput" placeholder="Ім'я" defaultValue={client.name ?? ""} />
+                <input name="email" className="adminRowInput" placeholder="Email" type="email" defaultValue={client.email ?? ""} />
+                <input name="phone" className="adminRowInput" placeholder="Телефон" defaultValue={client.phone ?? ""} />
+                <input name="level" className="adminRowInput" placeholder="Рівень" defaultValue={client.level ?? ""} />
+              </div>
+              <div className="adminRow">
+                <input name="goal" className="adminRowInput" placeholder="Ціль" defaultValue={client.goal ?? ""} />
+                <input name="city" className="adminRowInput" placeholder="Місто" defaultValue={client.city ?? ""} />
+                <input name="job_type" className="adminRowInput" placeholder="Статус/зайнятість" defaultValue={client.job_type ?? ""} />
+                <input name="age" className="adminRowInput" placeholder="Вік" type="number" min={0} defaultValue={client.age ?? ""} />
+              </div>
+              <div className="adminRow">
+                <input name="height_cm" className="adminRowInput" placeholder="Зріст, см" type="number" min={0} defaultValue={client.height_cm ?? ""} />
+                <input name="start_weight" className="adminRowInput" placeholder="Вага на старті" defaultValue={client.start_weight ?? ""} />
+                <input name="start_date" className="adminRowInput" placeholder="Дата старту" type="date" defaultValue={client.start_date ?? ""} />
+                <input name="training_frequency" className="adminRowInput" placeholder="Тренувань/тиждень" defaultValue={client.training_frequency ?? ""} />
+              </div>
+              <input name="activity_level" className="authInput" placeholder="Активність" defaultValue={client.activity_level ?? ""} />
+              <input name="priorities" className="authInput" placeholder="Пріоритети" defaultValue={client.priorities ?? ""} />
+              <input name="health_notes" className="authInput" placeholder="Обмеження та застереження" defaultValue={client.health_notes ?? ""} />
+              <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
+                Зберегти
+              </button>
+            </form>
           </div>
 
           <div className="authCard">
