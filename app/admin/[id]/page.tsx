@@ -1,7 +1,13 @@
 import { notFound } from "next/navigation";
 import { requireCoach } from "@/lib/supabase/guards";
 import { WEEKDAYS } from "@/lib/weekdays";
-import { addExercise, deleteExercise, updateClientProfile } from "./actions";
+import {
+  addExercise,
+  deleteExercise,
+  updateClientProfile,
+  uploadClientPhoto,
+  deleteClientPhoto,
+} from "./actions";
 
 export default async function ClientCardPage({
   params,
@@ -256,11 +262,40 @@ export default async function ClientCardPage({
                         {p.date} {p.angle ? `· ${p.angle}` : ""}
                       </p>
                       {p.note && <p className="authNote">{p.note}</p>}
+                      <form action={deleteClientPhoto}>
+                        <input type="hidden" name="clientId" value={id} />
+                        <input type="hidden" name="photoId" value={p.id} />
+                        <input type="hidden" name="storagePath" value={p.storage_path} />
+                        <button type="submit" className="adminDeleteBtn">
+                          Видалити
+                        </button>
+                      </form>
                     </div>
                   );
                 })}
               </div>
             )}
+
+            <h3 className="cabinetDayTitle" style={{ fontSize: 16, marginTop: 20 }}>
+              Додати фото
+            </h3>
+            <form action={uploadClientPhoto} className="authForm">
+              <input type="hidden" name="clientId" value={id} />
+              <input type="file" name="photo" accept="image/*" required className="authInput" />
+              <div className="adminRow">
+                <select name="angle" className="adminRowInput" defaultValue="">
+                  <option value="">Ракурс</option>
+                  <option value="Фронт">Фронт</option>
+                  <option value="Профіль">Профіль</option>
+                  <option value="Спина">Спина</option>
+                </select>
+                <input name="date" className="adminRowInput" type="date" />
+                <input name="note" className="adminRowInput" placeholder="Коментар (необов'язково)" />
+              </div>
+              <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
+                Завантажити
+              </button>
+            </form>
           </div>
         </div>
       </section>

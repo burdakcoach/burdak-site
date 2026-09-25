@@ -93,3 +93,60 @@ export async function deleteExercise(formData: FormData) {
   await supabase.from("exercises").delete().eq("id", exerciseId);
   revalidatePath(`/admin/${clientId}`);
 }
+
+export async function uploadClientPhoto(formData: FormData) {
+  const { supabase } = await requireCoach();
+  const clientId = String(formData.get("clientId") || "");
+  if (!clientId) {
+    return;
+  }
+
+  const file = formData.get("photo");
+  if (!(file instanceof File) || file.size === 0) {
+    return;
+  }
+
+  const angle = String(formData.get("angle") || "") || null;
+  const note = String(formData.get("note") || "") || null;
+  const date = String(formData.get("date") || "") || undefined;
+
+  const ext = file.name.split(".").pop() || "jpg";
+  const path = `${clientId}/${Date.now()}-${angle || "photo"}.${ext}`;
+
+  const { error: uploadError } = await supabase.storage.from("photos").upload(path, file, {
+    contentType: file.type || "image/jpeg",
+  });
+
+  if (uploadError) {
+    console.error("Photo upload failed:", uploadError.message);
+    return;
+  }
+
+  await supabase.from("photos").insert({
+    client_id: clientId,
+    angle,
+    note,
+    date,
+    storage_path: path,
+  });
+
+  revalidatePath(`/admin/${clientId}`);
+}
+
+export async function deleteClientPhoto(formData: FormData) {
+  const { supabase } = await requireCoach();
+  const clientId = String(formData.get("clientId") || "");
+  const photoId = String(formData.get("photoId") || "");
+  const storagePath = String(formData.get("storagePath") || "");
+
+  if (!photoId) {
+    return;
+  }
+
+  await supabase.from("photos").delete().eq("id", photoId);
+  if (storagePath) {
+    await supabase.storage.from("photos").remove([storagePath]);
+  }
+
+  revalidatePath(`/admin/${clientId}`);
+}
