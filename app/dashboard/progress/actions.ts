@@ -32,8 +32,8 @@ export async function uploadPhoto(formData: FormData) {
   const angle = String(formData.get("angle") || "") || null;
   const note = String(formData.get("note") || "") || null;
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `${client.id}/${Date.now()}-${angle || "photo"}.${ext}`;
+  const ext = (file.name.split(".").pop() || "jpg").replace(/[^a-zA-Z0-9]/g, "") || "jpg";
+  const path = `${client.id}/${Date.now()}.${ext}`;
 
   const { error: uploadError } = await supabase.storage.from("photos").upload(path, file, {
     contentType: file.type || "image/jpeg",

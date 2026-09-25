@@ -110,8 +110,8 @@ export async function uploadClientPhoto(formData: FormData) {
   const note = String(formData.get("note") || "") || null;
   const date = String(formData.get("date") || "") || undefined;
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `${clientId}/${Date.now()}-${angle || "photo"}.${ext}`;
+  const ext = (file.name.split(".").pop() || "jpg").replace(/[^a-zA-Z0-9]/g, "") || "jpg";
+  const path = `${clientId}/${Date.now()}.${ext}`;
 
   const { error: uploadError } = await supabase.storage.from("photos").upload(path, file, {
     contentType: file.type || "image/jpeg",
