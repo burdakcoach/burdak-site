@@ -162,7 +162,7 @@ export default async function ProgressPage() {
     <div className="authCard">
       <h2 className="cabinetDayTitle">Фото прогресу</h2>
 
-      <form action={uploadPhoto} className="authForm" encType="multipart/form-data">
+      <form action={uploadPhoto} className="authForm">
         <input type="file" name="photo" accept="image/*" required className="authInput" />
         <div className="adminRow">
           <select name="angle" className="adminRowInput" defaultValue="">
