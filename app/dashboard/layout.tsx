@@ -19,9 +19,13 @@ export default async function DashboardLayout({
 
   const { data: client } = await supabase
     .from("clients")
-    .select("name, level")
+    .select("name, level, role")
     .eq("auth_user_id", user.id)
     .single();
+
+  if (client?.role === "coach") {
+    redirect("/admin");
+  }
 
   return (
     <main>
