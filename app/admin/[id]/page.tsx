@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { requireCoach } from "@/lib/supabase/guards";
 import { WEEKDAYS } from "@/lib/weekdays";
 import {
+  activateProgram,
   addExercise,
+  addMeasurement,
   deleteExercise,
   updateClientProfile,
   uploadClientPhoto,
@@ -11,10 +13,13 @@ import {
 
 export default async function ClientCardPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ program?: string }>;
 }) {
   const { id } = await params;
+  const { program: selectedProgramId } = await searchParams;
   const { supabase } = await requireCoach();
 
   const { data: client } = await supabase
@@ -29,22 +34,27 @@ export default async function ClientCardPage({
     notFound();
   }
 
-  let { data: program } = await supabase
+  const { data: allPrograms } = await supabase
     .from("programs")
-    .select("id")
+    .select("id, is_active, week_start_date, created_at")
     .eq("client_id", id)
-    .eq("is_active", true)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+    .order("created_at", { ascending: false });
+
+  const programsList = allPrograms ?? [];
+
+  let program =
+    programsList.find((p) => p.id === selectedProgramId) ??
+    programsList.find((p) => p.is_active) ??
+    programsList[0];
 
   if (!program) {
     const { data: created } = await supabase
       .from("programs")
       .insert({ client_id: id, is_active: true })
-      .select("id")
+      .select("id, is_active, week_start_date, created_at")
       .single();
-    program = created;
+    program = created!;
+    programsList.push(program);
   }
 
   const { data: exercises } = await supabase
@@ -129,8 +139,54 @@ export default async function ClientCardPage({
             </form>
           </div>
 
+          {programsList.length > 1 && (
+            <div className="authCard">
+              <h2 className="cabinetDayTitle">Програми ({programsList.length})</h2>
+              <p className="authNote" style={{ marginBottom: 12 }}>
+                Клієнт бачить тільки активну. Інші — чернетки, видно тільки тут.
+              </p>
+              <div className="adminRow" style={{ flexWrap: "wrap", gap: 10, display: "flex" }}>
+                {programsList.map((p) => (
+                  <div
+                    key={p.id}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      padding: "6px 10px",
+                      borderRadius: 10,
+                      border: p.id === program!.id ? "1px solid #fff" : "1px solid rgba(255,255,255,0.15)",
+                    }}
+                  >
+                    <a
+                      href={`/admin/${id}?program=${p.id}`}
+                      style={{
+                        textDecoration: "none",
+                        color: "inherit",
+                        fontWeight: p.id === program!.id ? 700 : 400,
+                      }}
+                    >
+                      {p.week_start_date ?? "без дати"} · {p.is_active ? "Активна" : "Чернетка"}
+                    </a>
+                    {!p.is_active && (
+                      <form action={activateProgram}>
+                        <input type="hidden" name="clientId" value={id} />
+                        <input type="hidden" name="programId" value={p.id} />
+                        <button type="submit" className="adminDeleteBtn">
+                          Активувати
+                        </button>
+                      </form>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="authCard">
-            <h2 className="cabinetDayTitle">Програма тренувань</h2>
+            <h2 className="cabinetDayTitle">
+              Програма тренувань {program!.is_active ? "· Активна (видно клієнту)" : "· Чернетка (клієнт не бачить)"}
+            </h2>
 
             {Array.from(byDay.keys()).map((day) => {
               const dayExercises = byDay.get(day) || [];
@@ -241,6 +297,33 @@ export default async function ClientCardPage({
                 </tbody>
               </table>
             )}
+
+            <h3 className="cabinetDayTitle" style={{ fontSize: 16, marginTop: 20 }}>
+              Зробити нові заміри
+            </h3>
+            <p className="authNote" style={{ marginBottom: 12 }}>
+              Дата виставляється автоматично — сьогодні.
+            </p>
+            <form action={addMeasurement} className="authForm">
+              <input type="hidden" name="clientId" value={id} />
+              <div className="adminRow">
+                <input name="weight" className="adminRowInput" placeholder="Вага, кг" type="number" step="0.1" min={0} />
+                <input name="neck" className="adminRowInput" placeholder="Шия, см" type="number" step="0.1" min={0} />
+                <input name="chest" className="adminRowInput" placeholder="Груди, см" type="number" step="0.1" min={0} />
+                <input name="waist" className="adminRowInput" placeholder="Талія, см" type="number" step="0.1" min={0} />
+              </div>
+              <div className="adminRow">
+                <input name="hips" className="adminRowInput" placeholder="Таз/стегна, см" type="number" step="0.1" min={0} />
+                <input name="thigh" className="adminRowInput" placeholder="Стегно, см" type="number" step="0.1" min={0} />
+                <input name="calf" className="adminRowInput" placeholder="Литка, см" type="number" step="0.1" min={0} />
+                <input name="biceps" className="adminRowInput" placeholder="Біцепс, см" type="number" step="0.1" min={0} />
+              </div>
+              <input name="wellbeing" className="authInput" placeholder="Самопочуття (необов'язково)" />
+              <input name="comment" className="authInput" placeholder="Коментар (необов'язково)" />
+              <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
+                Зробити нові заміри
+              </button>
+            </form>
           </div>
 
           <div className="authCard">

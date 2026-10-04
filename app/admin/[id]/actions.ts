@@ -81,6 +81,65 @@ export async function updateClientProfile(formData: FormData) {
   revalidatePath(`/admin/${clientId}`);
 }
 
+export async function activateProgram(formData: FormData) {
+  const { supabase } = await requireCoach();
+  const clientId = String(formData.get("clientId") || "");
+  const programId = String(formData.get("programId") || "");
+
+  if (!clientId || !programId) {
+    return;
+  }
+
+  await supabase
+    .from("programs")
+    .update({ is_active: false })
+    .eq("client_id", clientId)
+    .eq("is_active", true);
+
+  await supabase.from("programs").update({ is_active: true }).eq("id", programId);
+
+  revalidatePath(`/admin/${clientId}`);
+}
+
+const MEASUREMENT_NUMBER_FIELDS = [
+  "weight",
+  "neck",
+  "chest",
+  "waist",
+  "hips",
+  "thigh",
+  "calf",
+  "biceps",
+] as const;
+
+export async function addMeasurement(formData: FormData) {
+  const { supabase } = await requireCoach();
+  const clientId = String(formData.get("clientId") || "");
+  if (!clientId) {
+    return;
+  }
+
+  const payload: Record<string, string | number | null> = {
+    client_id: clientId,
+    date: new Date().toISOString().slice(0, 10),
+  };
+
+  for (const key of MEASUREMENT_NUMBER_FIELDS) {
+    const raw = formData.get(key);
+    payload[key] = raw != null && String(raw).trim() !== "" ? Number(raw) : null;
+  }
+
+  const wellbeing = formData.get("wellbeing");
+  payload.wellbeing = wellbeing != null && String(wellbeing).trim() !== "" ? String(wellbeing).trim() : null;
+
+  const comment = formData.get("comment");
+  payload.comment = comment != null && String(comment).trim() !== "" ? String(comment).trim() : null;
+
+  await supabase.from("measurements").upsert(payload, { onConflict: "client_id,date" });
+
+  revalidatePath(`/admin/${clientId}`);
+}
+
 export async function deleteExercise(formData: FormData) {
   const { supabase } = await requireCoach();
   const clientId = String(formData.get("clientId") || "");
