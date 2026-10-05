@@ -25,7 +25,7 @@ export default async function ClientCardPage({
   const { data: client } = await supabase
     .from("clients")
     .select(
-      "id, name, email, phone, level, goal, age, height_cm, start_weight, start_date, training_frequency, activity_level, priorities, health_notes, city, job_type"
+      "id, name, email, phone, level, goal, age, height_cm, start_weight, start_date, training_frequency, activity_level, priorities, health_notes, city, job_type, nutrition_reporting"
     )
     .eq("id", id)
     .single();
@@ -133,6 +133,16 @@ export default async function ClientCardPage({
               <input name="activity_level" className="authInput" placeholder="Активність" defaultValue={client.activity_level ?? ""} />
               <input name="priorities" className="authInput" placeholder="Пріоритети" defaultValue={client.priorities ?? ""} />
               <input name="health_notes" className="authInput" placeholder="Обмеження та застереження" defaultValue={client.health_notes ?? ""} />
+              <select
+                name="nutrition_reporting"
+                className="authInput"
+                defaultValue={client.nutrition_reporting ?? ""}
+              >
+                <option value="">Звітність по харчуванню — не вказано</option>
+                <option value="Регулярно">Регулярно звітує</option>
+                <option value="Нерегулярно">Нерегулярно звітує</option>
+                <option value="Не звітує">Не звітує</option>
+              </select>
               <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
                 Зберегти
               </button>

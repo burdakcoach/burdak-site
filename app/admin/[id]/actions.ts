@@ -52,6 +52,7 @@ const PROFILE_TEXT_FIELDS = [
   "training_frequency",
   "activity_level",
   "priorities",
+  "nutrition_reporting",
 ] as const;
 
 export async function updateClientProfile(formData: FormData) {

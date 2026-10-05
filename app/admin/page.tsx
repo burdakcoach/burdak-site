@@ -19,14 +19,14 @@ function formatRpe(value: number | null) {
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ level?: string }>;
+  searchParams: Promise<{ level?: string; nutrition?: string }>;
 }) {
-  const { level: levelFilter } = await searchParams;
+  const { level: levelFilter, nutrition: nutritionFilter } = await searchParams;
   const { supabase } = await requireCoach();
 
   const { data: clients } = await supabase
     .from("clients")
-    .select("id, name, email, level, role")
+    .select("id, name, email, level, role, nutrition_reporting")
     .order("name", { ascending: true });
 
   const realClients = (clients || []).filter((c) => c.role !== "coach");
@@ -54,9 +54,15 @@ export default async function AdminPage({
   });
 
   const levels = Array.from(new Set(realClients.map((c) => c.level).filter(Boolean))) as string[];
-  const filteredClients = levelFilter
+  let filteredClients = levelFilter
     ? realClients.filter((c) => c.level === levelFilter)
     : realClients;
+  if (nutritionFilter) {
+    filteredClients =
+      nutritionFilter === "Не вказано"
+        ? filteredClients.filter((c) => !c.nutrition_reporting)
+        : filteredClients.filter((c) => c.nutrition_reporting === nutritionFilter);
+  }
 
   return (
     <main>
@@ -81,8 +87,8 @@ export default async function AdminPage({
             </form>
           </details>
 
-          {levels.length > 0 && (
-            <form method="get" className="adminRow" style={{ gridTemplateColumns: "auto auto" }}>
+          <form method="get" className="adminRow" style={{ gridTemplateColumns: "auto auto auto" }}>
+            {levels.length > 0 && (
               <select name="level" className="adminRowInput" defaultValue={levelFilter || ""}>
                 <option value="">Усі рівні</option>
                 {levels.map((lvl) => (
@@ -91,11 +97,18 @@ export default async function AdminPage({
                   </option>
                 ))}
               </select>
-              <button type="submit" className="authButton">
-                Фільтр
-              </button>
-            </form>
-          )}
+            )}
+            <select name="nutrition" className="adminRowInput" defaultValue={nutritionFilter || ""}>
+              <option value="">Звітність по харчуванню — усі</option>
+              <option value="Регулярно">Регулярно звітує</option>
+              <option value="Нерегулярно">Нерегулярно звітує</option>
+              <option value="Не звітує">Не звітує</option>
+              <option value="Не вказано">Не вказано</option>
+            </select>
+            <button type="submit" className="authButton">
+              Фільтр
+            </button>
+          </form>
 
           <div className="authCard">
             {filteredClients.length === 0 && (
@@ -110,6 +123,7 @@ export default async function AdminPage({
                     <th>Рівень</th>
                     <th>Відвідуваність</th>
                     <th>Сер. RPE</th>
+                    <th>Харчування</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -122,6 +136,7 @@ export default async function AdminPage({
                         <td>{c.level || "—"}</td>
                         <td>{formatPercent(kpi?.attendance ?? null)}</td>
                         <td>{formatRpe(kpi?.avgRpe ?? null)}</td>
+                        <td>{c.nutrition_reporting || "—"}</td>
                         <td>
                           <Link href={`/admin/${c.id}`} className="authNote">
                             Відкрити →
