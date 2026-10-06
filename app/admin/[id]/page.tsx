@@ -5,6 +5,7 @@ import {
   activateProgram,
   addExercise,
   addMeasurement,
+  createProgram,
   deleteExercise,
   updateClientProfile,
   uploadClientPhoto,
@@ -42,26 +43,18 @@ export default async function ClientCardPage({
 
   const programsList = allPrograms ?? [];
 
-  let program =
+  const program =
     programsList.find((p) => p.id === selectedProgramId) ??
     programsList.find((p) => p.is_active) ??
     programsList[0];
 
-  if (!program) {
-    const { data: created } = await supabase
-      .from("programs")
-      .insert({ client_id: id, is_active: true })
-      .select("id, is_active, week_start_date, created_at")
-      .single();
-    program = created!;
-    programsList.push(program);
-  }
-
-  const { data: exercises } = await supabase
-    .from("exercises")
-    .select("id, day_label, name, sets, reps, coach_comment, order_index")
-    .eq("program_id", program!.id)
-    .order("order_index", { ascending: true });
+  const { data: exercises } = program
+    ? await supabase
+        .from("exercises")
+        .select("id, day_label, name, sets, reps, coach_comment, order_index")
+        .eq("program_id", program.id)
+        .order("order_index", { ascending: true })
+    : { data: [] as { id: string; day_label: string; name: string; sets: number | null; reps: string | null; coach_comment: string | null; order_index: number }[] };
 
   const { data: recentLogs } = await supabase
     .from("workout_logs")
@@ -165,7 +158,7 @@ export default async function ClientCardPage({
                       gap: 6,
                       padding: "6px 10px",
                       borderRadius: 10,
-                      border: p.id === program!.id ? "1px solid #fff" : "1px solid rgba(255,255,255,0.15)",
+                      border: p.id === program?.id ? "1px solid #fff" : "1px solid rgba(255,255,255,0.15)",
                     }}
                   >
                     <a
@@ -173,7 +166,7 @@ export default async function ClientCardPage({
                       style={{
                         textDecoration: "none",
                         color: "inherit",
-                        fontWeight: p.id === program!.id ? 700 : 400,
+                        fontWeight: p.id === program?.id ? 700 : 400,
                       }}
                     >
                       {p.week_start_date ?? "без дати"} · {p.is_active ? "Активна" : "Чернетка"}
@@ -195,10 +188,25 @@ export default async function ClientCardPage({
 
           <div className="authCard">
             <h2 className="cabinetDayTitle">
-              Програма тренувань {program!.is_active ? "· Активна (видно клієнту)" : "· Чернетка (клієнт не бачить)"}
+              Програма тренувань{" "}
+              {program ? (program.is_active ? "· Активна (видно клієнту)" : "· Чернетка (клієнт не бачить)") : ""}
             </h2>
 
-            {Array.from(byDay.keys()).map((day) => {
+            {!program && (
+              <>
+                <p className="authNote" style={{ marginBottom: 12 }}>
+                  У цього клієнта ще немає жодної програми.
+                </p>
+                <form action={createProgram}>
+                  <input type="hidden" name="clientId" value={id} />
+                  <button type="submit" className="authButton">
+                    + Створити програму
+                  </button>
+                </form>
+              </>
+            )}
+
+            {program && Array.from(byDay.keys()).map((day) => {
               const dayExercises = byDay.get(day) || [];
               if (dayExercises.length === 0) return null;
               return (
@@ -223,34 +231,38 @@ export default async function ClientCardPage({
               );
             })}
 
-            <h3 className="cabinetDayTitle" style={{ fontSize: 16, marginTop: 20 }}>
-              Додати вправу
-            </h3>
-            <form action={addExercise} className="authForm">
-              <input type="hidden" name="clientId" value={id} />
-              <input type="hidden" name="programId" value={program!.id} />
-              <div className="adminRow">
-                <input
-                  name="dayLabel"
-                  className="adminRowInput"
-                  placeholder="День (напр. День A)"
-                  list="dayLabelOptions"
-                  required
-                />
-                <datalist id="dayLabelOptions">
-                  {Array.from(new Set([...byDay.keys(), ...WEEKDAYS])).map((day) => (
-                    <option key={day} value={day} />
-                  ))}
-                </datalist>
-                <input name="name" className="adminRowInput" placeholder="Назва вправи" required />
-                <input name="sets" className="adminRowInput" placeholder="Підходи" type="number" min={1} />
-                <input name="reps" className="adminRowInput" placeholder="Повторення" />
-              </div>
-              <input name="coachComment" className="authInput" placeholder="Коментар тренера (необов'язково)" />
-              <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
-                Додати
-              </button>
-            </form>
+            {program && (
+              <>
+                <h3 className="cabinetDayTitle" style={{ fontSize: 16, marginTop: 20 }}>
+                  Додати вправу
+                </h3>
+                <form action={addExercise} className="authForm">
+                  <input type="hidden" name="clientId" value={id} />
+                  <input type="hidden" name="programId" value={program.id} />
+                  <div className="adminRow">
+                    <input
+                      name="dayLabel"
+                      className="adminRowInput"
+                      placeholder="День (напр. День A)"
+                      list="dayLabelOptions"
+                      required
+                    />
+                    <datalist id="dayLabelOptions">
+                      {Array.from(new Set([...byDay.keys(), ...WEEKDAYS])).map((day) => (
+                        <option key={day} value={day} />
+                      ))}
+                    </datalist>
+                    <input name="name" className="adminRowInput" placeholder="Назва вправи" required />
+                    <input name="sets" className="adminRowInput" placeholder="Підходи" type="number" min={1} />
+                    <input name="reps" className="adminRowInput" placeholder="Повторення" />
+                  </div>
+                  <input name="coachComment" className="authInput" placeholder="Коментар тренера (необов'язково)" />
+                  <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
+                    Додати
+                  </button>
+                </form>
+              </>
+            )}
           </div>
 
           <div className="authCard">

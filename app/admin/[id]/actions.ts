@@ -82,6 +82,28 @@ export async function updateClientProfile(formData: FormData) {
   revalidatePath(`/admin/${clientId}`);
 }
 
+export async function createProgram(formData: FormData) {
+  const { supabase } = await requireCoach();
+  const clientId = String(formData.get("clientId") || "");
+  if (!clientId) {
+    return;
+  }
+
+  await supabase
+    .from("programs")
+    .update({ is_active: false })
+    .eq("client_id", clientId)
+    .eq("is_active", true);
+
+  await supabase.from("programs").insert({
+    client_id: clientId,
+    is_active: true,
+    week_start_date: new Date().toISOString().slice(0, 10),
+  });
+
+  revalidatePath(`/admin/${clientId}`);
+}
+
 export async function activateProgram(formData: FormData) {
   const { supabase } = await requireCoach();
   const clientId = String(formData.get("clientId") || "");
