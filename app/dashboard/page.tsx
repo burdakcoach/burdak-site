@@ -16,7 +16,12 @@ type Exercise = {
   order_index: number;
 };
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ day?: string }>;
+}) {
+  const { day: requestedDay } = await searchParams;
   const supabase = await createClient();
 
   const {
@@ -54,7 +59,19 @@ export default async function DashboardPage() {
 
   const today = kyivToday();
   const todayWeekday = kyivTodayWeekday();
-  const todayExercises = (exercises || []).filter((e) => e.day_label === todayWeekday);
+
+  const dayLabels: string[] = [];
+  (exercises || []).forEach((e) => {
+    if (!dayLabels.includes(e.day_label)) dayLabels.push(e.day_label);
+  });
+
+  const selectedDay =
+    (requestedDay && dayLabels.includes(requestedDay) && requestedDay) ||
+    (dayLabels.includes(todayWeekday) && todayWeekday) ||
+    dayLabels[0] ||
+    todayWeekday;
+
+  const todayExercises = (exercises || []).filter((e) => e.day_label === selectedDay);
 
   const exerciseIds = (exercises || []).map((e) => e.id);
   const { data: todayLogs } =
@@ -69,21 +86,39 @@ export default async function DashboardPage() {
 
   const statusByExercise = new Map((todayLogs || []).map((l) => [l.exercise_id, l.status]));
 
-  const byDay = new Map<string, Exercise[]>();
-  (exercises || []).forEach((e) => {
-    if (!byDay.has(e.day_label)) byDay.set(e.day_label, []);
-    byDay.get(e.day_label)!.push(e);
-  });
-
   return (
     <>
       <div className="authCard">
-        <h2 className="cabinetDayTitle">Сьогодні · {todayWeekday}</h2>
+        <h2 className="cabinetDayTitle">Моя програма</h2>
 
         {!program && <p className="authNote">Тренер ще не призначив тобі програму.</p>}
 
+        {program && dayLabels.length > 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
+            {dayLabels.map((day) => (
+              <a
+                key={day}
+                href={`/dashboard?day=${encodeURIComponent(day)}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  padding: "6px 12px",
+                  borderRadius: 10,
+                  fontSize: 14,
+                  fontWeight: day === selectedDay ? 700 : 400,
+                  border:
+                    day === selectedDay ? "1px solid #fff" : "1px solid rgba(255,255,255,0.15)",
+                }}
+              >
+                {day}
+                {day === todayWeekday ? " · сьогодні" : ""}
+              </a>
+            ))}
+          </div>
+        )}
+
         {program && todayExercises.length === 0 && (
-          <p className="authNote">На сьогодні вправ немає — день відпочинку.</p>
+          <p className="authNote">На цей день вправ немає — день відпочинку.</p>
         )}
 
         {todayExercises.map((ex) => (
@@ -110,24 +145,6 @@ export default async function DashboardPage() {
           </div>
         ))}
       </div>
-
-      {program && (exercises || []).length > 0 && (
-        <div className="authCard">
-          <h2 className="cabinetDayTitle">Програма на тиждень</h2>
-          <div className="weekOverview">
-            {Array.from(byDay.keys()).map((day) => (
-              <div key={day} className="weekDay">
-                <p className="weekDayTitle">{day}</p>
-                <ul className="weekDayList">
-                  {byDay.get(day)!.map((e) => (
-                    <li key={e.id}>{e.name}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </>
   );
 }
