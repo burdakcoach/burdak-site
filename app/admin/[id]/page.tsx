@@ -1,16 +1,23 @@
 import { notFound } from "next/navigation";
 import { requireCoach } from "@/lib/supabase/guards";
-import { WEEKDAYS } from "@/lib/weekdays";
+import { WEEKDAYS, kyivToday } from "@/lib/weekdays";
 import {
   activateProgram,
   addExercise,
   addMeasurement,
   createProgram,
   deleteExercise,
+  logNutritionStatus,
   updateClientProfile,
   uploadClientPhoto,
   deleteClientPhoto,
 } from "./actions";
+
+const NUTRITION_COLORS: Record<string, string> = {
+  "Регулярно": "#4ade80",
+  "Нерегулярно": "#facc15",
+  "Не звітує": "#f87171",
+};
 
 export default async function ClientCardPage({
   params,
@@ -26,7 +33,7 @@ export default async function ClientCardPage({
   const { data: client } = await supabase
     .from("clients")
     .select(
-      "id, name, email, phone, level, goal, age, height_cm, start_weight, start_date, training_frequency, activity_level, priorities, health_notes, city, job_type, nutrition_reporting"
+      "id, name, email, phone, level, goal, age, height_cm, start_weight, start_date, training_frequency, activity_level, priorities, health_notes, city, job_type"
     )
     .eq("id", id)
     .single();
@@ -94,6 +101,19 @@ export default async function ClientCardPage({
     byDay.get(e.day_label)!.push(e);
   });
 
+  const today = kyivToday();
+  const monthPrefix = today.slice(0, 7); // YYYY-MM
+
+  const { data: nutritionLog } = await supabase
+    .from("nutrition_status_log")
+    .select("date, status")
+    .eq("client_id", id)
+    .order("date", { ascending: false });
+
+  const nutritionThisMonth = (nutritionLog ?? []).filter((l) => l.date.startsWith(monthPrefix));
+  const nutritionStatus = nutritionLog?.[0]?.status ?? null;
+  const nutritionNotReportingCount = nutritionThisMonth.filter((l) => l.status === "Не звітує").length;
+
   return (
     <main>
       <section className="authSection">
@@ -131,18 +151,57 @@ export default async function ClientCardPage({
               <input name="activity_level" className="authInput" placeholder="Активність" defaultValue={client.activity_level ?? ""} />
               <input name="priorities" className="authInput" placeholder="Пріоритети" defaultValue={client.priorities ?? ""} />
               <input name="health_notes" className="authInput" placeholder="Обмеження та застереження" defaultValue={client.health_notes ?? ""} />
-              <select
-                name="nutrition_reporting"
-                className="authInput"
-                defaultValue={client.nutrition_reporting ?? ""}
-              >
-                <option value="">Звітність по харчуванню — не вказано</option>
+              <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
+                Зберегти
+              </button>
+            </form>
+          </div>
+
+          <div className="authCard">
+            <h2 className="cabinetDayTitle">Харчування</h2>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+              {nutritionStatus ? (
+                <>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      background: NUTRITION_COLORS[nutritionStatus] ?? "#999",
+                    }}
+                  />
+                  <span>{nutritionStatus}</span>
+                  {nutritionStatus === "Не звітує" && nutritionNotReportingCount > 0 && (
+                    <span className="authNote">
+                      — {nutritionNotReportingCount}{" "}
+                      {nutritionNotReportingCount === 1 ? "день" : "днів"} цього місяця
+                    </span>
+                  )}
+                </>
+              ) : (
+                <span className="authNote">Ще не позначено</span>
+              )}
+            </div>
+
+            {saved === "nutrition" && (
+              <p style={{ color: "#4ade80", fontWeight: 600, marginBottom: 12 }}>✓ Збережено</p>
+            )}
+
+            <form action={logNutritionStatus} className="adminRow" style={{ gridTemplateColumns: "auto auto" }}>
+              <input type="hidden" name="clientId" value={id} />
+              <input type="hidden" name="currentProgramId" value={program?.id ?? ""} />
+              <select name="status" className="adminRowInput" defaultValue={nutritionStatus ?? ""} required>
+                <option value="" disabled>
+                  Обери статус на сьогодні
+                </option>
                 <option value="Регулярно">Регулярно звітує</option>
                 <option value="Нерегулярно">Нерегулярно звітує</option>
                 <option value="Не звітує">Не звітує</option>
               </select>
-              <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
-                Зберегти
+              <button type="submit" className="authButton">
+                Зберегти відмітку
               </button>
             </form>
           </div>

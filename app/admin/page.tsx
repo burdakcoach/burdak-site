@@ -1,11 +1,18 @@
 import Link from "next/link";
 import { requireCoach } from "@/lib/supabase/guards";
+import { kyivToday } from "@/lib/weekdays";
 import { createNewClient } from "./actions";
 
 type WorkoutLog = {
   client_id: string;
   status: string | null;
   rpe: number | null;
+};
+
+const NUTRITION_COLORS: Record<string, string> = {
+  "Регулярно": "#4ade80",
+  "Нерегулярно": "#facc15",
+  "Не звітує": "#f87171",
 };
 
 function formatPercent(value: number | null) {
@@ -26,7 +33,7 @@ export default async function AdminPage({
 
   const { data: clients } = await supabase
     .from("clients")
-    .select("id, name, email, level, role, nutrition_reporting")
+    .select("id, name, email, level, role")
     .order("name", { ascending: true });
 
   const realClients = (clients || []).filter((c) => c.role !== "coach");
@@ -53,6 +60,28 @@ export default async function AdminPage({
     kpiByClient.set(c.id, { attendance, avgRpe });
   });
 
+  const today = kyivToday();
+  const monthPrefix = today.slice(0, 7); // YYYY-MM
+
+  const { data: nutritionLogs } =
+    clientIds.length > 0
+      ? await supabase
+          .from("nutrition_status_log")
+          .select("client_id, date, status")
+          .in("client_id", clientIds)
+          .order("date", { ascending: false })
+      : { data: [] as { client_id: string; date: string; status: string }[] };
+
+  const nutritionByClient = new Map<string, { status: string | null; notReportingCount: number }>();
+  realClients.forEach((c) => {
+    const clientLogs = (nutritionLogs || []).filter((l) => l.client_id === c.id);
+    const status = clientLogs[0]?.status ?? null;
+    const notReportingCount = clientLogs.filter(
+      (l) => l.date.startsWith(monthPrefix) && l.status === "Не звітує"
+    ).length;
+    nutritionByClient.set(c.id, { status, notReportingCount });
+  });
+
   const levels = Array.from(new Set(realClients.map((c) => c.level).filter(Boolean))) as string[];
   let filteredClients = levelFilter
     ? realClients.filter((c) => c.level === levelFilter)
@@ -60,8 +89,8 @@ export default async function AdminPage({
   if (nutritionFilter) {
     filteredClients =
       nutritionFilter === "Не вказано"
-        ? filteredClients.filter((c) => !c.nutrition_reporting)
-        : filteredClients.filter((c) => c.nutrition_reporting === nutritionFilter);
+        ? filteredClients.filter((c) => !nutritionByClient.get(c.id)?.status)
+        : filteredClients.filter((c) => nutritionByClient.get(c.id)?.status === nutritionFilter);
   }
 
   return (
@@ -130,13 +159,34 @@ export default async function AdminPage({
                 <tbody>
                   {filteredClients.map((c) => {
                     const kpi = kpiByClient.get(c.id);
+                    const nutrition = nutritionByClient.get(c.id);
                     return (
                       <tr key={c.id}>
                         <td>{c.name || "—"}</td>
                         <td>{c.level || "—"}</td>
                         <td>{formatPercent(kpi?.attendance ?? null)}</td>
                         <td>{formatRpe(kpi?.avgRpe ?? null)}</td>
-                        <td>{c.nutrition_reporting || "—"}</td>
+                        <td>
+                          {nutrition?.status ? (
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                              <span
+                                style={{
+                                  display: "inline-block",
+                                  width: 9,
+                                  height: 9,
+                                  borderRadius: "50%",
+                                  background: NUTRITION_COLORS[nutrition.status] ?? "#999",
+                                }}
+                              />
+                              {nutrition.status}
+                              {nutrition.status === "Не звітує" && nutrition.notReportingCount > 0
+                                ? ` (${nutrition.notReportingCount})`
+                                : ""}
+                            </span>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
                         <td>
                           <Link href={`/admin/${c.id}`} className="authNote">
                             Відкрити →

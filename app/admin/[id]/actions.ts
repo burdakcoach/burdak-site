@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireCoach } from "@/lib/supabase/guards";
+import { kyivToday } from "@/lib/weekdays";
 
 function savedRedirectPath(clientId: string, saved: string, programId?: string) {
   const params = new URLSearchParams({ saved });
@@ -59,7 +60,6 @@ const PROFILE_TEXT_FIELDS = [
   "training_frequency",
   "activity_level",
   "priorities",
-  "nutrition_reporting",
 ] as const;
 
 export async function updateClientProfile(formData: FormData) {
@@ -174,6 +174,29 @@ export async function addMeasurement(formData: FormData) {
 
   const currentProgramId = String(formData.get("currentProgramId") || "");
   redirect(savedRedirectPath(clientId, "measurement", currentProgramId || undefined));
+}
+
+const NUTRITION_STATUSES = ["Регулярно", "Нерегулярно", "Не звітує"] as const;
+
+export async function logNutritionStatus(formData: FormData) {
+  const { supabase } = await requireCoach();
+  const clientId = String(formData.get("clientId") || "");
+  const status = String(formData.get("status") || "");
+
+  if (!clientId || !NUTRITION_STATUSES.includes(status as (typeof NUTRITION_STATUSES)[number])) {
+    return;
+  }
+
+  await supabase.from("nutrition_status_log").upsert(
+    { client_id: clientId, date: kyivToday(), status },
+    { onConflict: "client_id,date" }
+  );
+
+  revalidatePath(`/admin/${clientId}`);
+  revalidatePath("/admin");
+
+  const currentProgramId = String(formData.get("currentProgramId") || "");
+  redirect(savedRedirectPath(clientId, "nutrition", currentProgramId || undefined));
 }
 
 export async function deleteExercise(formData: FormData) {
