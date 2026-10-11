@@ -17,10 +17,10 @@ export default async function ClientCardPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ program?: string }>;
+  searchParams: Promise<{ program?: string; saved?: string }>;
 }) {
   const { id } = await params;
-  const { program: selectedProgramId } = await searchParams;
+  const { program: selectedProgramId, saved } = await searchParams;
   const { supabase } = await requireCoach();
 
   const { data: client } = await supabase
@@ -103,8 +103,13 @@ export default async function ClientCardPage({
           <div className="authCard">
             <h1 className="sectionTitle">{client.name || client.email || "Клієнт"}</h1>
 
+            {saved === "profile" && (
+              <p style={{ color: "#4ade80", fontWeight: 600, marginTop: 10 }}>✓ Збережено</p>
+            )}
+
             <form action={updateClientProfile} className="authForm" style={{ marginTop: 18 }}>
               <input type="hidden" name="clientId" value={id} />
+              <input type="hidden" name="currentProgramId" value={program?.id ?? ""} />
               <div className="adminRow">
                 <input name="name" className="adminRowInput" placeholder="Ім'я" defaultValue={client.name ?? ""} />
                 <input name="email" className="adminRowInput" placeholder="Email" type="email" defaultValue={client.email ?? ""} />
@@ -326,8 +331,12 @@ export default async function ClientCardPage({
             <p className="authNote" style={{ marginBottom: 12 }}>
               Дата виставляється автоматично — сьогодні.
             </p>
+            {saved === "measurement" && (
+              <p style={{ color: "#4ade80", fontWeight: 600, marginBottom: 12 }}>✓ Збережено</p>
+            )}
             <form action={addMeasurement} className="authForm">
               <input type="hidden" name="clientId" value={id} />
+              <input type="hidden" name="currentProgramId" value={program?.id ?? ""} />
               <div className="adminRow">
                 <input name="weight" className="adminRowInput" placeholder="Вага, кг" type="number" step="0.1" min={0} />
                 <input name="neck" className="adminRowInput" placeholder="Шия, см" type="number" step="0.1" min={0} />

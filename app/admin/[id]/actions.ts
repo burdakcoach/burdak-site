@@ -1,7 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { requireCoach } from "@/lib/supabase/guards";
+
+function savedRedirectPath(clientId: string, saved: string, programId?: string) {
+  const params = new URLSearchParams({ saved });
+  if (programId) params.set("program", programId);
+  return `/admin/${clientId}?${params.toString()}`;
+}
 
 export async function addExercise(formData: FormData) {
   const { supabase } = await requireCoach();
@@ -80,6 +87,9 @@ export async function updateClientProfile(formData: FormData) {
 
   await supabase.from("clients").update(payload).eq("id", clientId);
   revalidatePath(`/admin/${clientId}`);
+
+  const currentProgramId = String(formData.get("currentProgramId") || "");
+  redirect(savedRedirectPath(clientId, "profile", currentProgramId || undefined));
 }
 
 export async function createProgram(formData: FormData) {
@@ -161,6 +171,9 @@ export async function addMeasurement(formData: FormData) {
   await supabase.from("measurements").upsert(payload, { onConflict: "client_id,date" });
 
   revalidatePath(`/admin/${clientId}`);
+
+  const currentProgramId = String(formData.get("currentProgramId") || "");
+  redirect(savedRedirectPath(clientId, "measurement", currentProgramId || undefined));
 }
 
 export async function deleteExercise(formData: FormData) {
