@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requireCoach } from "@/lib/supabase/guards";
 import { kyivToday } from "@/lib/weekdays";
-import { createNewClient } from "./actions";
+import { createNewClient, logNutritionStatusFromList } from "./actions";
 
 type WorkoutLog = {
   client_id: string;
@@ -99,6 +99,12 @@ export default async function AdminPage({
         : filteredClients.filter((c) => c.client_status === statusFilter);
   }
 
+  const returnQuery = new URLSearchParams({
+    ...(levelFilter ? { level: levelFilter } : {}),
+    ...(nutritionFilter ? { nutrition: nutritionFilter } : {}),
+    ...(statusFilter ? { status: statusFilter } : {}),
+  }).toString();
+
   return (
     <main>
       <section className="authSection">
@@ -180,8 +186,8 @@ export default async function AdminPage({
                         <td>{formatPercent(kpi?.attendance ?? null)}</td>
                         <td>{formatRpe(kpi?.avgRpe ?? null)}</td>
                         <td>
-                          {nutrition?.status ? (
-                            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                            {nutrition?.status && (
                               <span
                                 style={{
                                   display: "inline-block",
@@ -189,16 +195,54 @@ export default async function AdminPage({
                                   height: 9,
                                   borderRadius: "50%",
                                   background: NUTRITION_COLORS[nutrition.status] ?? "#999",
+                                  flexShrink: 0,
                                 }}
                               />
-                              {nutrition.status}
-                              {nutrition.status === "Не звітує" && nutrition.notReportingCount > 0
-                                ? ` (${nutrition.notReportingCount})`
-                                : ""}
-                            </span>
-                          ) : (
-                            "—"
-                          )}
+                            )}
+                            <form
+                              action={logNutritionStatusFromList}
+                              style={{ display: "flex", alignItems: "center", gap: 4 }}
+                            >
+                              <input type="hidden" name="clientId" value={c.id} />
+                              <input type="hidden" name="returnQuery" value={returnQuery} />
+                              <select
+                                name="status"
+                                defaultValue={nutrition?.status ?? ""}
+                                style={{
+                                  fontSize: 12,
+                                  padding: "3px 4px",
+                                  borderRadius: 6,
+                                  background: "rgba(255,255,255,0.04)",
+                                  color: "#fff",
+                                  border: "1px solid rgba(255,255,255,0.12)",
+                                }}
+                              >
+                                <option value="" disabled>
+                                  —
+                                </option>
+                                <option value="Регулярно">Регулярно</option>
+                                <option value="Нерегулярно">Нерегулярно</option>
+                                <option value="Не звітує">Не звітує</option>
+                              </select>
+                              <button
+                                type="submit"
+                                style={{
+                                  fontSize: 12,
+                                  padding: "3px 8px",
+                                  borderRadius: 6,
+                                  border: "1px solid rgba(255,255,255,0.2)",
+                                  background: "rgba(255,255,255,0.08)",
+                                  color: "#fff",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                ✓
+                              </button>
+                            </form>
+                            {nutrition?.status === "Не звітує" && nutrition.notReportingCount > 0 && (
+                              <span className="authNote">({nutrition.notReportingCount})</span>
+                            )}
+                          </div>
                         </td>
                         <td>{c.client_status || "—"}</td>
                         <td>
