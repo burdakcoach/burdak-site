@@ -26,14 +26,14 @@ function formatRpe(value: number | null) {
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ level?: string; nutrition?: string }>;
+  searchParams: Promise<{ level?: string; nutrition?: string; status?: string }>;
 }) {
-  const { level: levelFilter, nutrition: nutritionFilter } = await searchParams;
+  const { level: levelFilter, nutrition: nutritionFilter, status: statusFilter } = await searchParams;
   const { supabase } = await requireCoach();
 
   const { data: clients } = await supabase
     .from("clients")
-    .select("id, name, email, level, role")
+    .select("id, name, email, level, role, client_status")
     .order("name", { ascending: true });
 
   const realClients = (clients || []).filter((c) => c.role !== "coach");
@@ -92,6 +92,12 @@ export default async function AdminPage({
         ? filteredClients.filter((c) => !nutritionByClient.get(c.id)?.status)
         : filteredClients.filter((c) => nutritionByClient.get(c.id)?.status === nutritionFilter);
   }
+  if (statusFilter) {
+    filteredClients =
+      statusFilter === "Не вказано"
+        ? filteredClients.filter((c) => !c.client_status)
+        : filteredClients.filter((c) => c.client_status === statusFilter);
+  }
 
   return (
     <main>
@@ -116,7 +122,7 @@ export default async function AdminPage({
             </form>
           </details>
 
-          <form method="get" className="adminRow" style={{ gridTemplateColumns: "auto auto auto" }}>
+          <form method="get" className="adminRow" style={{ gridTemplateColumns: "auto auto auto auto" }}>
             {levels.length > 0 && (
               <select name="level" className="adminRowInput" defaultValue={levelFilter || ""}>
                 <option value="">Усі рівні</option>
@@ -132,6 +138,12 @@ export default async function AdminPage({
               <option value="Регулярно">Регулярно звітує</option>
               <option value="Нерегулярно">Нерегулярно звітує</option>
               <option value="Не звітує">Не звітує</option>
+              <option value="Не вказано">Не вказано</option>
+            </select>
+            <select name="status" className="adminRowInput" defaultValue={statusFilter || ""}>
+              <option value="">Статус клієнта — усі</option>
+              <option value="Активний">Активний</option>
+              <option value="Неактивний">Неактивний</option>
               <option value="Не вказано">Не вказано</option>
             </select>
             <button type="submit" className="authButton">
@@ -153,6 +165,7 @@ export default async function AdminPage({
                     <th>Відвідуваність</th>
                     <th>Сер. RPE</th>
                     <th>Харчування</th>
+                    <th>Статус</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -187,6 +200,7 @@ export default async function AdminPage({
                             "—"
                           )}
                         </td>
+                        <td>{c.client_status || "—"}</td>
                         <td>
                           <Link href={`/admin/${c.id}`} className="authNote">
                             Відкрити →
