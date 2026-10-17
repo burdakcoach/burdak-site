@@ -111,6 +111,10 @@ export default async function AdminPage({
         <div className="cabinetContainer" style={{ maxWidth: 960 }}>
           <h1 className="sectionTitle">Клієнти</h1>
 
+          <Link href="/admin/calendar-check" className="authNote">
+            Перевірити календар →
+          </Link>
+
           <details className="authCard">
             <summary className="cabinetDayTitle" style={{ cursor: "pointer" }}>
               + Додати клієнта
