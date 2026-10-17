@@ -114,6 +114,30 @@ export default async function ClientCardPage({
   const nutritionStatus = nutritionLog?.[0]?.status ?? null;
   const nutritionNotReportingCount = nutritionThisMonth.filter((l) => l.status === "Не звітує").length;
 
+  const since30 = new Date();
+  since30.setDate(since30.getDate() - 30);
+  const { data: nutritionScreenshotsRaw } = await supabase
+    .from("nutrition_screenshots")
+    .select("id, date, storage_path")
+    .eq("client_id", id)
+    .gte("date", since30.toISOString().slice(0, 10))
+    .order("date", { ascending: false });
+
+  const nutritionScreenshots = nutritionScreenshotsRaw ?? [];
+
+  const nutritionScreenshotUrls = new Map<string, string>();
+  if (nutritionScreenshots.length > 0) {
+    const { data: signed } = await supabase.storage
+      .from("nutrition-screenshots")
+      .createSignedUrls(
+        nutritionScreenshots.map((s) => s.storage_path),
+        3600
+      );
+    (signed || []).forEach((s) => {
+      if (s.signedUrl) nutritionScreenshotUrls.set(s.path ?? "", s.signedUrl);
+    });
+  }
+
   return (
     <main>
       <section className="authSection">
@@ -209,6 +233,29 @@ export default async function ClientCardPage({
                 Зберегти відмітку
               </button>
             </form>
+
+            {nutritionScreenshots.length === 0 && (
+              <p className="authNote" style={{ marginTop: 16 }}>
+                Скрінів харчування клієнт ще не завантажував.
+              </p>
+            )}
+
+            {nutritionScreenshots.length > 0 && (
+              <div className="photoGrid" style={{ marginTop: 16 }}>
+                {nutritionScreenshots.map((s) => {
+                  const url = nutritionScreenshotUrls.get(s.storage_path);
+                  return (
+                    <div key={s.id} className="photoCard">
+                      {url && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={url} alt={`Харчування ${s.date}`} className="photoImage" />
+                      )}
+                      <p className="authNote">{s.date}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {programsList.length > 1 && (

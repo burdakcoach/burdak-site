@@ -50,6 +50,9 @@ export default async function DashboardLayout({
             <Link href="/dashboard/progress" className="cabinetNavLink">
               Прогрес
             </Link>
+            <Link href="/dashboard/nutrition" className="cabinetNavLink">
+              Харчування
+            </Link>
             <Link href="/dashboard/profile" className="cabinetNavLink">
               Мої дані
             </Link>
