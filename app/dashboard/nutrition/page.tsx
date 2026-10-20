@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { kyivToday } from "@/lib/weekdays";
-import { uploadNutritionScreenshot, deleteNutritionScreenshot } from "./actions";
+import { deleteNutritionScreenshot } from "./actions";
+import UploadForm from "./UploadForm";
 
 type Screenshot = {
   id: string;
@@ -63,12 +64,7 @@ export default async function NutritionPage() {
         побачить без того, щоб ти писав йому окремо.
       </p>
 
-      <form action={uploadNutritionScreenshot} className="authForm">
-        <input type="file" name="screenshot" accept="image/*" required className="authInput" />
-        <button type="submit" className="authButton" style={{ justifySelf: "start" }}>
-          {uploadedToday ? "Замінити сьогоднішній скрін" : "Завантажити за сьогодні"}
-        </button>
-      </form>
+      <UploadForm uploadedToday={uploadedToday} />
 
       {rows.length === 0 && (
         <p className="authNote" style={{ marginTop: 16 }}>
