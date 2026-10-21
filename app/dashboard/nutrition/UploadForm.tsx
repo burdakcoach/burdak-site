@@ -3,7 +3,11 @@
 import { useState } from "react";
 import { uploadNutritionScreenshot } from "./actions";
 
-async function compressImage(file: File, maxDimension = 1600, quality = 0.75): Promise<Blob> {
+async function compressImage(file: File, maxDimension = 1600, quality = 0.75): Promise<File> {
+  if (typeof createImageBitmap !== "function") {
+    throw new Error("createImageBitmap unsupported");
+  }
+
   const bitmap = await createImageBitmap(file);
   let { width, height } = bitmap;
   if (width > maxDimension || height > maxDimension) {
@@ -18,50 +22,54 @@ async function compressImage(file: File, maxDimension = 1600, quality = 0.75): P
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Canvas unsupported");
   ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close?.();
 
-  return new Promise((resolve, reject) => {
-    canvas.toBlob(
-      (blob) => (blob ? resolve(blob) : reject(new Error("toBlob failed"))),
-      "image/jpeg",
-      quality
-    );
+  const blob = await new Promise<Blob | null>((resolve) => {
+    canvas.toBlob(resolve, "image/jpeg", quality);
   });
+  if (!blob) throw new Error("toBlob failed");
+
+  const filename = file.name.replace(/\.[^.]+$/, "") + ".jpg";
+  return new File([blob], filename, { type: "image/jpeg" });
 }
 
 export default function UploadForm({ uploadedToday }: { uploadedToday: boolean }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError("");
-
-    const form = e.currentTarget;
-    const fileInput = form.elements.namedItem("screenshot") as HTMLInputElement;
-    const file = fileInput.files?.[0];
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const input = e.currentTarget;
+    const file = input.files?.[0];
     if (!file) return;
 
+    setError("");
     setBusy(true);
     try {
       const compressed = await compressImage(file);
-      const formData = new FormData();
-      formData.set("screenshot", compressed, file.name.replace(/\.[^.]+$/, "") + ".jpg");
-      await uploadNutritionScreenshot(formData);
-      form.reset();
+      const dt = new DataTransfer();
+      dt.items.add(compressed);
+      input.files = dt.files;
     } catch (err) {
-      console.error(err);
-      setError("Не вдалося завантажити скрін. Спробуй ще раз.");
+      // Стиснення не вдалось (непідтримуваний браузер тощо) — надсилаємо оригінал як є.
+      console.error("Compression failed, uploading original file:", err);
     } finally {
       setBusy(false);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="authForm">
-      <input type="file" name="screenshot" accept="image/*" required className="authInput" />
+    <form action={uploadNutritionScreenshot} className="authForm">
+      <input
+        type="file"
+        name="screenshot"
+        accept="image/*"
+        required
+        className="authInput"
+        onChange={handleFileChange}
+      />
       {error && <p className="authNote">{error}</p>}
       <button type="submit" className="authButton" disabled={busy} style={{ justifySelf: "start" }}>
-        {busy ? "Завантажую..." : uploadedToday ? "Замінити сьогоднішній скрін" : "Завантажити за сьогодні"}
+        {busy ? "Готую фото..." : uploadedToday ? "Замінити сьогоднішній скрін" : "Завантажити за сьогодні"}
       </button>
     </form>
   );
