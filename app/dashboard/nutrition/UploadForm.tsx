@@ -1,9 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { uploadNutritionScreenshot } from "./actions";
 
-async function compressImage(file: File, maxDimension = 1600, quality = 0.75): Promise<File> {
+async function compressImage(file: File, maxDimension = 1600, quality = 0.75): Promise<Blob> {
   if (typeof createImageBitmap !== "function") {
     throw new Error("createImageBitmap unsupported");
   }
@@ -28,48 +28,64 @@ async function compressImage(file: File, maxDimension = 1600, quality = 0.75): P
     canvas.toBlob(resolve, "image/jpeg", quality);
   });
   if (!blob) throw new Error("toBlob failed");
-
-  const filename = file.name.replace(/\.[^.]+$/, "") + ".jpg";
-  return new File([blob], filename, { type: "image/jpeg" });
+  return blob;
 }
 
 export default function UploadForm({ uploadedToday }: { uploadedToday: boolean }) {
+  const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const input = e.currentTarget;
-    const file = input.files?.[0];
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError("");
+
+    const form = e.currentTarget;
+    const fileInput = form.elements.namedItem("screenshot") as HTMLInputElement;
+    const file = fileInput.files?.[0];
     if (!file) return;
 
-    setError("");
     setBusy(true);
     try {
-      const compressed = await compressImage(file);
-      const dt = new DataTransfer();
-      dt.items.add(compressed);
-      input.files = dt.files;
+      let toUpload: Blob = file;
+      let filename = file.name;
+
+      try {
+        toUpload = await compressImage(file);
+        filename = file.name.replace(/\.[^.]+$/, "") + ".jpg";
+      } catch (compressErr) {
+        console.error("Compression failed, uploading original:", compressErr);
+      }
+
+      const formData = new FormData();
+      formData.set("screenshot", toUpload, filename);
+
+      const res = await fetch("/api/upload-nutrition-screenshot", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `HTTP ${res.status}`);
+      }
+
+      form.reset();
+      router.refresh();
     } catch (err) {
-      // Стиснення не вдалось (непідтримуваний браузер тощо) — надсилаємо оригінал як є.
-      console.error("Compression failed, uploading original file:", err);
+      console.error(err);
+      setError("Не вдалося завантажити скрін. Спробуй ще раз або напиши тренеру.");
     } finally {
       setBusy(false);
     }
   }
 
   return (
-    <form action={uploadNutritionScreenshot} className="authForm">
-      <input
-        type="file"
-        name="screenshot"
-        accept="image/*"
-        required
-        className="authInput"
-        onChange={handleFileChange}
-      />
+    <form onSubmit={handleSubmit} className="authForm">
+      <input type="file" name="screenshot" accept="image/*" required className="authInput" />
       {error && <p className="authNote">{error}</p>}
       <button type="submit" className="authButton" disabled={busy} style={{ justifySelf: "start" }}>
-        {busy ? "Готую фото..." : uploadedToday ? "Замінити сьогоднішній скрін" : "Завантажити за сьогодні"}
+        {busy ? "Завантажую..." : uploadedToday ? "Замінити сьогоднішній скрін" : "Завантажити за сьогодні"}
       </button>
     </form>
   );
