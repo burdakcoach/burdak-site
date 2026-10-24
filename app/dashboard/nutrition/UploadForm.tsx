@@ -74,7 +74,8 @@ export default function UploadForm({ uploadedToday }: { uploadedToday: boolean }
       router.refresh();
     } catch (err) {
       console.error(err);
-      setError("Не вдалося завантажити скрін. Спробуй ще раз або напиши тренеру.");
+      const message = err instanceof Error ? err.message : String(err);
+      setError(`Не вдалося завантажити скрін: ${message}`);
     } finally {
       setBusy(false);
     }
