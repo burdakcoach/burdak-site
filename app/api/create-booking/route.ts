@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { getEvents } from "@/lib/googleCalendar";
+
 const PRICE_UAH = 500;
 
 export async function POST(req: NextRequest) {
@@ -8,6 +10,22 @@ export async function POST(req: NextRequest) {
 
     if (!name || !phone || !start || !end) {
       return NextResponse.json({ error: "Заповни всі поля" }, { status: 400 });
+    }
+
+    const existingEvents = await getEvents(start, end);
+    const overlappingCount = existingEvents.filter((e) => {
+      const eventStart = new Date(e.start);
+      const eventEnd = new Date(e.end);
+      const slotStart = new Date(start);
+      const slotEnd = new Date(end);
+      return slotStart < eventEnd && slotEnd > eventStart;
+    }).length;
+
+    if (overlappingCount >= 2) {
+      return NextResponse.json(
+        { error: "На жаль, цей час вже повністю заброньовано. Обери інший слот." },
+        { status: 409 }
+      );
     }
 
     const token = process.env.MONOBANK_TOKEN;
@@ -42,7 +60,7 @@ export async function POST(req: NextRequest) {
               },
             ],
           },
-          redirectUrl: `${baseUrl}/booking?success=1`,
+          redirectUrl: `${baseUrl}/booking?success=1&start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}&name=${encodeURIComponent(name)}`,
           webHookUrl: `${baseUrl}/api/monobank-webhook`,
           validity: 3600,
           paymentType: "debit",

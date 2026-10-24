@@ -1912,6 +1912,44 @@ main {
     min-height: 300px;
   }
 }
+.bookingConfirmed {
+  max-width: 560px;
+  margin: 40px auto 0;
+  padding: 48px 32px;
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
+  text-align: center;
+}
+
+.bookingConfirmedIcon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookingConfirmedText {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #a1a1aa;
+}
+
+.bookingConfirmed .primaryBtn {
+  display: inline-block;
+  margin-top: 28px;
+}
+
 /* AUTH */
 
 .authSection {
@@ -2161,6 +2199,7 @@ main {
   font-weight: 600;
   cursor: pointer;
 }
+
 .cabinetNav {
   display: flex;
   gap: 8px;
@@ -2227,6 +2266,7 @@ main {
     gap: 4px;
   }
 }
+
 .photoGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

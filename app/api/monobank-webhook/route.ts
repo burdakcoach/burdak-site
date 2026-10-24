@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createCalendarEvent } from "@/lib/googleCalendar";
+import { createCalendarEvent, getEvents } from "@/lib/googleCalendar";
+
 
 async function sendTelegramMessage(text: string) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -43,6 +44,16 @@ export async function POST(req: NextRequest) {
       Buffer.from(reference, "base64").toString("utf-8")
     );
 
+    // Перевіряємо, скільки вже записано на цей час
+    const existingEvents = await getEvents(start, end);
+    const overlappingCount = existingEvents.filter((e) => {
+      const eventStart = new Date(e.start);
+      const eventEnd = new Date(e.end);
+      const slotStart = new Date(start);
+      const slotEnd = new Date(end);
+      return slotStart < eventEnd && slotEnd > eventStart;
+    }).length;
+
     await createCalendarEvent({
       summary: `Тренування: ${name}`,
       description: `Клієнт: ${name}\nТелефон: ${phone}\nОплачено через сайт`,
@@ -50,9 +61,15 @@ export async function POST(req: NextRequest) {
       end,
     });
 
-    await sendTelegramMessage(
-      `✅ Нове бронювання!\n\n👤 ${name}\n📞 ${phone}\n🕐 ${new Date(start).toLocaleString("uk-UA", { timeZone: "Europe/Kyiv" })}\n\nОплату отримано.`
-    );
+    if (overlappingCount >= 2) {
+      await sendTelegramMessage(
+        `⚠️ УВАГА: ПЕРЕБРОНЮВАННЯ!\n\nНа цей час вже було ${overlappingCount} запис(и), а тепер додався ще один.\n\n👤 ${name}\n📞 ${phone}\n🕐 ${new Date(start).toLocaleString("uk-UA", { timeZone: "Europe/Kyiv" })}\n\nОплату ОТРИМАНО — потрібно вручну зв'язатись і перенести або повернути кошти.`
+      );
+    } else {
+      await sendTelegramMessage(
+        `✅ Нове бронювання!\n\n👤 ${name}\n📞 ${phone}\n🕐 ${new Date(start).toLocaleString("uk-UA", { timeZone: "Europe/Kyiv" })}\n\nОплату отримано.`
+      );
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

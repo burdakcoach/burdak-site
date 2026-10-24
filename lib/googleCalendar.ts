@@ -15,21 +15,26 @@ function getAuth(scopes: string[]) {
   });
 }
 
-export async function getBusyTimes(timeMin: string, timeMax: string) {
+export async function getEvents(timeMin: string, timeMax: string) {
   const auth = getAuth(["https://www.googleapis.com/auth/calendar.readonly"]);
   const calendar = google.calendar({ version: "v3", auth });
   const calendarId = process.env.GOOGLE_CALENDAR_ID!;
 
-  const res = await calendar.freebusy.query({
-    requestBody: {
-      timeMin,
-      timeMax,
-      items: [{ id: calendarId }],
-    },
+  const res = await calendar.events.list({
+    calendarId,
+    timeMin,
+    timeMax,
+    singleEvents: true,
+    orderBy: "startTime",
   });
 
-  return res.data.calendars?.[calendarId]?.busy ?? [];
-}
+  return (res.data.items ?? [])
+    .filter((e) => e.status !== "cancelled" && e.start?.dateTime && e.end?.dateTime)
+    .map((e) => ({
+      start: e.start!.dateTime!,
+      end: e.end!.dateTime!,
+    }));
+} 
 
 export async function createCalendarEvent(params: {
   summary: string;

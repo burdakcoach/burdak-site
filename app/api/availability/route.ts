@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getBusyTimes } from "@/lib/googleCalendar";
+import { getEvents } from "@/lib/googleCalendar"; 
 
 const WORK_START_HOUR = 9;
 const WORK_END_HOUR = 20; // останній старт слоту — 19:00 (h < 20)
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
       now.getTime() + DAYS_AHEAD * 24 * 60 * 60 * 1000
     ).toISOString();
 
-    const busy = await getBusyTimes(timeMin, timeMax);
+    const events = await getEvents(timeMin, timeMax);
     const slots: { start: string; end: string }[] = [];
 
     const todayKyiv = now.toLocaleDateString("en-CA", { timeZone: TIME_ZONE });
@@ -50,13 +50,16 @@ export async function GET(req: NextRequest) {
 
         const slotEnd = new Date(slotStart.getTime() + SLOT_MINUTES * 60 * 1000);
 
-        const overlaps = busy.some((b) => {
-          const busyStart = new Date(b.start!);
-          const busyEnd = new Date(b.end!);
-          return slotStart < busyEnd && slotEnd > busyStart;
-        });
+        const overlappingCount = events.filter((e) => {
+  const eventStart = new Date(e.start);
+  const eventEnd = new Date(e.end);
+  return slotStart < eventEnd && slotEnd > eventStart;
+}).length;
 
-        if (!overlaps) {
+const MAX_CAPACITY = 2;
+
+if (overlappingCount < MAX_CAPACITY) {
+  
           slots.push({
             start: slotStart.toISOString(),
             end: slotEnd.toISOString(),
