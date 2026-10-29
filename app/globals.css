@@ -2240,6 +2240,12 @@ main {
   font-size: 11px;
 }
 
+.progressChartPoint {
+  fill: #e4e4e7;
+  font-size: 9px;
+  font-weight: 600;
+}
+
 .progressTableWrap {
   overflow-x: auto;
 }

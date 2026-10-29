@@ -25,13 +25,100 @@ type Measurement = {
   comment: string | null;
 };
 
+type StrengthPoint = { date: string; weight: number; reps: string | null };
+type StrengthSeries = { id: string; name: string; points: StrengthPoint[] };
+
+function formatShortDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString("uk-UA", { day: "2-digit", month: "2-digit" });
+}
+
+function pickTickIndices(length: number, maxTicks = 6): number[] {
+  if (length <= maxTicks) return Array.from({ length }, (_, i) => i);
+  const step = (length - 1) / (maxTicks - 1);
+  const indices = new Set<number>();
+  for (let i = 0; i < maxTicks; i++) indices.add(Math.round(i * step));
+  return Array.from(indices).sort((a, b) => a - b);
+}
+
+function ExerciseStrengthChart({ name, points }: { name: string; points: StrengthPoint[] }) {
+  const width = 600;
+  const plotHeight = 170;
+  const svgHeight = plotHeight + 36;
+  const padding = 24;
+  const topPadding = 32;
+
+  const weights = points.map((p) => p.weight);
+  const min = Math.min(...weights);
+  const max = Math.max(...weights);
+  const range = max - min || 1;
+
+  const coords = points.map((p, i) => {
+    const x = padding + (i / (points.length - 1)) * (width - padding * 2);
+    const y =
+      plotHeight -
+      padding -
+      ((p.weight - min) / range) * (plotHeight - padding - topPadding);
+    return { x, y, ...p };
+  });
+
+  const path = coords.map((c) => `${c.x},${c.y}`).join(" ");
+  const latest = points[points.length - 1];
+  const tickIndices = pickTickIndices(points.length);
+
+  return (
+    <div className="exerciseCard">
+      <div className="exerciseHeader">
+        <span className="exerciseName">{name}</span>
+        <span className="exerciseMeta">
+          {latest.weight} кг{latest.reps ? ` × ${latest.reps}` : ""}
+        </span>
+      </div>
+      <svg viewBox={`0 0 ${width} ${svgHeight}`} className="progressChart">
+        <polyline points={path} fill="none" stroke="#fff" strokeWidth={2} />
+        {coords.map((c, i) => (
+          <g key={i}>
+            <circle cx={c.x} cy={c.y} r={3} fill="#fff" />
+            <text
+              x={c.x}
+              y={c.y - 10}
+              textAnchor="middle"
+              className="progressChartPoint"
+            >
+              {c.weight}×{c.reps ?? "?"}
+            </text>
+          </g>
+        ))}
+        {tickIndices.map((i) => (
+          <text
+            key={i}
+            x={coords[i].x}
+            y={svgHeight - 4}
+            textAnchor={i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"}
+            className="progressChartLabel"
+          >
+            {formatShortDate(points[i].date)}
+          </text>
+        ))}
+        <text x={padding} y={14} className="progressChartLabel">
+          {max} кг
+        </text>
+        <text x={padding} y={plotHeight - 8} className="progressChartLabel">
+          {min} кг
+        </text>
+      </svg>
+    </div>
+  );
+}
+
 function WeightChart({ measurements }: { measurements: Measurement[] }) {
   const points = measurements.filter((m) => m.weight != null);
   if (points.length < 2) return null;
 
   const width = 600;
-  const height = 180;
+  const plotHeight = 190;
+  const svgHeight = plotHeight + 36;
   const padding = 24;
+  const topPadding = 32;
 
   const weights = points.map((p) => p.weight as number);
   const min = Math.min(...weights);
@@ -40,22 +127,42 @@ function WeightChart({ measurements }: { measurements: Measurement[] }) {
 
   const coords = points.map((p, i) => {
     const x = padding + (i / (points.length - 1)) * (width - padding * 2);
-    const y = height - padding - ((p.weight! - min) / range) * (height - padding * 2);
+    const y =
+      plotHeight -
+      padding -
+      ((p.weight! - min) / range) * (plotHeight - padding - topPadding);
     return { x, y, weight: p.weight, date: p.date };
   });
 
   const path = coords.map((c) => `${c.x},${c.y}`).join(" ");
+  const tickIndices = pickTickIndices(points.length);
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} className="progressChart">
+    <svg viewBox={`0 0 ${width} ${svgHeight}`} className="progressChart">
       <polyline points={path} fill="none" stroke="#fff" strokeWidth={2} />
       {coords.map((c, i) => (
-        <circle key={i} cx={c.x} cy={c.y} r={3} fill="#fff" />
+        <g key={i}>
+          <circle cx={c.x} cy={c.y} r={3} fill="#fff" />
+          <text x={c.x} y={c.y - 10} textAnchor="middle" className="progressChartPoint">
+            {c.weight}
+          </text>
+        </g>
+      ))}
+      {tickIndices.map((i) => (
+        <text
+          key={i}
+          x={coords[i].x}
+          y={svgHeight - 4}
+          textAnchor={i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"}
+          className="progressChartLabel"
+        >
+          {formatShortDate(points[i].date)}
+        </text>
       ))}
       <text x={padding} y={14} className="progressChartLabel">
         {max} кг
       </text>
-      <text x={padding} y={height - 8} className="progressChartLabel">
+      <text x={padding} y={plotHeight - 8} className="progressChartLabel">
         {min} кг
       </text>
     </svg>
@@ -87,6 +194,39 @@ export default async function ProgressPage() {
     : { data: [] as Measurement[] };
 
   const rows = (measurements || []) as Measurement[];
+
+  const { data: strengthLogsRaw } = client
+    ? await supabase
+        .from("workout_logs")
+        .select("exercise_id, date, weight, actual_reps, exercises(name)")
+        .eq("client_id", client.id)
+        .not("weight", "is", null)
+        .order("date", { ascending: true })
+    : { data: [] };
+
+  const strengthByExercise = new Map<string, StrengthSeries>();
+  (strengthLogsRaw || []).forEach((l) => {
+    const weightNum = l.weight ? parseFloat(l.weight.replace(",", ".")) : NaN;
+    if (Number.isNaN(weightNum)) return;
+    const exerciseRef = l.exercises as unknown as { name: string } | { name: string }[] | null;
+    const exerciseName = Array.isArray(exerciseRef) ? exerciseRef[0]?.name : exerciseRef?.name;
+    if (!strengthByExercise.has(l.exercise_id)) {
+      strengthByExercise.set(l.exercise_id, {
+        id: l.exercise_id,
+        name: exerciseName || "Вправа",
+        points: [],
+      });
+    }
+    strengthByExercise.get(l.exercise_id)!.points.push({
+      date: l.date,
+      weight: weightNum,
+      reps: l.actual_reps,
+    });
+  });
+
+  const strengthCharts = Array.from(strengthByExercise.values()).filter(
+    (s) => s.points.length >= 2
+  );
 
   const { data: photos } = client
     ? await supabase
@@ -157,6 +297,21 @@ export default async function ProgressPage() {
           </div>
         </>
       )}
+    </div>
+
+    <div className="authCard">
+      <h2 className="cabinetDayTitle">Силові показники</h2>
+
+      {strengthCharts.length === 0 && (
+        <p className="authNote">
+          Ще не накопичилось достатньо даних — потрібно хоча б 2 тренування з записаною вагою
+          по одній вправі.
+        </p>
+      )}
+
+      {strengthCharts.map((s) => (
+        <ExerciseStrengthChart key={s.id} name={s.name} points={s.points} />
+      ))}
     </div>
 
     <div className="authCard">
