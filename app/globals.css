@@ -2099,6 +2099,13 @@ main {
   line-height: 1.5;
 }
 
+.exerciseLastResult {
+  margin-top: 8px;
+  color: #71717a;
+  font-size: 13px;
+  font-style: italic;
+}
+
 .statusButtons {
   display: flex;
   gap: 8px;

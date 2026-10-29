@@ -78,13 +78,34 @@ export default async function DashboardPage({
     client && exerciseIds.length > 0
       ? await supabase
           .from("workout_logs")
-          .select("exercise_id, status")
+          .select("exercise_id, status, weight, actual_reps")
           .eq("client_id", client.id)
           .eq("date", today)
           .in("exercise_id", exerciseIds)
       : { data: [] };
 
-  const statusByExercise = new Map((todayLogs || []).map((l) => [l.exercise_id, l.status]));
+  const logByExercise = new Map((todayLogs || []).map((l) => [l.exercise_id, l]));
+
+  const { data: pastLogs } =
+    client && exerciseIds.length > 0
+      ? await supabase
+          .from("workout_logs")
+          .select("exercise_id, date, weight, actual_reps")
+          .eq("client_id", client.id)
+          .in("exercise_id", exerciseIds)
+          .lt("date", today)
+          .order("date", { ascending: false })
+      : { data: [] };
+
+  const lastResultByExercise = new Map<
+    string,
+    { date: string; weight: string | null; actual_reps: string | null }
+  >();
+  (pastLogs || []).forEach((l) => {
+    if (!lastResultByExercise.has(l.exercise_id)) {
+      lastResultByExercise.set(l.exercise_id, l);
+    }
+  });
 
   return (
     <>
@@ -121,29 +142,61 @@ export default async function DashboardPage({
           <p className="authNote">На цей день вправ немає — день відпочинку.</p>
         )}
 
-        {todayExercises.map((ex) => (
-          <div key={ex.id} className="exerciseCard">
-            <div className="exerciseHeader">
-              <span className="exerciseName">{ex.name}</span>
-              <span className="exerciseMeta">
-                {ex.sets ? `${ex.sets} × ${ex.reps ?? "?"}` : ex.reps}
-              </span>
+        {todayExercises.map((ex) => {
+          const todayLog = logByExercise.get(ex.id);
+          const lastResult = lastResultByExercise.get(ex.id);
+
+          return (
+            <div key={ex.id} className="exerciseCard">
+              <div className="exerciseHeader">
+                <span className="exerciseName">{ex.name}</span>
+                <span className="exerciseMeta">
+                  {ex.sets ? `${ex.sets} × ${ex.reps ?? "?"}` : ex.reps}
+                </span>
+              </div>
+              {ex.coach_comment && <p className="exerciseComment">{ex.coach_comment}</p>}
+              <p className="exerciseLastResult">
+                Минулого разу:{" "}
+                {lastResult
+                  ? `${lastResult.weight ? lastResult.weight + " кг × " : ""}${
+                      lastResult.actual_reps ?? "—"
+                    }`
+                  : "ще не було"}
+              </p>
+              <form className="adminRow">
+                <input
+                  type="text"
+                  name="weight"
+                  placeholder="Вага, кг"
+                  defaultValue={todayLog?.weight ?? ""}
+                  className="adminRowInput"
+                />
+                <input
+                  type="text"
+                  name="actualReps"
+                  placeholder="Повторення"
+                  defaultValue={todayLog?.actual_reps ?? ""}
+                  className="adminRowInput"
+                />
+                <div className="statusButtons">
+                  {STATUS_OPTIONS.map((status) => {
+                    const isCurrent = todayLog?.status === status;
+                    return (
+                      <button
+                        key={status}
+                        type="submit"
+                        formAction={logWorkoutStatus.bind(null, ex.id, status)}
+                        className={isCurrent ? "statusBtnActive" : "statusBtn"}
+                      >
+                        {status}
+                      </button>
+                    );
+                  })}
+                </div>
+              </form>
             </div>
-            {ex.coach_comment && <p className="exerciseComment">{ex.coach_comment}</p>}
-            <div className="statusButtons">
-              {STATUS_OPTIONS.map((status) => {
-                const isCurrent = statusByExercise.get(ex.id) === status;
-                return (
-                  <form key={status} action={logWorkoutStatus.bind(null, ex.id, status)}>
-                    <button type="submit" className={isCurrent ? "statusBtnActive" : "statusBtn"}>
-                      {status}
-                    </button>
-                  </form>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );

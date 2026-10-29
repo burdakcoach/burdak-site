@@ -8,7 +8,11 @@ import { kyivToday } from "@/lib/weekdays";
 const STATUSES = ["Виконано", "Пропуск", "Частково"] as const;
 export type WorkoutStatus = (typeof STATUSES)[number];
 
-export async function logWorkoutStatus(exerciseId: string, status: WorkoutStatus) {
+export async function logWorkoutStatus(
+  exerciseId: string,
+  status: WorkoutStatus,
+  formData: FormData
+) {
   const supabase = await createClient();
   const {
     data: { user },
@@ -42,6 +46,12 @@ export async function logWorkoutStatus(exerciseId: string, status: WorkoutStatus
     return;
   }
 
+  const weightRaw = formData.get("weight");
+  const actualRepsRaw = formData.get("actualReps");
+  const weight = typeof weightRaw === "string" && weightRaw.trim() ? weightRaw.trim() : null;
+  const actualReps =
+    typeof actualRepsRaw === "string" && actualRepsRaw.trim() ? actualRepsRaw.trim() : null;
+
   await supabase.from("workout_logs").upsert(
     {
       client_id: client.id,
@@ -49,6 +59,8 @@ export async function logWorkoutStatus(exerciseId: string, status: WorkoutStatus
       date: kyivToday(),
       planned_sets: exercise.sets,
       planned_reps: exercise.reps,
+      weight,
+      actual_reps: actualReps,
       status,
     },
     { onConflict: "client_id,exercise_id,date" }
